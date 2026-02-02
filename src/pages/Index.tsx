@@ -13,13 +13,14 @@ import GlowingInfinity from "@/components/ui/GlowingInfinity";
 const Index = () => {
   return (
     <main className="min-h-screen bg-background overflow-x-hidden relative">
-      {/* Fixed background effects that scroll with page */}
-      <div className="absolute inset-0 pointer-events-none">
+      {/* Fixed background effects - stays in viewport while scrolling */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <GlowingInfinity isFixed={false} />
         <StarField count={200} />
         <ShootingStars count={3} interval={5} />
-        <GlowingInfinity isFixed={false} />
       </div>
       
+      {/* Page content */}
       <div className="relative z-10">
         <HeroSection />
         <StorySection />
