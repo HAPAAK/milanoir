@@ -373,38 +373,9 @@ const Contact = () => {
                 <h3 className="font-heading font-bold text-2xl gradient-text mb-4">
                   Join Our Journey
                 </h3>
-                <p className="text-muted-foreground leading-relaxed mb-6">
+                <p className="text-muted-foreground leading-relaxed">
                   Whether you're an artist seeking to perform on international stages, a sponsor looking to connect with engaged diaspora audiences, a venue partner wanting to host culturally significant events, or simply someone who believes in the power of purposeful entertainment—we invite you to be part of The Beginning of Infinity.
                 </p>
-
-                <div className="section-divider w-full my-6" />
-
-                {/* Company Info */}
-                <div className="space-y-2 text-sm">
-                  <p className="text-foreground font-semibold">Milanoir Events Limited</p>
-                  <p className="text-muted-foreground">Company Number: 16820191</p>
-                  <p className="text-muted-foreground">Registered in England & Wales</p>
-                  <motion.p 
-                    className="mt-4 text-base font-medium italic"
-                    style={{
-                      background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
-                      WebkitBackgroundClip: "text",
-                      WebkitTextFillColor: "transparent",
-                      backgroundClip: "text",
-                      filter: "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
-                    }}
-                    animate={{
-                      filter: [
-                        "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
-                        "drop-shadow(0 0 20px hsl(185 85% 55% / 0.5))",
-                        "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
-                      ],
-                    }}
-                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                  >
-                    "The Beginning of Infinity — Representing the Nepalese Diaspora Globally"
-                  </motion.p>
-                </div>
               </motion.div>
             </motion.div>
           </div>
