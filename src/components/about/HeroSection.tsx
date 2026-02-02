@@ -1,12 +1,16 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/milanoir-logo.png";
+import logo from "@/assets/milanoir-logo-infinity.png";
 import StarField from "@/components/ui/StarField";
+import ShootingStars from "@/components/ui/ShootingStars";
 
 const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden cosmic-bg">
       {/* Star field background */}
       <StarField count={200} />
+      
+      {/* Shooting Stars */}
+      <ShootingStars count={3} interval={5} />
       
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -124,7 +128,7 @@ const HeroSection = () => {
               transition={{ duration: 2, repeat: Infinity }}
             />
             <span className="text-sm md:text-base text-foreground font-medium tracking-wide">
-              Based in London, United Kingdom
+              Registered in England & Wales
             </span>
           </motion.div>
 
@@ -137,34 +141,6 @@ const HeroSection = () => {
             Company No: 16820191
           </motion.p>
         </motion.div>
-      </div>
-
-      {/* Shooting stars effect */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className="absolute w-1 h-1 bg-white rounded-full"
-            style={{
-              top: `${20 + i * 30}%`,
-              left: "-5%",
-            }}
-            animate={{
-              x: ["0vw", "110vw"],
-              y: ["0vh", "30vh"],
-              opacity: [0, 1, 1, 0],
-            }}
-            transition={{
-              duration: 2,
-              delay: i * 4 + 2,
-              repeat: Infinity,
-              repeatDelay: 8,
-              ease: "linear",
-            }}
-          >
-            <div className="w-16 h-[1px] bg-gradient-to-l from-white to-transparent absolute right-0 top-1/2 -translate-y-1/2" />
-          </motion.div>
-        ))}
       </div>
     </section>
   );

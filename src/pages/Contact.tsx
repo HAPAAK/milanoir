@@ -7,10 +7,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import logo from "@/assets/milanoir-logo.png";
+import logo from "@/assets/milanoir-logo-infinity.png";
 import FooterSection from "@/components/about/FooterSection";
 import StarField from "@/components/ui/StarField";
 import GlowingInfinity from "@/components/ui/GlowingInfinity";
+import ShootingStars from "@/components/ui/ShootingStars";
 
 const contactInfo = [
   {
@@ -71,6 +72,9 @@ const Contact = () => {
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
         {/* Star field */}
         <StarField count={150} />
+        
+        {/* Shooting Stars */}
+        <ShootingStars count={3} interval={5} />
         
         {/* Glowing Infinity */}
         <GlowingInfinity />
@@ -372,9 +376,6 @@ const Contact = () => {
                 <p className="text-muted-foreground leading-relaxed mb-6">
                   Whether you're an artist seeking to perform on international stages, a sponsor looking to connect with engaged diaspora audiences, a venue partner wanting to host culturally significant events, or simply someone who believes in the power of purposeful entertainment—we invite you to be part of The Beginning of Infinity.
                 </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  Together, we're not just creating events. We're building a global movement that celebrates culture, supports communities, and proves that exceptional entertainment and meaningful impact can go hand in hand.
-                </p>
 
                 <div className="section-divider w-full my-6" />
 
@@ -383,9 +384,26 @@ const Contact = () => {
                   <p className="text-foreground font-semibold">Milanoir Events Limited</p>
                   <p className="text-muted-foreground">Company Number: 16820191</p>
                   <p className="text-muted-foreground">Registered in England & Wales</p>
-                  <p className="text-cosmic-pink italic mt-4">
+                  <motion.p 
+                    className="mt-4 text-base font-medium italic"
+                    style={{
+                      background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
+                      WebkitBackgroundClip: "text",
+                      WebkitTextFillColor: "transparent",
+                      backgroundClip: "text",
+                      filter: "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                    }}
+                    animate={{
+                      filter: [
+                        "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                        "drop-shadow(0 0 20px hsl(185 85% 55% / 0.5))",
+                        "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                      ],
+                    }}
+                    transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                  >
                     "The Beginning of Infinity — Representing the Nepalese Diaspora Globally"
-                  </p>
+                  </motion.p>
                 </div>
               </motion.div>
             </motion.div>
