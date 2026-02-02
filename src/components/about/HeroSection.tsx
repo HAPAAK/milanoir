@@ -47,30 +47,25 @@ const HeroSection = () => {
           </motion.h1>
 
           <motion.div
-            className="flex items-center gap-4 text-sm text-muted-foreground"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
+            className="flex items-center gap-3 px-6 py-3 rounded-full glass-card"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 0.8 }}
           >
-            <span className="flex items-center gap-2">
-              <span className="w-2 h-2 bg-cosmic-cyan rounded-full" />
-              London, United Kingdom
+            <span className="w-2 h-2 bg-cosmic-cyan rounded-full animate-pulse" />
+            <span className="text-sm md:text-base text-foreground font-medium tracking-wide">
+              Based in London, United Kingdom
             </span>
-            <span className="text-border">|</span>
-            <span>Company No: 16820191</span>
           </motion.div>
-        </motion.div>
 
-        <motion.div
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 0.8 }}
-        >
-          <div className="flex flex-col items-center gap-2 text-muted-foreground">
-            <span className="text-xs tracking-widest uppercase">Scroll to explore</span>
-            <div className="w-px h-12 bg-gradient-to-b from-primary to-transparent" />
-          </div>
+          <motion.p
+            className="text-xs text-muted-foreground/60 mt-4"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.2, duration: 0.8 }}
+          >
+            Company No: 16820191
+          </motion.p>
         </motion.div>
       </div>
     </section>
