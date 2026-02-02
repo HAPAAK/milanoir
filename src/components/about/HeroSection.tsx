@@ -1,21 +1,9 @@
 import { motion } from "framer-motion";
 import logo from "@/assets/milanoir-logo-infinity.png";
-import StarField from "@/components/ui/StarField";
-import ShootingStars from "@/components/ui/ShootingStars";
-import GlowingInfinity from "@/components/ui/GlowingInfinity";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden cosmic-bg">
-      {/* Star field background */}
-      <StarField count={200} />
-      
-      {/* Shooting Stars */}
-      <ShootingStars count={3} interval={5} />
-      
-      {/* Glowing Infinity Background */}
-      <GlowingInfinity />
-      
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div 
@@ -46,24 +34,6 @@ const HeroSection = () => {
             rotate: [0, 180, 360],
           }}
           transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        />
-        
-        {/* Additional nebula effects */}
-        <motion.div 
-          className="absolute top-10 right-10 w-[600px] h-[600px] bg-gradient-to-br from-cosmic-pink/5 via-cosmic-purple/5 to-transparent rounded-full blur-[150px]"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-10 left-10 w-[500px] h-[500px] bg-gradient-to-tr from-cosmic-cyan/5 via-cosmic-blue/5 to-transparent rounded-full blur-[130px]"
-          animate={{
-            scale: [1.1, 0.9, 1.1],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
         />
       </div>
 

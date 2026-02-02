@@ -1,73 +1,117 @@
 import { motion } from "framer-motion";
-import cosmicInfinityBg from "@/assets/cosmic-infinity-bg.png";
+import glowingInfinityBg from "@/assets/glowing-infinity-bg.png";
 import { useMemo } from "react";
 
 interface Sparkle {
   id: number;
-  x: number;
-  y: number;
+  startX: number;
+  startY: number;
+  endX: number;
+  endY: number;
   size: number;
   duration: number;
   delay: number;
 }
 
-const GlowingInfinity = () => {
-  // Generate sparkles that move around the infinity
+interface GlowingInfinityProps {
+  isFixed?: boolean;
+}
+
+const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
+  // Generate sparkles with unique non-overlapping paths
   const sparkles = useMemo<Sparkle[]>(() => {
-    return Array.from({ length: 50 }, (_, i) => ({
-      id: i,
-      x: 20 + Math.random() * 60,
-      y: 25 + Math.random() * 50,
-      size: Math.random() * 3 + 1,
-      duration: Math.random() * 4 + 3,
-      delay: Math.random() * 4,
-    }));
+    const regions = [
+      // Top left region
+      { x: [5, 20], y: [10, 30] },
+      // Top right region
+      { x: [75, 95], y: [10, 30] },
+      // Bottom left region
+      { x: [5, 25], y: [65, 85] },
+      // Bottom right region
+      { x: [70, 95], y: [65, 85] },
+      // Left side
+      { x: [3, 15], y: [35, 60] },
+      // Right side
+      { x: [85, 97], y: [35, 60] },
+      // Top center left
+      { x: [25, 40], y: [5, 20] },
+      // Top center right
+      { x: [55, 75], y: [5, 20] },
+      // Bottom center left
+      { x: [25, 40], y: [80, 95] },
+      // Bottom center right
+      { x: [55, 75], y: [80, 95] },
+    ];
+
+    return Array.from({ length: 20 }, (_, i) => {
+      const region = regions[i % regions.length];
+      const startX = region.x[0] + Math.random() * (region.x[1] - region.x[0]);
+      const startY = region.y[0] + Math.random() * (region.y[1] - region.y[0]);
+      // Move within own region only
+      const endX = region.x[0] + Math.random() * (region.x[1] - region.x[0]);
+      const endY = region.y[0] + Math.random() * (region.y[1] - region.y[0]);
+      
+      return {
+        id: i,
+        startX,
+        startY,
+        endX,
+        endY,
+        size: Math.random() * 4 + 2,
+        duration: Math.random() * 4 + 4,
+        delay: Math.random() * 3,
+      };
+    });
   }, []);
 
   return (
-    <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-      {/* Cosmic infinity background image - moving and glowing */}
+    <div className={`${isFixed ? 'fixed' : 'absolute'} inset-0 flex items-center justify-center pointer-events-none overflow-hidden`}>
+      {/* Dark overlay base */}
+      <div className="absolute inset-0 bg-background/60" />
+
+      {/* Glowing infinity background image */}
       <motion.div
         className="absolute inset-0 flex items-center justify-center"
         animate={{
-          scale: [1, 1.05, 1],
+          scale: [1, 1.02, 1],
         }}
         transition={{
-          duration: 20,
+          duration: 8,
           repeat: Infinity,
           ease: "easeInOut",
         }}
       >
         <motion.img
-          src={cosmicInfinityBg}
+          src={glowingInfinityBg}
           alt=""
-          className="w-full h-full object-cover"
+          className="w-[90%] md:w-[70%] lg:w-[60%] max-w-[900px] h-auto object-contain"
           style={{
-            opacity: 0.35,
-            minWidth: "120%",
-            minHeight: "120%",
+            filter: "brightness(0.7) saturate(1.3)",
           }}
           animate={{
-            x: [0, 30, -20, 0],
-            y: [0, -20, 15, 0],
-            opacity: [0.3, 0.4, 0.35, 0.3],
+            opacity: [0.5, 0.7, 0.5],
+            filter: [
+              "brightness(0.7) saturate(1.3) drop-shadow(0 0 40px hsl(220 90% 60% / 0.5))",
+              "brightness(0.85) saturate(1.4) drop-shadow(0 0 60px hsl(280 85% 55% / 0.6))",
+              "brightness(0.7) saturate(1.3) drop-shadow(0 0 40px hsl(220 90% 60% / 0.5))",
+            ],
           }}
           transition={{
-            duration: 25,
+            duration: 5,
             repeat: Infinity,
             ease: "easeInOut",
           }}
         />
       </motion.div>
 
-      {/* Overlay glow layer for pulsing effect */}
+      {/* Glow overlay */}
       <motion.div
-        className="absolute inset-0 flex items-center justify-center"
+        className="absolute inset-0"
         style={{
-          background: "radial-gradient(ellipse at center, hsl(280 80% 50% / 0.08), transparent 70%)",
+          background: "radial-gradient(ellipse at center, hsl(220 90% 50% / 0.1), transparent 60%)",
         }}
         animate={{
-          opacity: [0.5, 0.8, 0.5],
+          opacity: [0.4, 0.7, 0.4],
         }}
         transition={{
           duration: 4,
@@ -76,37 +120,35 @@ const GlowingInfinity = () => {
         }}
       />
 
-      {/* Moving sparkles around the infinity */}
+      {/* Blue/cyan sparkles moving in their own regions */}
       {sparkles.map((sparkle) => (
         <motion.div
           key={sparkle.id}
           className="absolute rounded-full"
           style={{
-            left: `${sparkle.x}%`,
-            top: `${sparkle.y}%`,
             width: `${sparkle.size}px`,
             height: `${sparkle.size}px`,
-            background: sparkle.id % 3 === 0 
-              ? "hsl(185 90% 70%)" 
-              : sparkle.id % 3 === 1 
-                ? "hsl(280 85% 75%)" 
-                : "hsl(330 85% 70%)",
-            boxShadow: `0 0 ${sparkle.size * 4}px ${sparkle.size * 1.5}px ${
-              sparkle.id % 3 === 0 
-                ? "hsl(185 90% 60% / 0.7)" 
-                : sparkle.id % 3 === 1 
-                  ? "hsl(280 85% 65% / 0.7)" 
-                  : "hsl(330 85% 60% / 0.7)"
+            background: sparkle.id % 2 === 0 
+              ? "hsl(200 100% 75%)" 
+              : "hsl(185 95% 70%)",
+            boxShadow: `0 0 ${sparkle.size * 5}px ${sparkle.size * 2}px ${
+              sparkle.id % 2 === 0 
+                ? "hsl(200 100% 60% / 0.8)" 
+                : "hsl(185 95% 55% / 0.8)"
             }`,
           }}
+          initial={{
+            left: `${sparkle.startX}%`,
+            top: `${sparkle.startY}%`,
+          }}
           animate={{
-            x: [0, (Math.random() - 0.5) * 120, (Math.random() - 0.5) * 100, 0],
-            y: [0, (Math.random() - 0.5) * 80, (Math.random() - 0.5) * 60, 0],
-            opacity: [0.4, 1, 0.7, 0.4],
-            scale: [0.8, 1.4, 1, 0.8],
+            left: [`${sparkle.startX}%`, `${sparkle.endX}%`, `${sparkle.startX}%`],
+            top: [`${sparkle.startY}%`, `${sparkle.endY}%`, `${sparkle.startY}%`],
+            opacity: [0.5, 1, 0.5],
+            scale: [0.8, 1.2, 0.8],
           }}
           transition={{
-            duration: sparkle.duration + 3,
+            duration: sparkle.duration,
             delay: sparkle.delay,
             repeat: Infinity,
             ease: "easeInOut",
