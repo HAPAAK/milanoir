@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import logo from "@/assets/milanoir-logo-infinity.png";
 import StarField from "@/components/ui/StarField";
 import ShootingStars from "@/components/ui/ShootingStars";
+import GlowingInfinity from "@/components/ui/GlowingInfinity";
 
 const HeroSection = () => {
   return (
@@ -11,6 +12,9 @@ const HeroSection = () => {
       
       {/* Shooting Stars */}
       <ShootingStars count={3} interval={5} />
+      
+      {/* Glowing Infinity Background */}
+      <GlowingInfinity />
       
       {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
