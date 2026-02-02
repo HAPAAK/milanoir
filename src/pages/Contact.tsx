@@ -9,6 +9,8 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/milanoir-logo.png";
 import FooterSection from "@/components/about/FooterSection";
+import StarField from "@/components/ui/StarField";
+import GlowingInfinity from "@/components/ui/GlowingInfinity";
 
 const contactInfo = [
   {
@@ -37,7 +39,6 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    subject: "",
     message: "",
   });
 
@@ -53,7 +54,7 @@ const Contact = () => {
       description: "We'll get back to you within 24 hours.",
     });
     
-    setFormData({ name: "", email: "", subject: "", message: "" });
+    setFormData({ name: "", email: "", message: "" });
     setIsSubmitting(false);
   };
 
@@ -68,6 +69,13 @@ const Contact = () => {
     <main className="min-h-screen bg-background overflow-x-hidden">
       {/* Background Effects */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
+        {/* Star field */}
+        <StarField count={150} />
+        
+        {/* Glowing Infinity */}
+        <GlowingInfinity />
+        
+        {/* Cosmic orbs */}
         <motion.div
           className="absolute top-20 left-10 w-[500px] h-[500px] bg-cosmic-pink/10 rounded-full blur-[120px]"
           animate={{
@@ -96,15 +104,7 @@ const Contact = () => {
 
       {/* Navigation */}
       <nav className="relative z-50 py-6 px-4">
-        <div className="container flex items-center justify-between">
-          <Link to="/">
-            <motion.img
-              src={logo}
-              alt="Milanoir Events"
-              className="w-28 md:w-32"
-              whileHover={{ scale: 1.05 }}
-            />
-          </Link>
+        <div className="container flex items-center justify-end">
           <Link to="/">
             <motion.div
               className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
@@ -117,8 +117,29 @@ const Contact = () => {
         </div>
       </nav>
 
+      {/* Logo Section - Centered at top */}
+      <section className="relative z-10 pt-4 pb-8">
+        <div className="container px-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="flex justify-center"
+          >
+            <Link to="/">
+              <motion.img
+                src={logo}
+                alt="Milanoir Events"
+                className="w-48 md:w-56 lg:w-64 animate-glow-pulse"
+                whileHover={{ scale: 1.05 }}
+              />
+            </Link>
+          </motion.div>
+        </div>
+      </section>
+
       {/* Hero Section */}
-      <section className="relative z-10 py-16 md:py-24">
+      <section className="relative z-10 py-12 md:py-16">
         <div className="container px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -141,9 +162,9 @@ const Contact = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-4xl md:text-6xl lg:text-7xl font-display font-bold mb-6"
+              className="text-4xl md:text-6xl lg:text-7xl font-heading font-bold mb-6"
             >
-              <span className="text-gradient">Let's Create Something</span>
+              <span className="gradient-text">Let's Create Something</span>
               <br />
               <span className="text-foreground">Extraordinary</span>
             </motion.h1>
@@ -176,7 +197,7 @@ const Contact = () => {
                   initial={{ opacity: 0, y: 10 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="text-2xl md:text-3xl font-display font-bold mb-2 text-gradient"
+                  className="text-2xl md:text-3xl font-heading font-bold mb-2 gradient-text"
                 >
                   Send Us a Message
                 </motion.h2>
@@ -201,9 +222,9 @@ const Contact = () => {
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder="Your name"
+                        placeholder="Business Name"
                         required
-                        className="bg-background/50 border-border/50 focus:border-primary/50 transition-all duration-300"
+                        className="bg-background/50 border-border/50 focus:border-primary/50 transition-all duration-300 hover:border-primary/30"
                       />
                     </motion.div>
 
@@ -223,9 +244,9 @@ const Contact = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder="your@email.com"
+                        placeholder="business@email.com"
                         required
-                        className="bg-background/50 border-border/50 focus:border-primary/50 transition-all duration-300"
+                        className="bg-background/50 border-border/50 focus:border-primary/50 transition-all duration-300 hover:border-primary/30"
                       />
                     </motion.div>
                   </div>
@@ -237,28 +258,8 @@ const Contact = () => {
                     transition={{ delay: 0.3 }}
                     className="space-y-2"
                   >
-                    <Label htmlFor="subject" className="text-foreground">
-                      Subject
-                    </Label>
-                    <Input
-                      id="subject"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder="What's this about?"
-                      className="bg-background/50 border-border/50 focus:border-primary/50 transition-all duration-300"
-                    />
-                  </motion.div>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.4 }}
-                    className="space-y-2"
-                  >
                     <Label htmlFor="message" className="text-foreground">
-                      Message <span className="text-cosmic-pink">*</span>
+                      Message (What's this about?) <span className="text-cosmic-pink">*</span>
                     </Label>
                     <Textarea
                       id="message"
@@ -267,8 +268,8 @@ const Contact = () => {
                       onChange={handleChange}
                       placeholder="Tell us about your vision..."
                       required
-                      rows={5}
-                      className="bg-background/50 border-border/50 focus:border-primary/50 transition-all duration-300 resize-none"
+                      rows={6}
+                      className="bg-background/50 border-border/50 focus:border-primary/50 transition-all duration-300 resize-none hover:border-primary/30"
                     />
                   </motion.div>
 
@@ -276,7 +277,7 @@ const Contact = () => {
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.5 }}
+                    transition={{ delay: 0.4 }}
                   >
                     <Button
                       type="submit"
@@ -327,7 +328,7 @@ const Contact = () => {
                           <info.icon className="w-6 h-6 text-cosmic-pink group-hover:scale-110 transition-transform" />
                         </div>
                         <div>
-                          <h3 className="font-display font-semibold text-lg text-gradient mb-1">
+                          <h3 className="font-heading font-semibold text-lg gradient-text mb-1">
                             {info.title}
                           </h3>
                           <p className="text-muted-foreground group-hover:text-foreground transition-colors">
@@ -341,7 +342,7 @@ const Contact = () => {
                           <info.icon className="w-6 h-6 text-cosmic-pink group-hover:scale-110 transition-transform" />
                         </div>
                         <div>
-                          <h3 className="font-display font-semibold text-lg text-gradient mb-1">
+                          <h3 className="font-heading font-semibold text-lg gradient-text mb-1">
                             {info.title}
                           </h3>
                           <p className="text-muted-foreground">
@@ -360,12 +361,12 @@ const Contact = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.4, duration: 0.8 }}
-                className="glass-card p-8 rounded-2xl border border-border/50 relative overflow-hidden"
+                className="glass-card p-8 rounded-2xl border border-border/50 relative overflow-hidden hover:border-primary/20 transition-all duration-500"
               >
                 {/* Decorative gradient */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cosmic-pink/20 to-transparent rounded-full blur-2xl" />
                 
-                <h3 className="font-display font-bold text-2xl text-gradient mb-4">
+                <h3 className="font-heading font-bold text-2xl gradient-text mb-4">
                   Join Our Journey
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-6">
