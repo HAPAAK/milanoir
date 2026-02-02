@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import logo from "@/assets/milanoir-logo.png";
+import logo from "@/assets/milanoir-logo-infinity.png";
 import { Facebook, Instagram, Youtube } from "lucide-react";
 
 const socialLinks = [
@@ -34,14 +34,32 @@ const FooterSection = () => {
           <motion.img 
             src={logo} 
             alt="Milanoir Events" 
-            className="w-40 mb-8"
+            className="w-48 mb-8"
             whileHover={{ scale: 1.05 }}
             transition={{ type: "spring", stiffness: 300 }}
           />
           
-          <p className="text-muted-foreground text-sm max-w-md mb-6">
-            Milanoir Events Limited — Curating experiences that transcend ordinary entertainment.
-          </p>
+          {/* Glowing Tagline */}
+          <motion.p 
+            className="text-base md:text-lg max-w-lg mb-6 font-medium italic"
+            style={{
+              background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              backgroundClip: "text",
+              filter: "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+            }}
+            animate={{
+              filter: [
+                "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                "drop-shadow(0 0 20px hsl(185 85% 55% / 0.5))",
+                "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+              ],
+            }}
+            transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+          >
+            "The Beginning of Infinity — Representing the Nepalese Diaspora Globally"
+          </motion.p>
 
           {/* Social Links */}
           <motion.div 
@@ -75,7 +93,7 @@ const FooterSection = () => {
           </motion.div>
 
           <p className="text-xs text-muted-foreground/60 mb-2">
-            Registered in London, United Kingdom • Company Number: 16820191
+            Registered in England & Wales • Company Number: 16820191
           </p>
           
           <div className="section-divider w-32 my-6" />
