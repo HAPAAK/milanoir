@@ -134,30 +134,9 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
             </Badge>
           </div>
 
-          {/* Mystery symbol */}
-          <motion.div
-            className="mb-4"
-            animate={{
-              textShadow: [
-                "0 0 30px hsl(280 80% 60% / 0.5)",
-                "0 0 60px hsl(200 85% 55% / 0.7)",
-                "0 0 30px hsl(280 80% 60% / 0.5)",
-              ],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          >
-            <span className="text-4xl sm:text-5xl md:text-6xl font-heading font-bold gradient-text">
-              ?
-            </span>
-          </motion.div>
-
-          {/* Label */}
-          <h3 className="text-lg sm:text-xl md:text-2xl font-heading font-bold text-foreground/80 mb-3">
-            {uiText.artists.mysteryArtistLabel}
+          {/* Artist name - matching other artist cards */}
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold mb-3">
+            <span className="gradient-text">{uiText.artists.upcomingArtistLabel}</span>
           </h3>
 
           {/* Description - visible */}

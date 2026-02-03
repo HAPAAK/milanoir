@@ -6,7 +6,6 @@
 import PageWrapper from "@/components/layout/PageWrapper";
 import EventHero from "@/components/home/EventHero";
 import ArtistBentoGrid from "@/components/home/ArtistBentoGrid";
-import EventInfo from "@/components/home/EventInfo";
 import FooterSection from "@/components/about/FooterSection";
 
 const Home = () => {
@@ -14,7 +13,6 @@ const Home = () => {
     <PageWrapper>
       <EventHero />
       <ArtistBentoGrid />
-      <EventInfo />
       <FooterSection />
     </PageWrapper>
   );

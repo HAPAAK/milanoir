@@ -6,14 +6,14 @@
 
 import type { ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import SideNavigation from "./SideNavigation";
+import TopNavigation from "./TopNavigation";
 import GlowingInfinity from "@/components/ui/GlowingInfinity";
 import StarField from "@/components/ui/StarField";
 import ShootingStars from "@/components/ui/ShootingStars";
 
 interface PageWrapperProps {
   children: ReactNode;
-  /** Whether to show side navigation */
+  /** Whether to show top navigation */
   showNavigation?: boolean;
 }
 
@@ -39,15 +39,11 @@ const PageWrapper = ({ children, showNavigation = true }: PageWrapperProps) => {
         <ShootingStars count={3} interval={5} />
       </div>
 
-      {/* Side navigation */}
-      {showNavigation && <SideNavigation />}
+      {/* Top navigation */}
+      {showNavigation && <TopNavigation />}
 
-      {/* Main content with left margin for desktop nav */}
-      <main
-        className={`relative z-10 min-h-screen ${
-          showNavigation ? "lg:ml-20" : ""
-        }`}
-      >
+      {/* Main content */}
+      <main className="relative z-10 min-h-screen">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

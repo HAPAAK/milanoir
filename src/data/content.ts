@@ -92,7 +92,7 @@ export const uiText = {
     sectionSubtitle: "World-class performers bringing the energy",
     playPreview: "Play Preview",
     comingSoon: "Coming Soon",
-    mysteryArtistLabel: "Mystery Artist",
+    upcomingArtistLabel: "Upcoming Artist",
   },
   
   // Event info
