@@ -9,7 +9,6 @@ import { MapPin, Calendar } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
 import { Button } from "@/components/ui/button";
 import { mainEvent, uiText } from "@/data/content";
-import logo from "@/assets/milanoir-logo-infinity.png";
 
 const EventHero = () => {
   return (
@@ -62,32 +61,6 @@ const EventHero = () => {
           </div>
         </motion.div>
 
-        {/* Centered logo with glow */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
-          className="mb-5 md:mb-6"
-        >
-          <motion.img
-            src={logo}
-            alt="Milanoir Events"
-            className="w-28 sm:w-32 md:w-40 lg:w-48 mx-auto"
-            animate={{
-              filter: [
-                "drop-shadow(0 0 20px hsl(330 85% 60% / 0.3))",
-                "drop-shadow(0 0 40px hsl(200 85% 55% / 0.4))",
-                "drop-shadow(0 0 20px hsl(330 85% 60% / 0.3))",
-              ],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            whileHover={{ scale: 1.05 }}
-          />
-        </motion.div>
 
         {/* Countdown timer */}
         <motion.div

@@ -58,7 +58,7 @@ export const mainEvent: Event = {
   id: "nepalese-new-year-2082",
   title: "Nepalese New Year 2082",
   subtitle: "The Beginning of Infinity",
-  date: new Date("2026-04-14T00:00:00+01:00"), // April 14, 2026, UK time
+  date: new Date("2026-04-13T00:00:00+01:00"), // April 13, 2026, UK time
   venue: null, // TBA
   artists: artists,
   isActive: true,
@@ -72,7 +72,7 @@ export const uiText = {
   hero: {
     tagline: "Experience the celebration of a lifetime",
     location: "London, United Kingdom",
-    dateLabel: "April 14, 2026",
+    dateLabel: "April 13, 2026",
     scrollCta: "Discover the lineup",
   },
   
