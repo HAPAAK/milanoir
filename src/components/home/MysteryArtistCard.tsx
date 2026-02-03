@@ -88,6 +88,35 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
 
         {/* Content container */}
         <div className="relative z-10 h-full flex flex-col">
+          {/* Mystery artist silhouette image */}
+          {artist.imageUrl && (
+            <motion.div
+              className="relative overflow-hidden rounded-xl mb-4 h-40 md:h-48"
+              animate={{
+                opacity: [0.7, 0.9, 0.7],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <img
+                src={artist.imageUrl}
+                alt="Mystery Artist"
+                className="w-full h-full object-cover object-top filter brightness-0 invert opacity-80"
+                loading="lazy"
+              />
+              {/* Cosmic overlay */}
+              <div 
+                className="absolute inset-0"
+                style={{
+                  background: "radial-gradient(ellipse at 50% 50%, hsl(280 80% 50% / 0.3), transparent 70%)",
+                }}
+              />
+            </motion.div>
+          )}
+
           {/* Badges */}
           <div className="flex flex-wrap gap-2 mb-4">
             <Badge

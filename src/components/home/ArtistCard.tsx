@@ -79,6 +79,25 @@ const ArtistCard = ({
 
         {/* Content container */}
         <div className="relative z-10 h-full flex flex-col">
+          {/* Artist image */}
+          {artist.imageUrl && (
+            <motion.div
+              className={`relative overflow-hidden rounded-xl mb-4 ${
+                isLarge ? "h-48 md:h-64" : "h-32 md:h-40"
+              }`}
+              style={{ y: imageY }}
+            >
+              <img
+                src={artist.imageUrl}
+                alt={artist.name}
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
+                loading="lazy"
+              />
+              {/* Gradient overlay */}
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
+            </motion.div>
+          )}
+
           {/* Genre badge */}
           <Badge
             variant="secondary"
@@ -88,16 +107,15 @@ const ArtistCard = ({
           </Badge>
 
           {/* Artist name with gradient */}
-          <motion.h3
+          <h3
             className={`font-heading font-bold gradient-text mb-3 ${
               isLarge
                 ? "text-2xl sm:text-3xl md:text-4xl"
                 : "text-xl sm:text-2xl md:text-3xl"
             }`}
-            style={{ y: imageY }}
           >
             {artist.name}
-          </motion.h3>
+          </h3>
 
           {/* Origin badge */}
           {artist.origin && (
