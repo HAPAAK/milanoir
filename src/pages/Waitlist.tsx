@@ -26,7 +26,6 @@ const waitlistSchema = z.object({
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().email("Valid email is required"),
   phone: z.string().min(1, "Phone number is required"),
-  postcode: z.string().min(1, "Postcode is required"),
   termsAccepted: z.boolean().refine(val => val === true, {
     message: "You must accept the privacy policy"
   })
@@ -192,22 +191,13 @@ const Waitlist = () => {
                   {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
                 </div>
 
-                {/* Phone and Postcode row */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="phone" className="text-sm text-muted-foreground">
-                      Phone
-                    </Label>
-                    <Input id="phone" type="tel" {...register("phone")} placeholder="+44 7XXX XXXXXX" className="glass-card border-border/40 focus:border-primary/50 bg-background/50 h-12" />
-                    {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="postcode" className="text-sm text-muted-foreground">
-                      Postcode
-                    </Label>
-                    <Input id="postcode" {...register("postcode")} placeholder="SW1A 1AA" className="glass-card border-border/40 focus:border-primary/50 bg-background/50 h-12" />
-                    {errors.postcode && <p className="text-xs text-destructive">{errors.postcode.message}</p>}
-                  </div>
+                {/* Phone */}
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-sm text-muted-foreground">
+                    Phone
+                  </Label>
+                  <Input id="phone" type="tel" {...register("phone")} placeholder="+44 7XXX XXXXXX" className="glass-card border-border/40 focus:border-primary/50 bg-background/50 h-12" />
+                  {errors.phone && <p className="text-xs text-destructive">{errors.phone.message}</p>}
                 </div>
 
                 {/* Terms checkbox */}
