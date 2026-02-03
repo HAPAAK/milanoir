@@ -1,18 +1,17 @@
 /**
  * TopNavigation - Fixed top navigation bar with iOS-inspired glassmorphism
- * Features: Logo on left, text links on right, mobile hamburger menu
+ * Features: Logo on left, text links on right (desktop only)
+ * Mobile uses bottom tab navigation instead
  */
 
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X } from "lucide-react";
-import { navigationItems, uiText } from "@/data/content";
+import { motion } from "framer-motion";
+import { navigationItems } from "@/data/content";
 import logo from "@/assets/milanoir-logo.png";
 
 const TopNavigation = () => {
   const location = useLocation();
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Track scroll for enhanced glass effect
@@ -23,11 +22,6 @@ const TopNavigation = () => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Close menu on route change
-  useEffect(() => {
-    setIsMenuOpen(false);
-  }, [location.pathname]);
 
   const isActive = (href: string) => location.pathname === href;
 
@@ -93,82 +87,8 @@ const TopNavigation = () => {
               </Link>
             ))}
           </nav>
-
-          {/* Mobile menu button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden relative z-10 p-2 text-foreground hover:text-primary transition-colors"
-            aria-label={isMenuOpen ? uiText.nav.menuClose : uiText.nav.menuOpen}
-            aria-expanded={isMenuOpen}
-          >
-            <AnimatePresence mode="wait">
-              {isMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X className="w-6 h-6" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu className="w-6 h-6" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
         </div>
       </motion.header>
-
-      {/* Mobile menu overlay */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="fixed inset-x-0 top-16 z-40 md:hidden"
-          >
-            <nav
-              className="backdrop-blur-2xl bg-background/95 border-b border-border/40 py-6"
-              style={{
-                boxShadow: "0 10px 40px rgba(0, 0, 0, 0.2)",
-              }}
-            >
-              <div className="container px-4 flex flex-col gap-4">
-                {navigationItems.map((item, index) => (
-                  <motion.div
-                    key={item.id}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1, duration: 0.3 }}
-                  >
-                    <Link
-                      to={item.href}
-                      className={`block py-3 px-4 rounded-xl text-base font-medium transition-all duration-300 ${
-                        isActive(item.href)
-                          ? "bg-primary/10 text-primary border border-primary/20"
-                          : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-                      }`}
-                    >
-                      {item.label}
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </>
   );
 };

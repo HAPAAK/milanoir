@@ -1,19 +1,20 @@
 /**
  * PageWrapper - Consistent page structure with cosmic background
- * Includes: GlowingInfinity, StarField, ShootingStars
- * Handles left margin adjustment for side navigation
+ * Includes: GlowingInfinity, StarField, ShootingStars, MobileNavigation
+ * Mobile-first design with bottom tab navigation
  */
 
 import type { ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import TopNavigation from "./TopNavigation";
+import MobileNavigation from "./MobileNavigation";
 import GlowingInfinity from "@/components/ui/GlowingInfinity";
 import StarField from "@/components/ui/StarField";
 import ShootingStars from "@/components/ui/ShootingStars";
 
 interface PageWrapperProps {
   children: ReactNode;
-  /** Whether to show top navigation */
+  /** Whether to show navigation */
   showNavigation?: boolean;
 }
 
@@ -39,11 +40,11 @@ const PageWrapper = ({ children, showNavigation = true }: PageWrapperProps) => {
         <ShootingStars count={3} interval={5} />
       </div>
 
-      {/* Top navigation */}
+      {/* Top navigation (hidden on mobile, visible on desktop) */}
       {showNavigation && <TopNavigation />}
 
-      {/* Main content */}
-      <main className="relative z-10 min-h-screen">
+      {/* Main content with bottom padding for mobile nav */}
+      <main className="relative z-10 min-h-screen pb-20 md:pb-0">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -52,6 +53,9 @@ const PageWrapper = ({ children, showNavigation = true }: PageWrapperProps) => {
           {children}
         </motion.div>
       </main>
+
+      {/* Mobile bottom navigation */}
+      {showNavigation && <MobileNavigation />}
     </div>
   );
 };
