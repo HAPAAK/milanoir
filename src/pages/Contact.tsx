@@ -1,5 +1,10 @@
+/**
+ * Contact - Contact page with form and info
+ * Wrapped with PageWrapper for consistent navigation and background
+ */
+
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Send, ArrowLeft } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -9,9 +14,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/milanoir-logo-infinity.png";
 import FooterSection from "@/components/about/FooterSection";
-import StarField from "@/components/ui/StarField";
-import GlowingInfinity from "@/components/ui/GlowingInfinity";
-import ShootingStars from "@/components/ui/ShootingStars";
+import PageWrapper from "@/components/layout/PageWrapper";
 
 const contactInfo = [
   {
@@ -67,62 +70,9 @@ const Contact = () => {
   };
 
   return (
-    <main className="min-h-screen bg-background overflow-x-hidden">
-      {/* Background Effects */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {/* Star field */}
-        <StarField count={150} />
-        
-        {/* Shooting Stars */}
-        <ShootingStars count={3} interval={5} />
-        
-        {/* Glowing Infinity */}
-        <GlowingInfinity />
-        
-        {/* Cosmic orbs */}
-        <motion.div
-          className="absolute top-20 left-10 w-[500px] h-[500px] bg-cosmic-pink/10 rounded-full blur-[120px]"
-          animate={{
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-          }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-20 right-10 w-[600px] h-[600px] bg-cosmic-cyan/10 rounded-full blur-[140px]"
-          animate={{
-            scale: [1.2, 1, 1.2],
-            opacity: [0.4, 0.6, 0.4],
-          }}
-          transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-cosmic-purple/10 rounded-full blur-[100px]"
-          animate={{
-            scale: [1, 1.3, 1],
-            opacity: [0.2, 0.4, 0.2],
-          }}
-          transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
-        />
-      </div>
-
-      {/* Navigation */}
-      <nav className="relative z-50 py-6 px-4">
-        <div className="container flex items-center justify-end">
-          <Link to="/">
-            <motion.div
-              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-              whileHover={{ x: -5 }}
-            >
-              <ArrowLeft className="w-4 h-4" />
-              <span className="text-sm font-medium">Back to Home</span>
-            </motion.div>
-          </Link>
-        </div>
-      </nav>
-
+    <PageWrapper>
       {/* Logo Section - Centered at top */}
-      <section className="relative z-10 pt-4 pb-8">
+      <section className="relative z-10 pt-20 md:pt-24 pb-8">
         <div className="container px-4">
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -157,7 +107,7 @@ const Contact = () => {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="inline-block mb-6"
             >
-              <span className="px-4 py-2 glass-card text-xs md:text-sm tracking-widest text-cosmic-pink uppercase">
+              <span className="px-4 py-2 glass-card text-xs md:text-sm tracking-widest text-primary uppercase">
                 Get In Touch
               </span>
             </motion.div>
@@ -219,7 +169,7 @@ const Contact = () => {
                       className="space-y-2"
                     >
                       <Label htmlFor="name" className="text-foreground">
-                        Full Name <span className="text-cosmic-pink">*</span>
+                        Full Name <span className="text-primary">*</span>
                       </Label>
                       <Input
                         id="name"
@@ -240,7 +190,7 @@ const Contact = () => {
                       className="space-y-2"
                     >
                       <Label htmlFor="email" className="text-foreground">
-                        Email Address <span className="text-cosmic-pink">*</span>
+                        Email Address <span className="text-primary">*</span>
                       </Label>
                       <Input
                         id="email"
@@ -263,7 +213,7 @@ const Contact = () => {
                     className="space-y-2"
                   >
                     <Label htmlFor="message" className="text-foreground">
-                      Message (What's this about?) <span className="text-cosmic-pink">*</span>
+                      Message (What's this about?) <span className="text-primary">*</span>
                     </Label>
                     <Textarea
                       id="message"
@@ -286,7 +236,7 @@ const Contact = () => {
                     <Button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full h-12 bg-gradient-to-r from-cosmic-pink via-cosmic-purple to-cosmic-cyan hover:opacity-90 text-white font-semibold text-base rounded-xl shadow-lg shadow-cosmic-pink/20 transition-all duration-300 group"
+                      className="w-full h-12 bg-gradient-to-r from-primary via-accent to-secondary hover:opacity-90 text-white font-semibold text-base rounded-xl shadow-lg shadow-primary/20 transition-all duration-300 group"
                     >
                       {isSubmitting ? (
                         <motion.div
@@ -328,8 +278,8 @@ const Contact = () => {
                   >
                     {info.href ? (
                       <a href={info.href} className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cosmic-pink/20 to-cosmic-purple/20 flex items-center justify-center group-hover:from-cosmic-pink/30 group-hover:to-cosmic-purple/30 transition-all duration-300">
-                          <info.icon className="w-6 h-6 text-cosmic-pink group-hover:scale-110 transition-transform" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300">
+                          <info.icon className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
                         </div>
                         <div>
                           <h3 className="font-heading font-semibold text-lg gradient-text mb-1">
@@ -342,8 +292,8 @@ const Contact = () => {
                       </a>
                     ) : (
                       <div className="flex items-center gap-4">
-                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-cosmic-pink/20 to-cosmic-purple/20 flex items-center justify-center group-hover:from-cosmic-pink/30 group-hover:to-cosmic-purple/30 transition-all duration-300">
-                          <info.icon className="w-6 h-6 text-cosmic-pink group-hover:scale-110 transition-transform" />
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center group-hover:from-primary/30 group-hover:to-accent/30 transition-all duration-300">
+                          <info.icon className="w-6 h-6 text-primary group-hover:scale-110 transition-transform" />
                         </div>
                         <div>
                           <h3 className="font-heading font-semibold text-lg gradient-text mb-1">
@@ -368,7 +318,7 @@ const Contact = () => {
                 className="glass-card p-8 rounded-2xl border border-border/50 relative overflow-hidden hover:border-primary/20 transition-all duration-500"
               >
                 {/* Decorative gradient */}
-                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-cosmic-pink/20 to-transparent rounded-full blur-2xl" />
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-2xl" />
                 
                 <h3 className="font-heading font-bold text-2xl gradient-text mb-4">
                   Join Our Journey
@@ -383,7 +333,7 @@ const Contact = () => {
       </section>
 
       <FooterSection />
-    </main>
+    </PageWrapper>
   );
 };
 
