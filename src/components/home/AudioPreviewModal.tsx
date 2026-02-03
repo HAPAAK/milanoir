@@ -26,16 +26,16 @@ const AudioPreviewModal = ({
 }: AudioPreviewModalProps) => {
   if (!artist) return null;
 
-  // Build Spotify embed URL
+  // Build Spotify embed URL with autoplay enabled
   const spotifyEmbedUrl = artist.spotifyTrackId
-    ? `https://open.spotify.com/embed/track/${artist.spotifyTrackId}?utm_source=generator&theme=0`
+    ? `https://open.spotify.com/embed/track/${artist.spotifyTrackId}?utm_source=generator&theme=0&autoplay=1`
     : null;
 
-  // Build SoundCloud embed URL (fallback)
+  // Build SoundCloud embed URL (fallback) with autoplay enabled
   const soundcloudEmbedUrl = artist.soundcloudUrl
     ? `https://w.soundcloud.com/player/?url=${encodeURIComponent(
         artist.soundcloudUrl
-      )}&color=%23ff5500&auto_play=false&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true`
+      )}&color=%23ff5500&auto_play=true&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=true`
     : null;
 
   const embedUrl = spotifyEmbedUrl || soundcloudEmbedUrl;

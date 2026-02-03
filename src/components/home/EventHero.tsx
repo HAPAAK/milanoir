@@ -1,122 +1,143 @@
 /**
- * EventHero - Hero section with logo, event title, countdown, and scroll indicator
- * Premium animations and gradient effects
+ * EventHero - Hero section with viewport-fit design
+ * Layout: Subtitle → Title → Tagline → Badges → Logo → Countdown → CTA
  */
 
+import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ChevronDown, MapPin, Calendar } from "lucide-react";
+import { MapPin, Calendar } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
+import { Button } from "@/components/ui/button";
 import { mainEvent, uiText } from "@/data/content";
 import logo from "@/assets/milanoir-logo-infinity.png";
 
 const EventHero = () => {
-  const scrollToContent = () => {
-    window.scrollTo({
-      top: window.innerHeight * 0.9,
-      behavior: "smooth",
-    });
-  };
-
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-center px-4 py-20">
-      <div className="container max-w-5xl mx-auto text-center">
-        {/* Animated logo */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
+    <section className="relative h-screen flex flex-col items-center justify-center px-4 pt-20 pb-8">
+      <div className="container max-w-5xl mx-auto text-center flex flex-col items-center justify-center h-full">
+        {/* Event subtitle badge */}
+        <motion.span
+          initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, ease: "easeOut" }}
-          className="mb-8 md:mb-12"
+          transition={{ duration: 0.6 }}
+          className="inline-block px-4 py-2 glass-card text-xs md:text-sm tracking-widest text-primary uppercase mb-3 md:mb-4"
         >
-          <motion.img
-            src={logo}
-            alt="Milanoir Events"
-            className="w-40 sm:w-48 md:w-56 lg:w-64 mx-auto animate-glow-pulse"
-            whileHover={{ scale: 1.05 }}
-          />
-        </motion.div>
+          {mainEvent.subtitle}
+        </motion.span>
 
-        {/* Event title */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
+        {/* Main title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
-          className="mb-6 md:mb-8"
+          transition={{ delay: 0.1, duration: 0.8 }}
+          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-tight mb-3 md:mb-4"
         >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="inline-block px-4 py-2 glass-card text-xs md:text-sm tracking-widest text-primary uppercase mb-4 md:mb-6"
-          >
-            {mainEvent.subtitle}
-          </motion.span>
-
-          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-heading font-bold leading-tight">
-            <span className="gradient-text">{mainEvent.title}</span>
-          </h1>
-        </motion.div>
+          <span className="gradient-text">{mainEvent.title}</span>
+        </motion.h1>
 
         {/* Tagline */}
         <motion.p
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.8 }}
-          className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-2xl mx-auto mb-6 md:mb-8"
+          transition={{ delay: 0.2, duration: 0.8 }}
+          className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 md:mb-5"
         >
           {uiText.hero.tagline}
         </motion.p>
 
         {/* Location and date badges */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6, duration: 0.8 }}
-          className="flex flex-wrap items-center justify-center gap-3 md:gap-4 mb-10 md:mb-14"
+          transition={{ delay: 0.3, duration: 0.8 }}
+          className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-5 md:mb-6"
         >
-          <div className="flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm md:text-base">
-            <MapPin className="w-4 h-4 text-primary" />
+          <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 glass-card rounded-full text-xs md:text-sm">
+            <MapPin className="w-3 h-3 md:w-4 md:h-4 text-primary" />
             <span className="text-foreground">{uiText.hero.location}</span>
           </div>
-          <div className="flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm md:text-base">
-            <Calendar className="w-4 h-4 text-secondary" />
+          <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 glass-card rounded-full text-xs md:text-sm">
+            <Calendar className="w-3 h-3 md:w-4 md:h-4 text-secondary" />
             <span className="text-foreground">{uiText.hero.dateLabel}</span>
           </div>
         </motion.div>
 
+        {/* Centered logo with glow */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.4, duration: 0.8, ease: "easeOut" }}
+          className="mb-5 md:mb-6"
+        >
+          <motion.img
+            src={logo}
+            alt="Milanoir Events"
+            className="w-28 sm:w-32 md:w-40 lg:w-48 mx-auto"
+            animate={{
+              filter: [
+                "drop-shadow(0 0 20px hsl(330 85% 60% / 0.3))",
+                "drop-shadow(0 0 40px hsl(200 85% 55% / 0.4))",
+                "drop-shadow(0 0 20px hsl(330 85% 60% / 0.3))",
+              ],
+            }}
+            transition={{
+              duration: 4,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            whileHover={{ scale: 1.05 }}
+          />
+        </motion.div>
+
         {/* Countdown timer */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
-          className="mb-12 md:mb-16"
+          transition={{ delay: 0.5, duration: 0.8 }}
+          className="w-full max-w-lg mx-auto mb-6 md:mb-8"
         >
           <CountdownTimer />
         </motion.div>
 
-        {/* Scroll indicator */}
-        <motion.button
-          onClick={scrollToContent}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
-          className="group flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-          aria-label={uiText.hero.scrollCta}
+        {/* Join the Waitlist CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <span className="text-xs md:text-sm uppercase tracking-widest">
-            {uiText.hero.scrollCta}
-          </span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-          >
-            <ChevronDown className="w-5 h-5 md:w-6 md:h-6" />
-          </motion.div>
-        </motion.button>
+          <Link to="/waitlist">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+            >
+              <Button
+                size="lg"
+                className="h-12 md:h-14 px-8 md:px-10 text-sm md:text-base font-semibold rounded-full relative overflow-hidden group"
+                style={{
+                  background:
+                    "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)))",
+                }}
+              >
+                <motion.span
+                  className="absolute inset-0"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)))",
+                  }}
+                  initial={{ opacity: 0 }}
+                  whileHover={{ opacity: 1 }}
+                  transition={{ duration: 0.3 }}
+                />
+                <span className="relative z-10">Join the Waitlist</span>
+              </Button>
+            </motion.div>
+          </Link>
+        </motion.div>
       </div>
 
       {/* Decorative gradient at bottom */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
         style={{
           background:
             "linear-gradient(to top, hsl(var(--background)), transparent)",

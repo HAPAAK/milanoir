@@ -33,29 +33,6 @@ const ArtistBentoGrid = () => {
   return (
     <section className="py-16 md:py-24 px-4">
       <div className="container max-w-7xl mx-auto">
-        {/* Section header */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16"
-        >
-          <motion.span
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            className="inline-block px-4 py-2 glass-card text-xs md:text-sm tracking-widest text-primary uppercase mb-4"
-          >
-            The Lineup
-          </motion.span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4">
-            <span className="gradient-text">{uiText.artists.sectionTitle}</span>
-          </h2>
-          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-            {uiText.artists.sectionSubtitle}
-          </p>
-        </motion.div>
 
         {/* Bento grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
