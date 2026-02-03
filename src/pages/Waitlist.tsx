@@ -113,10 +113,10 @@ const Waitlist = () => {
 
               {/* Countdown section */}
               <div className="mb-8">
-              <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">CELEBRATIONS BEGINS IN...
-I BEGINS IN...<Clock className="w-4 h-4 text-secondary" />
-                Infinity begins in...
-              </p>
+                <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
+                  <Clock className="w-4 h-4 text-secondary" />
+                  Infinity begins in...
+                </p>
                 <CountdownTimer />
               </div>
 
