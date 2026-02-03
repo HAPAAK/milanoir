@@ -12,6 +12,11 @@ export const navigationItems: NavigationItem[] = [
   { id: "contact", label: "Contact", href: "/contact" },
 ];
 
+// Artist images
+import mrDImage from "@/assets/artists/mr-d.jpeg";
+import sacarImage from "@/assets/artists/sacar.jpeg";
+import mysteryArtistImage from "@/assets/artists/mystery-artist.jpeg";
+
 // Featured artists for Nepalese New Year 2082
 export const artists: Artist[] = [
   {
@@ -21,7 +26,8 @@ export const artists: Artist[] = [
     description:
       "From the streets of Hetauda to stages across Nepal and beyond, Mr. D is a lyrical force who blends raw emotion with razor-sharp storytelling. His tracks like 'Gobar Lyath' and 'Bandai Cha Nepal' speak truth to power, making him a voice for the unheard and a rebel with rhythm.",
     origin: "Hetauda, Nepal",
-    spotifyTrackId: "4PTG3Z6ehGkBFwjybzWkR8", // Example track ID - replace with actual
+    imageUrl: mrDImage,
+    spotifyTrackId: "4BCEDbMGVmwuKX6E9LpMJy",
     isMystery: false,
   },
   {
@@ -31,7 +37,8 @@ export const artists: Artist[] = [
     description:
       "Kathmandu-born and Sydney-based, Lil Buddha is a bilingual rap phenom known for his fiery freestyles and authentic storytelling. His music bridges cultures and continents, delivering powerful narratives that resonate with audiences worldwide.",
     origin: "Kathmandu / Sydney",
-    spotifyTrackId: "6habFhsOp2NvshLv26DqMb", // Example track ID - replace with actual
+    imageUrl: sacarImage,
+    spotifyTrackId: "7q35Cd6mgVfZfeTfzki0ij",
     isMystery: false,
   },
   {
@@ -41,6 +48,7 @@ export const artists: Artist[] = [
     description:
       "There's a presence that doesn't shout—it resonates. A voice that feels like dusk and dawn colliding. When he steps in, the energy shifts. You won't find him chasing the spotlight, but when the beat drops, it finds him. Cryptic. Cosmic. Calm. And yet, unforgettable.",
     origin: "TBA",
+    imageUrl: mysteryArtistImage,
     isMystery: true,
   },
 ];
