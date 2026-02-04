@@ -1,6 +1,7 @@
 /**
  * ThemeMusicPlayer - Background music that plays automatically
- * Starts at 32 seconds, stops on user interaction
+ * Starts at 32 seconds, pauses when artist preview modal opens
+ * Exposes global pause/resume via custom events
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -11,10 +12,15 @@ import { Button } from "@/components/ui/button";
 const THEME_SONG_URL = "/audio/theme-song.mp3";
 const START_TIME_SECONDS = 32;
 
+// Custom events for external control
+export const PAUSE_THEME_MUSIC = "pauseThemeMusic";
+export const RESUME_THEME_MUSIC = "resumeThemeMusic";
+
 const ThemeMusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showControl, setShowControl] = useState(false);
+  const [wasPlayingBeforePause, setWasPlayingBeforePause] = useState(false);
 
   useEffect(() => {
     // Create audio element
@@ -40,12 +46,34 @@ const ThemeMusicPlayer = () => {
     // Delay slightly to allow page load
     const timeout = setTimeout(tryAutoplay, 1000);
 
+    // Listen for pause/resume events from modal
+    const handlePause = () => {
+      if (audioRef.current && !audioRef.current.paused) {
+        setWasPlayingBeforePause(true);
+        audioRef.current.pause();
+        setIsPlaying(false);
+      }
+    };
+
+    const handleResume = () => {
+      if (audioRef.current && wasPlayingBeforePause) {
+        audioRef.current.play().catch(console.error);
+        setIsPlaying(true);
+        setWasPlayingBeforePause(false);
+      }
+    };
+
+    window.addEventListener(PAUSE_THEME_MUSIC, handlePause);
+    window.addEventListener(RESUME_THEME_MUSIC, handleResume);
+
     return () => {
       clearTimeout(timeout);
+      window.removeEventListener(PAUSE_THEME_MUSIC, handlePause);
+      window.removeEventListener(RESUME_THEME_MUSIC, handleResume);
       audio.pause();
       audio.src = "";
     };
-  }, []);
+  }, [wasPlayingBeforePause]);
 
   const togglePlay = () => {
     if (audioRef.current) {
