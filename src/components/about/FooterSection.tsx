@@ -69,7 +69,7 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center text-center mb-10"
+            className="flex flex-col items-center text-center mb-8"
           >
             <motion.img 
               src={logo} 
@@ -79,9 +79,9 @@ const FooterSection = () => {
               transition={{ type: "spring", stiffness: 300 }}
             />
             
-            {/* Glowing Tagline */}
+            {/* Glowing Tagline - Larger */}
             <motion.p 
-              className="text-sm md:text-base max-w-md font-medium italic"
+              className="text-base md:text-xl lg:text-2xl max-w-xl font-medium italic"
               style={{
                 background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
                 WebkitBackgroundClip: "text",
@@ -102,28 +102,25 @@ const FooterSection = () => {
             </motion.p>
           </motion.div>
 
-          {/* Follow Us, Social Links, Links & Language - all on same row */}
+          {/* Follow Us & Social Links - Separate centered row */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 mb-10"
+            className="flex flex-col items-center text-center mb-8"
           >
-            {/* Follow Us Label */}
-            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider">
+            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
               {t.footer.followUs}
             </h3>
-
-            {/* Social Links */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-4">
               {socialLinks.map((social, index) => (
                 <motion.a
                   key={social.name}
                   href={social.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 group"
+                  className="w-11 h-11 rounded-full glass-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 group"
                   whileHover={{ scale: 1.1, y: -2 }}
                   whileTap={{ scale: 0.95 }}
                   initial={{ opacity: 0, y: 10 }}
@@ -132,17 +129,23 @@ const FooterSection = () => {
                   aria-label={social.name}
                 >
                   {social.icon ? (
-                    <social.icon className="w-4 h-4 group-hover:drop-shadow-[0_0_8px_hsl(330,85%,60%)]" />
+                    <social.icon className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_hsl(330,85%,60%)]" />
                   ) : (
                     <TikTokIcon />
                   )}
                 </motion.a>
               ))}
             </div>
+          </motion.div>
 
-            {/* Divider */}
-            <span className="hidden md:block w-px h-5 bg-border/50" />
-
+          {/* Links & Language - Same row */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-10"
+          >
             {/* Links */}
             <nav className="flex items-center gap-4">
               {companyLinks.map((link) => (
