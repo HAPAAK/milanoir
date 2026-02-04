@@ -11,13 +11,11 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from "@/components/ui/dialog";
 import { uiText } from "@/data/content";
 import type { Artist } from "@/types/event";
-import {
-  PAUSE_THEME_MUSIC,
-  RESUME_THEME_MUSIC,
-} from "./ThemeMusicPlayer";
+import { PAUSE_THEME_MUSIC, RESUME_THEME_MUSIC } from "@/lib/audioEvents";
 
 interface AudioPreviewModalProps {
   artist: Artist | null;
@@ -85,6 +83,9 @@ const AudioPreviewModal = ({
                 <DialogTitle className="text-2xl font-heading font-bold gradient-text">
                   {artist.name}
                 </DialogTitle>
+                <DialogDescription className="sr-only">
+                  Audio preview player for {artist.name}.
+                </DialogDescription>
                 <p className="text-sm text-muted-foreground">{artist.genre}</p>
               </DialogHeader>
 
