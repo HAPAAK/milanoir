@@ -1,6 +1,6 @@
 /**
  * EventHero - Hero section with viewport-fit design
- * Layout: Subtitle → Title → Tagline → Badges → Logo → Countdown → CTA
+ * Layout: Logo + presents → Subtitle → Title → Tagline → Badges → Countdown → CTA
  */
 
 import { Link } from "react-router-dom";
@@ -8,17 +8,38 @@ import { motion } from "framer-motion";
 import { MapPin, Calendar } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
 import { Button } from "@/components/ui/button";
-import { mainEvent, uiText } from "@/data/content";
+import { mainEvent } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
+import logo from "@/assets/milanoir-logo-infinity.png";
 
 const EventHero = () => {
+  const { t } = useLanguage();
+
   return (
     <section className="relative h-screen flex flex-col items-center justify-center px-4 pt-20 pb-8">
       <div className="container max-w-5xl mx-auto text-center flex flex-col items-center justify-center h-full">
+        {/* Logo + Presents */}
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="flex flex-col items-center mb-4"
+        >
+          <img 
+            src={logo} 
+            alt="Milanoir Events" 
+            className="w-16 md:w-20 opacity-80 mb-2"
+          />
+          <span className="text-xs md:text-sm tracking-[0.3em] uppercase text-muted-foreground font-light">
+            {t.hero.presents}
+          </span>
+        </motion.div>
+
         {/* Event subtitle badge */}
         <motion.span
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
           className="inline-block px-4 py-2 glass-card text-xs md:text-sm tracking-widest text-primary uppercase mb-3 md:mb-4"
         >
           {mainEvent.subtitle}
@@ -28,7 +49,7 @@ const EventHero = () => {
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.1, duration: 0.8 }}
+          transition={{ delay: 0.2, duration: 0.8 }}
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-tight mb-3 md:mb-4"
         >
           <span className="gradient-text">{mainEvent.title}</span>
@@ -38,29 +59,28 @@ const EventHero = () => {
         <motion.p
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 0.8 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
           className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-4 md:mb-5"
         >
-          {uiText.hero.tagline}
+          {t.hero.tagline}
         </motion.p>
 
         {/* Location and date badges */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.8 }}
           className="flex flex-wrap items-center justify-center gap-2 md:gap-3 mb-5 md:mb-6"
         >
           <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 glass-card rounded-full text-xs md:text-sm">
             <MapPin className="w-3 h-3 md:w-4 md:h-4 text-primary" />
-            <span className="text-foreground">{uiText.hero.location}</span>
+            <span className="text-foreground">{t.hero.location}</span>
           </div>
           <div className="flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-2 glass-card rounded-full text-xs md:text-sm">
             <Calendar className="w-3 h-3 md:w-4 md:h-4 text-secondary" />
-            <span className="text-foreground">{uiText.hero.dateLabel}</span>
+            <span className="text-foreground">{t.hero.dateLabel}</span>
           </div>
         </motion.div>
-
 
         {/* Countdown timer */}
         <motion.div
@@ -101,7 +121,7 @@ const EventHero = () => {
                   whileHover={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 />
-                <span className="relative z-10">Join the Waitlist</span>
+                <span className="relative z-10">{t.hero.joinWaitlist}</span>
               </Button>
             </motion.div>
           </Link>
