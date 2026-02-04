@@ -43,8 +43,8 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
         }}
       />
 
-      {/* Card content - Fixed height to match other cards */}
-      <div className="relative glass-card rounded-2xl md:rounded-3xl border border-border/30 p-5 md:p-6 overflow-hidden h-full flex flex-col min-h-[520px] md:min-h-[560px]">
+      {/* Card content - Auto height to fit all content */}
+      <div className="relative glass-card rounded-2xl md:rounded-3xl border border-border/30 p-5 md:p-6 overflow-hidden h-full flex flex-col">
         {/* Cosmic cloud background */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
@@ -91,7 +91,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
           {/* Mystery artist silhouette image - Fixed height to match */}
           {artist.imageUrl && (
             <motion.div
-              className="relative overflow-hidden rounded-xl mb-4 h-48 md:h-52 flex-shrink-0"
+              className="relative overflow-hidden rounded-xl mb-4 h-52 md:h-56 flex-shrink-0"
               animate={{
                 opacity: [0.7, 0.9, 0.7],
               }}
@@ -139,8 +139,8 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
             <span className="gradient-text">{uiText.artists.upcomingArtistLabel}</span>
           </h3>
 
-          {/* Description - Flexible height */}
-          <p className="text-sm text-muted-foreground leading-relaxed italic flex-grow line-clamp-5">
+          {/* Description - Full text without clipping */}
+          <p className="text-sm text-muted-foreground leading-relaxed italic flex-grow">
             "{artist.description}"
           </p>
 
