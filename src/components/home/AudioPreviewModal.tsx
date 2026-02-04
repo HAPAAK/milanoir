@@ -1,8 +1,10 @@
 /**
  * AudioPreviewModal - Elegant Spotify/SoundCloud player modal
  * Uses Radix Dialog for accessibility with glassmorphism styling
+ * Pauses theme music when open, resumes when closed
  */
 
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Dialog,
@@ -12,6 +14,10 @@ import {
 } from "@/components/ui/dialog";
 import { uiText } from "@/data/content";
 import type { Artist } from "@/types/event";
+import {
+  PAUSE_THEME_MUSIC,
+  RESUME_THEME_MUSIC,
+} from "./ThemeMusicPlayer";
 
 interface AudioPreviewModalProps {
   artist: Artist | null;
@@ -24,6 +30,15 @@ const AudioPreviewModal = ({
   isOpen,
   onClose,
 }: AudioPreviewModalProps) => {
+  // Pause/resume theme music based on modal state
+  useEffect(() => {
+    if (isOpen) {
+      window.dispatchEvent(new CustomEvent(PAUSE_THEME_MUSIC));
+    } else {
+      window.dispatchEvent(new CustomEvent(RESUME_THEME_MUSIC));
+    }
+  }, [isOpen]);
+
   if (!artist) return null;
 
   // Build Spotify embed URL with autoplay enabled
@@ -73,7 +88,7 @@ const AudioPreviewModal = ({
                 <p className="text-sm text-muted-foreground">{artist.genre}</p>
               </DialogHeader>
 
-              {/* Audio player embed */}
+              {/* Audio player embed - autoplay enabled */}
               <div className="px-6 pb-6">
                 {embedUrl ? (
                   <div className="rounded-xl overflow-hidden bg-background/50">
