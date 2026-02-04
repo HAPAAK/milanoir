@@ -55,7 +55,10 @@ const FooterSection = () => {
   ];
 
   return (
-    <footer className="py-16 md:py-20 border-t border-border relative overflow-hidden">
+    <footer className="pt-8 md:pt-12 pb-12 md:pb-16 relative overflow-hidden">
+      {/* Subtle top gradient fade instead of hard border */}
+      <div className="absolute top-0 left-0 right-0 h-24 bg-gradient-to-b from-transparent to-transparent pointer-events-none" />
+      
       {/* Background glow */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-cosmic-pink/5 rounded-full blur-[100px]" />
@@ -69,12 +72,12 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="flex flex-col items-center text-center mb-8"
+            className="flex flex-col items-center text-center mb-6"
           >
             <motion.img 
               src={logo} 
               alt="Milanoir Events" 
-              className="w-48 md:w-56 mb-6"
+              className="w-44 md:w-52 mb-4"
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             />
@@ -108,9 +111,9 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col items-center text-center mb-8"
+            className="flex flex-col items-center text-center mb-6"
           >
-            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
               {t.footer.followUs}
             </h3>
             <div className="flex items-center gap-4">
@@ -144,7 +147,7 @@ const FooterSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-6 mb-10"
+            className="flex flex-col md:flex-row items-center justify-center gap-3 md:gap-5 mb-6"
           >
             {/* Links */}
             <nav className="flex items-center gap-4">
@@ -204,11 +207,11 @@ const FooterSection = () => {
             </div>
           </motion.div>
 
-          {/* Divider */}
-          <div className="section-divider w-full mb-8" />
+          {/* Subtle Divider */}
+          <div className="w-32 h-px bg-gradient-to-r from-transparent via-border/50 to-transparent mx-auto mb-5" />
 
           {/* Bottom section - Centered */}
-          <div className="flex flex-col items-center gap-3 text-center">
+          <div className="flex flex-col items-center gap-2 text-center">
             <p className="text-xs text-muted-foreground/60">
               {t.footer.registered}
             </p>
