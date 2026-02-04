@@ -59,8 +59,8 @@ const ArtistCard = ({
         }}
       />
 
-      {/* Card content - Fixed height */}
-      <div className="relative glass-card rounded-2xl md:rounded-3xl border border-border/50 group-hover:border-transparent transition-all duration-300 overflow-hidden h-full p-5 md:p-6 flex flex-col min-h-[520px] md:min-h-[560px]">
+      {/* Card content - Auto height to fit all content */}
+      <div className="relative glass-card rounded-2xl md:rounded-3xl border border-border/50 group-hover:border-transparent transition-all duration-300 overflow-hidden h-full p-5 md:p-6 flex flex-col">
         {/* Cosmic glow on hover */}
         <motion.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -75,7 +75,7 @@ const ArtistCard = ({
           {/* Artist image - Fixed height */}
           {artist.imageUrl && (
             <motion.div
-              className="relative overflow-hidden rounded-xl mb-4 h-48 md:h-52 flex-shrink-0"
+              className="relative overflow-hidden rounded-xl mb-4 h-52 md:h-56 flex-shrink-0"
               style={{ y: imageY }}
             >
               <img
@@ -109,8 +109,8 @@ const ArtistCard = ({
             </span>
           )}
 
-          {/* Description - Flexible height with line clamp */}
-          <p className="text-sm text-muted-foreground leading-relaxed flex-grow line-clamp-5">
+          {/* Description - Full text without clipping */}
+          <p className="text-sm text-muted-foreground leading-relaxed flex-grow">
             {artist.description}
           </p>
 
