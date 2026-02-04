@@ -63,150 +63,138 @@ const FooterSection = () => {
 
       <div className="container px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          {/* Main footer content - 3 columns */}
-          <div className="grid md:grid-cols-3 gap-10 md:gap-8 mb-12">
-            {/* Column 1: Company Links (Left) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="flex flex-col items-center md:items-start"
+          {/* Center section - Logo, Tagline & Social (larger) */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex flex-col items-center text-center mb-10"
+          >
+            <motion.img 
+              src={logo} 
+              alt="Milanoir Events" 
+              className="w-48 md:w-56 mb-6"
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", stiffness: 300 }}
+            />
+            
+            {/* Glowing Tagline */}
+            <motion.p 
+              className="text-sm md:text-base max-w-md font-medium italic mb-8"
+              style={{
+                background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
+                WebkitBackgroundClip: "text",
+                WebkitTextFillColor: "transparent",
+                backgroundClip: "text",
+                filter: "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+              }}
+              animate={{
+                filter: [
+                  "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                  "drop-shadow(0 0 20px hsl(185 85% 55% / 0.5))",
+                  "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                ],
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             >
-              <nav className="flex flex-col gap-3">
-                {companyLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-            </motion.div>
+              "{t.footer.tagline}"
+            </motion.p>
 
-            {/* Column 2: Logo, Tagline & Social (Center) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex flex-col items-center text-center"
-            >
-              <motion.img 
-                src={logo} 
-                alt="Milanoir Events" 
-                className="w-36 md:w-40 mb-4"
-                whileHover={{ scale: 1.05 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              />
-              
-              {/* Glowing Tagline */}
-              <motion.p 
-                className="text-xs md:text-sm max-w-xs font-medium italic mb-6"
-                style={{
-                  background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
-                  WebkitBackgroundClip: "text",
-                  WebkitTextFillColor: "transparent",
-                  backgroundClip: "text",
-                  filter: "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
-                }}
-                animate={{
-                  filter: [
-                    "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
-                    "drop-shadow(0 0 20px hsl(185 85% 55% / 0.5))",
-                    "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
-                  ],
-                }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-              >
-                "{t.footer.tagline}"
-              </motion.p>
-
-              {/* Follow Us & Social Links */}
-              <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
-                {t.footer.followUs}
-              </h3>
-              <div className="flex items-center gap-3">
-                {socialLinks.map((social, index) => (
-                  <motion.a
-                    key={social.name}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-full glass-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 group"
-                    whileHover={{ scale: 1.1, y: -2 }}
-                    whileTap={{ scale: 0.95 }}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.1 * index }}
-                    aria-label={social.name}
-                  >
-                    {social.icon ? (
-                      <social.icon className="w-4 h-4 group-hover:drop-shadow-[0_0_8px_hsl(330,85%,60%)]" />
-                    ) : (
-                      <TikTokIcon />
-                    )}
-                  </motion.a>
-                ))}
-              </div>
-            </motion.div>
-
-            {/* Column 3: Language Switcher (Right) */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center md:items-end"
-            >
-              {/* Language Switcher */}
-              <div className="relative" ref={dropdownRef}>
-                <button
-                  onClick={() => setIsLangOpen(!isLangOpen)}
-                  className="flex items-center gap-2 px-4 py-2.5 glass-card rounded-xl border border-border/40 hover:border-primary/50 transition-all duration-300 min-w-[140px]"
-                  aria-label="Select language"
-                  aria-expanded={isLangOpen}
+            {/* Follow Us & Social Links */}
+            <h3 className="text-sm font-semibold text-muted-foreground uppercase tracking-wider mb-4">
+              {t.footer.followUs}
+            </h3>
+            <div className="flex items-center gap-4">
+              {socialLinks.map((social, index) => (
+                <motion.a
+                  key={social.name}
+                  href={social.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-11 h-11 rounded-full glass-card flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 group"
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  whileTap={{ scale: 0.95 }}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 * index }}
+                  aria-label={social.name}
                 >
-                  <Globe className="w-4 h-4 text-muted-foreground" />
-                  <span className="text-lg">{currentLang.flag}</span>
-                  <span className="text-sm font-medium text-foreground flex-1 text-left">
-                    {currentLang.label}
-                  </span>
-                  <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${isLangOpen ? "rotate-180" : ""}`} />
-                </button>
-
-                {/* Language Dropdown */}
-                <AnimatePresence>
-                  {isLangOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, y: -10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: -10 }}
-                      transition={{ duration: 0.2 }}
-                      className="absolute bottom-full left-0 mb-2 w-full rounded-xl border border-border/40 bg-background shadow-xl overflow-hidden z-50"
-                    >
-                      {languages.map((lang) => (
-                        <button
-                          key={lang.code}
-                          onClick={() => handleLanguageChange(lang.code)}
-                          className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
-                            language === lang.code
-                              ? "bg-primary/10 text-primary"
-                              : "hover:bg-muted/50 text-foreground"
-                          }`}
-                        >
-                          <span className="text-lg">{lang.flag}</span>
-                          <span className="text-sm font-medium">{lang.label}</span>
-                        </button>
-                      ))}
-                    </motion.div>
+                  {social.icon ? (
+                    <social.icon className="w-5 h-5 group-hover:drop-shadow-[0_0_8px_hsl(330,85%,60%)]" />
+                  ) : (
+                    <TikTokIcon />
                   )}
-                </AnimatePresence>
-              </div>
-            </motion.div>
-          </div>
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+
+          {/* Row with Privacy, Terms, and Language Toggle - same level */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 mb-10"
+          >
+            {/* Links */}
+            <nav className="flex items-center gap-6">
+              {companyLinks.map((link) => (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Divider */}
+            <span className="hidden md:block w-px h-5 bg-border/50" />
+
+            {/* Language Switcher */}
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setIsLangOpen(!isLangOpen)}
+                className="flex items-center gap-2 px-4 py-2.5 glass-card rounded-xl border border-border/40 hover:border-primary/50 transition-all duration-300 min-w-[140px]"
+                aria-label="Select language"
+                aria-expanded={isLangOpen}
+              >
+                <Globe className="w-4 h-4 text-muted-foreground" />
+                <span className="text-lg">{currentLang.flag}</span>
+                <span className="text-sm font-medium text-foreground flex-1 text-left">
+                  {currentLang.label}
+                </span>
+                <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform ${isLangOpen ? "rotate-180" : ""}`} />
+              </button>
+
+              {/* Language Dropdown */}
+              <AnimatePresence>
+                {isLangOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute bottom-full left-0 mb-2 w-full rounded-xl border border-border/40 bg-background/95 backdrop-blur-md shadow-xl overflow-hidden z-50"
+                  >
+                    {languages.filter(lang => lang.code !== language).map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => handleLanguageChange(lang.code)}
+                        className="w-full flex items-center gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 text-foreground"
+                      >
+                        <span className="text-lg">{lang.flag}</span>
+                        <span className="text-sm font-medium">{lang.label}</span>
+                      </button>
+                    ))}
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+          </motion.div>
 
           {/* Divider */}
           <div className="section-divider w-full mb-8" />
