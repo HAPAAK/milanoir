@@ -83,7 +83,7 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            {/* Logo + Presents */}
+            {/* Logo only - no presents */}
             <motion.div
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -93,11 +93,8 @@ const Contact = () => {
               <img 
                 src={logo} 
                 alt="Milanoir Events" 
-                className="w-16 md:w-20 opacity-80 mb-2"
+                className="w-16 md:w-20 opacity-80"
               />
-              <span className="text-xs md:text-sm tracking-[0.3em] uppercase text-muted-foreground font-light">
-                {t.hero.presents}
-              </span>
             </motion.div>
 
             {/* Get In Touch Badge */}
