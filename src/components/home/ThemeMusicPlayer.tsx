@@ -8,19 +8,18 @@ import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Volume2, VolumeX } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { PAUSE_THEME_MUSIC, RESUME_THEME_MUSIC } from "@/lib/audioEvents";
 
 const THEME_SONG_URL = "/audio/theme-song.mp3";
 const START_TIME_SECONDS = 32;
 
 // Custom events for external control
-export const PAUSE_THEME_MUSIC = "pauseThemeMusic";
-export const RESUME_THEME_MUSIC = "resumeThemeMusic";
-
 const ThemeMusicPlayer = () => {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [showControl, setShowControl] = useState(false);
-  const [wasPlayingBeforePause, setWasPlayingBeforePause] = useState(false);
+  const wasPlayingBeforePauseRef = useRef(false);
+  const isExternallyPausedRef = useRef(false);
 
   useEffect(() => {
     // Create audio element
@@ -31,6 +30,11 @@ const ThemeMusicPlayer = () => {
 
     // Set start time and try autoplay
     const tryAutoplay = async () => {
+      // If something (like the artist preview) requested a pause, do not start.
+      if (isExternallyPausedRef.current) {
+        setShowControl(true);
+        return;
+      }
       audio.currentTime = START_TIME_SECONDS;
       try {
         await audio.play();
@@ -48,18 +52,27 @@ const ThemeMusicPlayer = () => {
 
     // Listen for pause/resume events from modal
     const handlePause = () => {
-      if (audioRef.current && !audioRef.current.paused) {
-        setWasPlayingBeforePause(true);
-        audioRef.current.pause();
-        setIsPlaying(false);
-      }
+      isExternallyPausedRef.current = true;
+
+      const currentAudio = audioRef.current;
+      if (!currentAudio) return;
+
+      // Remember if we were playing so we can resume seamlessly.
+      wasPlayingBeforePauseRef.current = !currentAudio.paused;
+      currentAudio.pause();
+      setIsPlaying(false);
     };
 
     const handleResume = () => {
-      if (audioRef.current && wasPlayingBeforePause) {
-        audioRef.current.play().catch(console.error);
+      isExternallyPausedRef.current = false;
+
+      const currentAudio = audioRef.current;
+      if (!currentAudio) return;
+
+      if (wasPlayingBeforePauseRef.current) {
+        currentAudio.play().catch(console.error);
         setIsPlaying(true);
-        setWasPlayingBeforePause(false);
+        wasPlayingBeforePauseRef.current = false;
       }
     };
 
@@ -73,9 +86,12 @@ const ThemeMusicPlayer = () => {
       audio.pause();
       audio.src = "";
     };
-  }, [wasPlayingBeforePause]);
+  }, []);
 
   const togglePlay = () => {
+    // Keep theme music paused while artist previews are active.
+    if (isExternallyPausedRef.current) return;
+
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
