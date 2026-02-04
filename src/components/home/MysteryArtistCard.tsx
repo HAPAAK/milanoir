@@ -1,6 +1,6 @@
 /**
  * MysteryArtistCard - Special treatment for unrevealed artist
- * Features cosmic cloud visuals, pulsing effects, and mysterious animations
+ * Matches height of regular artist cards
  */
 
 import { motion } from "framer-motion";
@@ -22,7 +22,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.15, duration: 0.8, ease: "easeOut" }}
       whileHover={{ scale: 1.02, y: -5 }}
-      className="relative group cursor-pointer"
+      className="relative group cursor-pointer h-full"
     >
       {/* Mysterious animated border */}
       <motion.div
@@ -43,8 +43,8 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
         }}
       />
 
-      {/* Card content */}
-      <div className="relative glass-card rounded-2xl md:rounded-3xl border border-border/30 p-5 md:p-6 overflow-hidden h-full">
+      {/* Card content - Fixed height to match other cards */}
+      <div className="relative glass-card rounded-2xl md:rounded-3xl border border-border/30 p-5 md:p-6 overflow-hidden h-full flex flex-col min-h-[520px] md:min-h-[560px]">
         {/* Cosmic cloud background */}
         <motion.div
           className="absolute inset-0 pointer-events-none"
@@ -88,10 +88,10 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
 
         {/* Content container */}
         <div className="relative z-10 h-full flex flex-col">
-          {/* Mystery artist silhouette image */}
+          {/* Mystery artist silhouette image - Fixed height to match */}
           {artist.imageUrl && (
             <motion.div
-              className="relative overflow-hidden rounded-xl mb-4 h-40 md:h-48"
+              className="relative overflow-hidden rounded-xl mb-4 h-48 md:h-52 flex-shrink-0"
               animate={{
                 opacity: [0.7, 0.9, 0.7],
               }}
@@ -118,7 +118,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
           )}
 
           {/* Badges */}
-          <div className="flex flex-wrap gap-2 mb-4">
+          <div className="flex flex-wrap gap-2 mb-3 flex-shrink-0">
             <Badge
               variant="secondary"
               className="bg-secondary/10 text-secondary border border-secondary/20 text-xs md:text-sm"
@@ -134,33 +134,37 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
             </Badge>
           </div>
 
-          {/* Artist name - matching other artist cards */}
-          <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold mb-3">
+          {/* Artist name */}
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold mb-2 flex-shrink-0">
             <span className="gradient-text">{uiText.artists.upcomingArtistLabel}</span>
           </h3>
 
-          {/* Description - visible */}
-          <p className="text-sm text-muted-foreground leading-relaxed italic flex-grow line-clamp-5 md:line-clamp-none">
+          {/* Description - Flexible height */}
+          <p className="text-sm text-muted-foreground leading-relaxed italic flex-grow line-clamp-5">
             "{artist.description}"
           </p>
 
-          {/* Decorative element */}
+          {/* Decorative element - Matches play button area height */}
           <motion.div
-            className="mt-4 md:mt-6 h-[2px] rounded-full"
-            style={{
-              background:
-                "linear-gradient(90deg, transparent, hsl(280 80% 60% / 0.5), hsl(200 85% 55% / 0.5), transparent)",
-            }}
-            animate={{
-              opacity: [0.3, 0.7, 0.3],
-              scaleX: [0.8, 1, 0.8],
-            }}
-            transition={{
-              duration: 4,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-          />
+            className="mt-4 h-10 md:h-12 flex items-center flex-shrink-0"
+          >
+            <motion.div
+              className="w-full h-[2px] rounded-full"
+              style={{
+                background:
+                  "linear-gradient(90deg, transparent, hsl(280 80% 60% / 0.5), hsl(200 85% 55% / 0.5), transparent)",
+              }}
+              animate={{
+                opacity: [0.3, 0.7, 0.3],
+                scaleX: [0.8, 1, 0.8],
+              }}
+              transition={{
+                duration: 4,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </motion.div>
         </div>
       </div>
     </motion.div>
