@@ -1,6 +1,6 @@
 /**
- * ArtistCard - Individual artist display with glassmorphism
- * Features parallax image, gradient border animation, and audio preview
+ * ArtistCard - Uniform artist display with glassmorphism
+ * Equal height cards with consistent image sizing
  */
 
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -15,15 +15,12 @@ interface ArtistCardProps {
   artist: Artist;
   index: number;
   onPlayPreview: (artist: Artist) => void;
-  /** Whether this is the large featured card */
-  isLarge?: boolean;
 }
 
 const ArtistCard = ({
   artist,
   index,
   onPlayPreview,
-  isLarge = false,
 }: ArtistCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -31,8 +28,8 @@ const ArtistCard = ({
     offset: ["start end", "end start"],
   });
 
-  // Parallax effect - image moves slower than scroll (0.7x speed)
-  const imageY = useTransform(scrollYProgress, [0, 1], [30, -30]);
+  // Parallax effect - image moves slower than scroll
+  const imageY = useTransform(scrollYProgress, [0, 1], [20, -20]);
 
   return (
     <motion.div
@@ -42,7 +39,7 @@ const ArtistCard = ({
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.15, duration: 0.6, ease: "easeOut" }}
       whileHover={{ scale: 1.02, y: -5 }}
-      className={`relative group cursor-pointer ${isLarge ? "md:row-span-2" : ""}`}
+      className="relative group cursor-pointer h-full"
     >
       {/* Animated gradient border */}
       <motion.div
@@ -62,12 +59,8 @@ const ArtistCard = ({
         }}
       />
 
-      {/* Card content */}
-      <div
-        className={`relative glass-card rounded-2xl md:rounded-3xl border border-border/50 group-hover:border-transparent transition-all duration-300 overflow-hidden h-full ${
-          isLarge ? "p-6 md:p-8" : "p-5 md:p-6"
-        }`}
-      >
+      {/* Card content - Fixed height */}
+      <div className="relative glass-card rounded-2xl md:rounded-3xl border border-border/50 group-hover:border-transparent transition-all duration-300 overflow-hidden h-full p-5 md:p-6 flex flex-col min-h-[520px] md:min-h-[560px]">
         {/* Cosmic glow on hover */}
         <motion.div
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
@@ -79,12 +72,10 @@ const ArtistCard = ({
 
         {/* Content container */}
         <div className="relative z-10 h-full flex flex-col">
-          {/* Artist image */}
+          {/* Artist image - Fixed height */}
           {artist.imageUrl && (
             <motion.div
-              className={`relative overflow-hidden rounded-xl mb-4 ${
-                isLarge ? "h-48 md:h-64" : "h-32 md:h-40"
-              }`}
+              className="relative overflow-hidden rounded-xl mb-4 h-48 md:h-52 flex-shrink-0"
               style={{ y: imageY }}
             >
               <img
@@ -101,37 +92,25 @@ const ArtistCard = ({
           {/* Genre badge */}
           <Badge
             variant="secondary"
-            className="self-start mb-4 bg-primary/10 text-primary border border-primary/20 text-xs md:text-sm"
+            className="self-start mb-3 bg-primary/10 text-primary border border-primary/20 text-xs md:text-sm flex-shrink-0"
           >
             {artist.genre}
           </Badge>
 
           {/* Artist name with gradient */}
-          <h3
-            className={`font-heading font-bold gradient-text mb-3 ${
-              isLarge
-                ? "text-2xl sm:text-3xl md:text-4xl"
-                : "text-xl sm:text-2xl md:text-3xl"
-            }`}
-          >
+          <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold gradient-text mb-2 flex-shrink-0">
             {artist.name}
           </h3>
 
           {/* Origin badge */}
           {artist.origin && (
-            <span className="text-xs md:text-sm text-muted-foreground mb-4">
+            <span className="text-xs md:text-sm text-muted-foreground mb-3 flex-shrink-0">
               {artist.origin}
             </span>
           )}
 
-          {/* Description */}
-          <p
-            className={`text-muted-foreground leading-relaxed flex-grow ${
-              isLarge
-                ? "text-sm md:text-base line-clamp-6 md:line-clamp-none"
-                : "text-sm line-clamp-4"
-            }`}
-          >
+          {/* Description - Flexible height with line clamp */}
+          <p className="text-sm text-muted-foreground leading-relaxed flex-grow line-clamp-5">
             {artist.description}
           </p>
 
@@ -141,7 +120,7 @@ const ArtistCard = ({
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               transition={{ delay: 0.3 }}
-              className="mt-4 md:mt-6"
+              className="mt-4 flex-shrink-0"
             >
               <Button
                 onClick={(e) => {
