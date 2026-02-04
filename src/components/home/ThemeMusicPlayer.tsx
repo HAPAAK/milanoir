@@ -21,6 +21,17 @@ const ThemeMusicPlayer = () => {
   const wasPlayingBeforePauseRef = useRef(false);
   const isExternallyPausedRef = useRef(false);
 
+  const waitForMetadata = (audio: HTMLAudioElement) =>
+    new Promise<void>((resolve) => {
+      // HAVE_METADATA = 1
+      if (audio.readyState >= 1) {
+        resolve();
+        return;
+      }
+
+      audio.addEventListener("loadedmetadata", () => resolve(), { once: true });
+    });
+
   useEffect(() => {
     // Create audio element
     const audio = new Audio(THEME_SONG_URL);
@@ -35,6 +46,10 @@ const ThemeMusicPlayer = () => {
         setShowControl(true);
         return;
       }
+
+      // Ensure metadata is ready before seeking, otherwise many browsers
+      // ignore currentTime assignments and start from 0.
+      await waitForMetadata(audio);
       audio.currentTime = START_TIME_SECONDS;
       try {
         await audio.play();
@@ -88,7 +103,7 @@ const ThemeMusicPlayer = () => {
     };
   }, []);
 
-  const togglePlay = () => {
+  const togglePlay = async () => {
     // Keep theme music paused while artist previews are active.
     if (isExternallyPausedRef.current) return;
 
@@ -97,8 +112,10 @@ const ThemeMusicPlayer = () => {
         audioRef.current.pause();
         setIsPlaying(false);
       } else {
-        audioRef.current.currentTime = START_TIME_SECONDS;
-        audioRef.current.play().catch(console.error);
+        const audio = audioRef.current;
+        await waitForMetadata(audio);
+        audio.currentTime = START_TIME_SECONDS;
+        audio.play().catch(console.error);
         setIsPlaying(true);
       }
     }
