@@ -1,13 +1,14 @@
 /**
- * FooterSection - Site footer with company links and language toggle
- * Features: Logo, tagline, social links, company links, language switcher
+ * FooterSection - Site footer with centered layout
+ * Features: Links left, Logo + tagline center, Social + language right, registration bottom
  */
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Facebook, Instagram, Youtube, Globe, ChevronDown } from "lucide-react";
 import logo from "@/assets/milanoir-logo-infinity.png";
+import { useLanguage, languages, type LanguageCode } from "@/contexts/LanguageContext";
 
 // Social media links
 const socialLinks = [
@@ -15,21 +16,6 @@ const socialLinks = [
   { name: "Instagram", icon: Instagram, url: "https://www.instagram.com/milanoirevents?igsh=OGhzcjl1OHdjajRy" },
   { name: "TikTok", icon: null, url: "https://www.tiktok.com/@milanoirevents?is_from_webapp=1&sender_device=pc" },
   { name: "YouTube", icon: Youtube, url: "https://youtube.com/@milanoirevents?si=s1eAa9ycIymEKZkD" },
-];
-
-// Company navigation links
-const companyLinks = [
-  { label: "About Us", href: "/about-us" },
-  { label: "Contact", href: "/contact" },
-  { label: "Privacy Policy", href: "/privacy-policy" },
-  { label: "Terms & Conditions", href: "/terms" },
-];
-
-// Supported languages
-const languages = [
-  { code: "en", label: "English", flag: "🇬🇧" },
-  { code: "es", label: "Español", flag: "🇪🇸" },
-  { code: "ne", label: "नेपाली", flag: "🇳🇵" },
 ];
 
 // TikTok custom icon
@@ -40,17 +26,33 @@ const TikTokIcon = () => (
 );
 
 const FooterSection = () => {
-  const [selectedLang, setSelectedLang] = useState("en");
+  const { language, setLanguage, t } = useLanguage();
   const [isLangOpen, setIsLangOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  const currentLang = languages.find(l => l.code === selectedLang) || languages[0];
+  const currentLang = languages.find(l => l.code === language) || languages[0];
 
-  const handleLanguageChange = (code: string) => {
-    setSelectedLang(code);
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsLangOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleLanguageChange = (code: LanguageCode) => {
+    setLanguage(code);
     setIsLangOpen(false);
-    // TODO: Integrate with i18n system when ready
-    console.log("Language changed to:", code);
   };
+
+  // Company links (Privacy Policy and Terms only)
+  const companyLinks = [
+    { label: t.footer.privacyPolicy, href: "/privacy-policy" },
+    { label: t.footer.terms, href: "/terms" },
+  ];
 
   return (
     <footer className="py-16 md:py-20 border-t border-border relative overflow-hidden">
@@ -61,27 +63,48 @@ const FooterSection = () => {
 
       <div className="container px-4 relative z-10">
         <div className="max-w-6xl mx-auto">
-          {/* Main footer content */}
+          {/* Main footer content - 3 columns */}
           <div className="grid md:grid-cols-3 gap-10 md:gap-8 mb-12">
-            {/* Column 1: Logo & Tagline */}
+            {/* Column 1: Company Links (Left) */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="flex flex-col items-center md:items-start text-center md:text-left"
+              className="flex flex-col items-center md:items-start"
+            >
+              <nav className="flex flex-col gap-3">
+                {companyLinks.map((link) => (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </nav>
+            </motion.div>
+
+            {/* Column 2: Logo, Tagline & Social (Center) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="flex flex-col items-center text-center"
             >
               <motion.img 
                 src={logo} 
                 alt="Milanoir Events" 
-                className="w-40 mb-6"
+                className="w-36 md:w-40 mb-4"
                 whileHover={{ scale: 1.05 }}
                 transition={{ type: "spring", stiffness: 300 }}
               />
               
               {/* Glowing Tagline */}
               <motion.p 
-                className="text-sm md:text-base max-w-xs font-medium italic"
+                className="text-xs md:text-sm max-w-xs font-medium italic mb-6"
                 style={{
                   background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
                   WebkitBackgroundClip: "text",
@@ -98,47 +121,14 @@ const FooterSection = () => {
                 }}
                 transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
-                "The Beginning of Infinity — Representing the Nepalese Diaspora Globally"
+                "{t.footer.tagline}"
               </motion.p>
-            </motion.div>
 
-            {/* Column 2: Company Links */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="flex flex-col items-center md:items-start"
-            >
-              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-                Company
+              {/* Follow Us & Social Links */}
+              <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                {t.footer.followUs}
               </h3>
-              <nav className="flex flex-col gap-3">
-                {companyLinks.map((link) => (
-                  <Link
-                    key={link.href}
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </nav>
-            </motion.div>
-
-            {/* Column 3: Social & Language */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="flex flex-col items-center md:items-end"
-            >
-              {/* Social Links */}
-              <h3 className="text-sm font-semibold text-foreground uppercase tracking-wider mb-4">
-                Follow Us
-              </h3>
-              <div className="flex items-center gap-3 mb-8">
+              <div className="flex items-center gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={social.name}
@@ -161,9 +151,18 @@ const FooterSection = () => {
                   </motion.a>
                 ))}
               </div>
+            </motion.div>
 
+            {/* Column 3: Language Switcher (Right) */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="flex flex-col items-center md:items-end"
+            >
               {/* Language Switcher */}
-              <div className="relative">
+              <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setIsLangOpen(!isLangOpen)}
                   className="flex items-center gap-2 px-4 py-2.5 glass-card rounded-xl border border-border/40 hover:border-primary/50 transition-all duration-300 min-w-[140px]"
@@ -179,29 +178,32 @@ const FooterSection = () => {
                 </button>
 
                 {/* Language Dropdown */}
-                {isLangOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute bottom-full left-0 mb-2 w-full rounded-xl border border-border/40 bg-background shadow-xl overflow-hidden z-50"
-                  >
-                    {languages.map((lang) => (
-                      <button
-                        key={lang.code}
-                        onClick={() => handleLanguageChange(lang.code)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
-                          selectedLang === lang.code
-                            ? "bg-primary/10 text-primary"
-                            : "hover:bg-muted/50 text-foreground"
-                        }`}
-                      >
-                        <span className="text-lg">{lang.flag}</span>
-                        <span className="text-sm font-medium">{lang.label}</span>
-                      </button>
-                    ))}
-                  </motion.div>
-                )}
+                <AnimatePresence>
+                  {isLangOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.2 }}
+                      className="absolute bottom-full left-0 mb-2 w-full rounded-xl border border-border/40 bg-background shadow-xl overflow-hidden z-50"
+                    >
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => handleLanguageChange(lang.code)}
+                          className={`w-full flex items-center gap-3 px-4 py-3 text-left transition-colors ${
+                            language === lang.code
+                              ? "bg-primary/10 text-primary"
+                              : "hover:bg-muted/50 text-foreground"
+                          }`}
+                        >
+                          <span className="text-lg">{lang.flag}</span>
+                          <span className="text-sm font-medium">{lang.label}</span>
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </div>
             </motion.div>
           </div>
@@ -209,13 +211,13 @@ const FooterSection = () => {
           {/* Divider */}
           <div className="section-divider w-full mb-8" />
 
-          {/* Bottom section */}
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
+          {/* Bottom section - Centered */}
+          <div className="flex flex-col items-center gap-3 text-center">
             <p className="text-xs text-muted-foreground/60">
-              Registered in England & Wales • Company Number: 16820191
+              {t.footer.registered}
             </p>
             <p className="text-xs text-muted-foreground/50">
-              © {new Date().getFullYear()} Milanoir Events Limited. All rights reserved.
+              {t.footer.copyright}
             </p>
           </div>
         </div>
