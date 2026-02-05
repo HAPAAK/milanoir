@@ -32,10 +32,65 @@ const ThemeMusicPlayer = () => {
       audio.addEventListener("loadedmetadata", () => resolve(), { once: true });
     });
 
+  const waitForSeeked = (audio: HTMLAudioElement) =>
+    new Promise<void>((resolve) => {
+      // In some browsers, seeking completes asynchronously; if we call play() before
+      // the seek finishes, playback may start from the previous position (often 0s).
+      if (!audio.seeking) {
+        resolve();
+        return;
+      }
+
+      const onSeeked = () => {
+        cleanup();
+        resolve();
+      };
+
+      const onError = () => {
+        cleanup();
+        resolve();
+      };
+
+      const cleanup = () => {
+        audio.removeEventListener("seeked", onSeeked);
+        audio.removeEventListener("error", onError);
+        window.clearTimeout(timeout);
+      };
+
+      // Safety timeout to avoid hanging if a browser never fires "seeked".
+      const timeout = window.setTimeout(() => {
+        cleanup();
+        resolve();
+      }, 750);
+
+      audio.addEventListener("seeked", onSeeked);
+      audio.addEventListener("error", onError);
+    });
+
+  const seekToStart = async (audio: HTMLAudioElement) => {
+    await waitForMetadata(audio);
+
+    // If the file is shorter than the start time (unexpected), fall back to 0.
+    if (Number.isFinite(audio.duration) && START_TIME_SECONDS >= audio.duration) {
+      audio.currentTime = 0;
+      return;
+    }
+
+    // Skip re-seeking if we’re already close (reduces jitter).
+    if (Math.abs(audio.currentTime - START_TIME_SECONDS) < 0.25) return;
+
+    audio.currentTime = START_TIME_SECONDS;
+    await waitForSeeked(audio);
+  };
+
   useEffect(() => {
     // Create audio element
     const audio = new Audio(THEME_SONG_URL);
-    audio.loop = true;
+    
+    // NOTE: We do NOT use `audio.loop = true` because that would loop back to 0s.
+    // We want it to continuously loop from 32s onward.
+    audio.loop = false;
+    audio.preload = "auto";
     audio.volume = 0.25;
     audioRef.current = audio;
 
@@ -47,11 +102,8 @@ const ThemeMusicPlayer = () => {
         return;
       }
 
-      // Ensure metadata is ready before seeking, otherwise many browsers
-      // ignore currentTime assignments and start from 0.
-      await waitForMetadata(audio);
-      audio.currentTime = START_TIME_SECONDS;
       try {
+        await seekToStart(audio);
         await audio.play();
         setIsPlaying(true);
         setShowControl(true);
@@ -64,6 +116,17 @@ const ThemeMusicPlayer = () => {
 
     // Delay slightly to allow page load
     const timeout = setTimeout(tryAutoplay, 1000);
+
+    // Keep looping from 32s onward (not from 0).
+    const handleEnded = () => {
+      const currentAudio = audioRef.current;
+      if (!currentAudio) return;
+      if (isExternallyPausedRef.current) return;
+
+      seekToStart(currentAudio)
+        .then(() => currentAudio.play())
+        .catch(console.error);
+    };
 
     // Listen for pause/resume events from modal
     const handlePause = () => {
@@ -91,11 +154,13 @@ const ThemeMusicPlayer = () => {
       }
     };
 
+    audio.addEventListener("ended", handleEnded);
     window.addEventListener(PAUSE_THEME_MUSIC, handlePause);
     window.addEventListener(RESUME_THEME_MUSIC, handleResume);
 
     return () => {
       clearTimeout(timeout);
+      audio.removeEventListener("ended", handleEnded);
       window.removeEventListener(PAUSE_THEME_MUSIC, handlePause);
       window.removeEventListener(RESUME_THEME_MUSIC, handleResume);
       audio.pause();
@@ -113,8 +178,7 @@ const ThemeMusicPlayer = () => {
         setIsPlaying(false);
       } else {
         const audio = audioRef.current;
-        await waitForMetadata(audio);
-        audio.currentTime = START_TIME_SECONDS;
+        await seekToStart(audio);
         audio.play().catch(console.error);
         setIsPlaying(true);
       }
