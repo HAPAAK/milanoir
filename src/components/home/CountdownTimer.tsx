@@ -110,7 +110,7 @@ const CountdownTimer = () => {
             />
 
             {/* Card */}
-            <div className="relative glass-card rounded-xl md:rounded-2xl p-3 sm:p-4 md:p-6 text-center border border-border/50 hover:border-primary/30 transition-all duration-300">
+            <div className="relative glass-card rounded-xl md:rounded-2xl px-3 py-4 sm:px-4 sm:py-5 md:px-6 md:py-8 text-center border border-border/50 hover:border-primary/30 transition-all duration-300 overflow-visible">
               {/* Number with pulsing glow */}
               <motion.span
                 className="block text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-heading font-bold gradient-text"
