@@ -100,7 +100,7 @@ const Waitlist = () => {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="glass-card rounded-3xl p-6 md:p-8 border border-border/30"
+              className="glass-card rounded-3xl p-6 md:p-8 border border-border/30 overflow-visible"
             >
               {/* Location badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm mb-6">
@@ -119,7 +119,7 @@ const Waitlist = () => {
               </p>
 
               {/* Countdown section */}
-              <div className="mb-8">
+              <div className="mb-8 overflow-visible">
                 <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
                   <Clock className="w-4 h-4 text-secondary" />
                   Infinity begins in...
