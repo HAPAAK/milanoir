@@ -51,18 +51,45 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    toast({
-      title: "Message Sent! ✨",
-      description: "We'll get back to you within 24 hours."
-    });
-    setFormData({
-      name: "",
-      email: "",
-      message: ""
-    });
-    setIsSubmitting(false);
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          message: formData.message
+        })
+      });
+
+      const responseData = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const errorMessage = typeof responseData.error === "string"
+          ? responseData.error
+          : "Something went wrong. Please try again.";
+        throw new Error(errorMessage);
+      }
+
+      toast({
+        title: "Message Sent! ✨",
+        description: typeof responseData.message === "string"
+          ? responseData.message
+          : "We'll get back to you within 24 hours."
+      });
+      setFormData({
+        name: "",
+        email: "",
+        message: ""
+      });
+    } catch (error) {
+      toast({
+        title: "Message failed",
+        description: error instanceof Error ? error.message : "Please try again in a moment.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {

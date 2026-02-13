@@ -45,11 +45,13 @@ const Waitlist = () => {
     handleSubmit,
     setValue,
     watch,
+    reset,
     formState: { errors }
   } = useForm<WaitlistFormData>({
     resolver: zodResolver(waitlistSchema),
     defaultValues: {
-      countryCode: defaultCountryCode
+      countryCode: defaultCountryCode,
+      termsAccepted: false
     }
   });
 
@@ -58,19 +60,53 @@ const Waitlist = () => {
   const onSubmit = async (data: WaitlistFormData) => {
     setIsSubmitting(true);
 
-    // Combine country code with phone if phone is provided
-    const fullPhone = data.phone ? `${countryCode} ${data.phone}` : undefined;
-    const submissionData = { ...data, phone: fullPhone };
+    try {
+      // Combine country code with phone if phone is provided.
+      const fullPhone = data.phone ? `${countryCode} ${data.phone}` : undefined;
+      const response = await fetch("/api/waitlist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email: data.email,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          phone: fullPhone
+        })
+      });
 
-    // Simulate API call - replace with actual backend integration
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    console.log("Waitlist submission:", submissionData);
-    
-    toast({
-      title: "You're on the list! 🎉",
-      description: "We'll notify you when tickets become available."
-    });
-    setIsSubmitting(false);
+      const responseData = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        const errorMessage = typeof responseData.error === "string"
+          ? responseData.error
+          : "Unable to join the waitlist right now. Please try again.";
+        throw new Error(errorMessage);
+      }
+
+      toast({
+        title: "You're on the list! 🎉",
+        description: typeof responseData.warning === "string"
+          ? `We'll notify you when tickets become available. ${responseData.warning}`
+          : "We'll notify you when tickets become available."
+      });
+
+      reset({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        countryCode: defaultCountryCode,
+        termsAccepted: false
+      });
+      setCountryCode(defaultCountryCode);
+    } catch (error) {
+      toast({
+        title: "Unable to join waitlist",
+        description: error instanceof Error ? error.message : "Please try again in a moment.",
+        variant: "destructive"
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
