@@ -20,6 +20,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { mainEvent, uiText } from "@/data/content";
 import { defaultCountryCode } from "@/data/countryCodes";
+import { getApiUrl } from "@/lib/api";
 
 // Form validation schema - phone is optional now
 const waitlistSchema = z.object({
@@ -63,7 +64,7 @@ const Waitlist = () => {
     try {
       // Combine country code with phone if phone is provided.
       const fullPhone = data.phone ? `${countryCode} ${data.phone}` : undefined;
-      const response = await fetch("/api/waitlist", {
+      const response = await fetch(getApiUrl("/waitlist"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

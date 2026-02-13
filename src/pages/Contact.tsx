@@ -15,6 +15,7 @@ import logo from "@/assets/milanoir-logo-infinity.png";
 import FooterSection from "@/components/about/FooterSection";
 import PageWrapper from "@/components/layout/PageWrapper";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { getApiUrl } from "@/lib/api";
 
 const contactInfo = [
   {
@@ -52,7 +53,7 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/contact", {
+      const response = await fetch(getApiUrl("/contact"), {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
