@@ -26,12 +26,28 @@ const calculateTimeLeft = (targetDate: Date): CountdownTime => {
 };
 
 const CountdownTimer = () => {
-  const [timeLeft, setTimeLeft] = useState<CountdownTime>(
-    calculateTimeLeft(mainEvent.date)
-  );
+  // Use deterministic initial markup for SSR; populate real time on mount.
+  const [timeLeft, setTimeLeft] = useState<CountdownTime>({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
   const [isEventPassed, setIsEventPassed] = useState(false);
 
   useEffect(() => {
+    const initial = calculateTimeLeft(mainEvent.date);
+    setTimeLeft(initial);
+    if (
+      initial.days === 0 &&
+      initial.hours === 0 &&
+      initial.minutes === 0 &&
+      initial.seconds === 0
+    ) {
+      setIsEventPassed(true);
+      return;
+    }
+
     const timer = setInterval(() => {
       const newTimeLeft = calculateTimeLeft(mainEvent.date);
       setTimeLeft(newTimeLeft);

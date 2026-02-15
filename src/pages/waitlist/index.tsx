@@ -1,10 +1,5 @@
-/**
- * Waitlist - Event waitlist registration page
- * Features: Back link, event info with countdown, glassmorphism form
- */
-
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowLeft, MapPin, Clock } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -22,21 +17,20 @@ import { mainEvent, uiText } from "@/data/content";
 import { defaultCountryCode } from "@/data/countryCodes";
 import { getApiUrl } from "@/lib/api";
 
-// Form validation schema - phone is optional now
 const waitlistSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
   lastName: z.string().min(1, "Last name is required"),
   email: z.string().email("Valid email is required"),
   countryCode: z.string().optional(),
   phone: z.string().optional(),
-  termsAccepted: z.boolean().refine(val => val === true, {
-    message: "You must accept the privacy policy"
-  })
+  termsAccepted: z.boolean().refine((val) => val === true, {
+    message: "You must accept the privacy policy",
+  }),
 });
 
 type WaitlistFormData = z.infer<typeof waitlistSchema>;
 
-const Waitlist = () => {
+const WaitlistPage = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [countryCode, setCountryCode] = useState(defaultCountryCode);
@@ -47,13 +41,13 @@ const Waitlist = () => {
     setValue,
     watch,
     reset,
-    formState: { errors }
+    formState: { errors },
   } = useForm<WaitlistFormData>({
     resolver: zodResolver(waitlistSchema),
     defaultValues: {
       countryCode: defaultCountryCode,
-      termsAccepted: false
-    }
+      termsAccepted: false,
+    },
   });
 
   const termsAccepted = watch("termsAccepted");
@@ -62,7 +56,6 @@ const Waitlist = () => {
     setIsSubmitting(true);
 
     try {
-      // Combine country code with phone if phone is provided.
       const fullPhone = data.phone ? `${countryCode} ${data.phone}` : undefined;
       const response = await fetch(getApiUrl("/waitlist"), {
         method: "POST",
@@ -71,23 +64,25 @@ const Waitlist = () => {
           email: data.email,
           firstName: data.firstName,
           lastName: data.lastName,
-          phone: fullPhone
-        })
+          phone: fullPhone,
+        }),
       });
 
       const responseData = await response.json().catch(() => ({}));
       if (!response.ok) {
-        const errorMessage = typeof responseData.error === "string"
-          ? responseData.error
-          : "Unable to join the waitlist right now. Please try again.";
+        const errorMessage =
+          typeof responseData.error === "string"
+            ? responseData.error
+            : "Unable to join the waitlist right now. Please try again.";
         throw new Error(errorMessage);
       }
 
       toast({
         title: "You're on the list! 🎉",
-        description: typeof responseData.warning === "string"
-          ? `We'll notify you when tickets become available. ${responseData.warning}`
-          : "We'll notify you when tickets become available."
+        description:
+          typeof responseData.warning === "string"
+            ? `We'll notify you when tickets become available. ${responseData.warning}`
+            : "We'll notify you when tickets become available.",
       });
 
       reset({
@@ -96,14 +91,14 @@ const Waitlist = () => {
         email: "",
         phone: "",
         countryCode: defaultCountryCode,
-        termsAccepted: false
+        termsAccepted: false,
       });
       setCountryCode(defaultCountryCode);
     } catch (error) {
       toast({
         title: "Unable to join waitlist",
         description: error instanceof Error ? error.message : "Please try again in a moment.",
-        variant: "destructive"
+        variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
@@ -114,7 +109,6 @@ const Waitlist = () => {
     <PageWrapper showNavigation={true}>
       <div className="min-h-screen pt-20 pb-24 md:pb-12 px-4">
         <div className="container max-w-6xl mx-auto">
-          {/* Back link */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -122,7 +116,7 @@ const Waitlist = () => {
             className="mb-8"
           >
             <Link
-              to="/"
+              href="/"
               className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
             >
               <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
@@ -130,32 +124,24 @@ const Waitlist = () => {
             </Link>
           </motion.div>
 
-          {/* Two-column layout */}
           <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
-            {/* Left column - Event info */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="glass-card rounded-3xl p-6 md:p-8 border border-border/30 overflow-visible"
             >
-              {/* Location badge */}
               <div className="inline-flex items-center gap-2 px-4 py-2 glass-card rounded-full text-sm mb-6">
                 <MapPin className="w-4 h-4 text-primary" />
                 <span className="text-foreground font-medium">LONDON</span>
               </div>
 
-              {/* Event title */}
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold mb-4">
                 <span className="gradient-text">{mainEvent.title}</span>
               </h1>
 
-              {/* Venue status */}
-              <p className="text-muted-foreground text-lg mb-8">
-                {uiText.eventInfo.venueTba}
-              </p>
+              <p className="text-muted-foreground text-lg mb-8">{uiText.eventInfo.venueTba}</p>
 
-              {/* Countdown section */}
               <div className="mb-8 overflow-visible">
                 <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
                   <Clock className="w-4 h-4 text-secondary" />
@@ -164,30 +150,20 @@ const Waitlist = () => {
                 <CountdownTimer />
               </div>
 
-              {/* Venue and Date badges */}
               <div className="grid grid-cols-2 gap-4">
                 <div className="glass-card rounded-2xl p-4 border border-border/30">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
-                    Venue
-                  </p>
-                  <p className="text-lg font-heading font-semibold text-foreground">
-                    TBA
-                  </p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Venue</p>
+                  <p className="text-lg font-heading font-semibold text-foreground">TBA</p>
                   <p className="text-sm text-muted-foreground">London, UK</p>
                 </div>
                 <div className="glass-card rounded-2xl p-4 border border-border/30">
-                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">
-                    Date
-                  </p>
-                  <p className="text-lg font-heading font-semibold text-foreground">
-                    April 13
-                  </p>
+                  <p className="text-xs text-muted-foreground uppercase tracking-wider mb-2">Date</p>
+                  <p className="text-lg font-heading font-semibold text-foreground">April 13</p>
                   <p className="text-sm text-muted-foreground">2026</p>
                 </div>
               </div>
             </motion.div>
 
-            {/* Right column - Registration form */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -198,13 +174,10 @@ const Waitlist = () => {
                 <h2 className="text-2xl md:text-3xl font-heading font-bold mb-2">
                   <span className="gradient-text">Join London</span>
                 </h2>
-                <p className="text-muted-foreground">
-                  Lock in your waitlist spot for the celebration
-                </p>
+                <p className="text-muted-foreground">Lock in your waitlist spot for the celebration</p>
               </div>
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-                {/* Name row */}
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName" className="text-sm text-muted-foreground">
@@ -236,7 +209,6 @@ const Waitlist = () => {
                   </div>
                 </div>
 
-                {/* Email */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-sm text-muted-foreground">
                     Email Address <span className="text-primary">*</span>
@@ -248,21 +220,15 @@ const Waitlist = () => {
                     placeholder="you@example.com"
                     className="glass-card border-border/40 focus:border-primary/50 bg-background/50 h-12"
                   />
-                  {errors.email && (
-                    <p className="text-xs text-destructive">{errors.email.message}</p>
-                  )}
+                  {errors.email && <p className="text-xs text-destructive">{errors.email.message}</p>}
                 </div>
 
-                {/* Phone with country code */}
                 <div className="space-y-2">
                   <Label htmlFor="phone" className="text-sm text-muted-foreground">
                     Phone <span className="text-muted-foreground/60">(Optional)</span>
                   </Label>
                   <div className="flex">
-                    <CountryCodeSelect
-                      value={countryCode}
-                      onChange={setCountryCode}
-                    />
+                    <CountryCodeSelect value={countryCode} onChange={setCountryCode} />
                     <Input
                       id="phone"
                       type="tel"
@@ -273,21 +239,23 @@ const Waitlist = () => {
                   </div>
                 </div>
 
-                {/* Terms checkbox */}
                 <div className="flex items-start gap-3 pt-2">
                   <Checkbox
                     id="terms"
                     checked={termsAccepted || false}
-                    onCheckedChange={checked => setValue("termsAccepted", checked === true)}
+                    onCheckedChange={(checked) => setValue("termsAccepted", checked === true)}
                     className="mt-0.5"
                   />
-                  <Label htmlFor="terms" className="text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                  <Label
+                    htmlFor="terms"
+                    className="text-sm text-muted-foreground leading-relaxed cursor-pointer"
+                  >
                     I agree to the{" "}
-                    <Link to="/privacy-policy" className="text-primary hover:underline">
+                    <Link href="/privacy-policy" className="text-primary hover:underline">
                       privacy policy
                     </Link>{" "}
                     and{" "}
-                    <Link to="/terms" className="text-primary hover:underline">
+                    <Link href="/terms" className="text-primary hover:underline">
                       terms of service
                     </Link>
                   </Label>
@@ -296,24 +264,19 @@ const Waitlist = () => {
                   <p className="text-xs text-destructive">{errors.termsAccepted.message}</p>
                 )}
 
-                {/* Submit button */}
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="pt-4"
-                >
+                <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="pt-4">
                   <Button
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full h-14 text-base font-semibold rounded-xl relative overflow-hidden group"
                     style={{
-                      background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)))"
+                      background: "linear-gradient(135deg, hsl(var(--primary)), hsl(var(--secondary)))",
                     }}
                   >
                     <motion.span
                       className="absolute inset-0"
                       style={{
-                        background: "linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)))"
+                        background: "linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--primary)))",
                       }}
                       initial={{ opacity: 0 }}
                       whileHover={{ opacity: 1 }}
@@ -326,11 +289,10 @@ const Waitlist = () => {
                 </motion.div>
               </form>
 
-              {/* Decorative gradient */}
               <div
                 className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none rounded-b-3xl overflow-hidden"
                 style={{
-                  background: "linear-gradient(to top, hsl(var(--primary) / 0.05), transparent)"
+                  background: "linear-gradient(to top, hsl(var(--primary) / 0.05), transparent)",
                 }}
               />
             </motion.div>
@@ -341,4 +303,4 @@ const Waitlist = () => {
   );
 };
 
-export default Waitlist;
+export default WaitlistPage;

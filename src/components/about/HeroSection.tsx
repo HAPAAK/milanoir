@@ -45,7 +45,7 @@ const HeroSection = () => {
           className="flex flex-col items-center text-center"
         >
           <motion.img
-            src={logo}
+            src={typeof logo === "string" ? logo : logo.src}
             alt="Milanoir Events"
             className="w-64 md:w-80 lg:w-96 mb-8 animate-glow-pulse"
             initial={{ scale: 0.8, opacity: 0 }}

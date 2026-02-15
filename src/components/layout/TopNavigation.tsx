@@ -5,13 +5,14 @@
  */
 
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { navigationItems } from "@/data/content";
 import logo from "@/assets/milanoir-logo.png";
 
 const TopNavigation = () => {
-  const location = useLocation();
+  const { pathname } = useRouter();
   const [isScrolled, setIsScrolled] = useState(false);
 
   // Track scroll for enhanced glass effect
@@ -23,7 +24,7 @@ const TopNavigation = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isActive = (href: string) => location.pathname === href;
+  const isActive = (href: string) => pathname === href;
 
   return (
     <>
@@ -45,13 +46,9 @@ const TopNavigation = () => {
       >
         <div className="container max-w-7xl mx-auto h-full px-4 flex items-center justify-between">
           {/* Logo */}
-          <Link
-            to="/"
-            className="relative z-10 flex items-center gap-2 group"
-            aria-label="Milanoir Events - Home"
-          >
+          <Link href="/" className="relative z-10 flex items-center gap-2 group" aria-label="Milanoir Events - Home">
             <motion.img
-              src={logo}
+              src={typeof logo === "string" ? logo : logo.src}
               alt="Milanoir Events"
               className="h-8 md:h-10 w-auto"
               whileHover={{ scale: 1.05 }}
@@ -60,33 +57,32 @@ const TopNavigation = () => {
           </Link>
 
           {/* Desktop navigation */}
-          <nav className="hidden md:flex items-center gap-8" role="navigation">
-            {navigationItems.map((item) => (
-              <Link
-                key={item.id}
-                to={item.href}
-                className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${
-                  isActive(item.href)
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {item.label}
-                {/* Active indicator */}
-                {isActive(item.href) && (
-                  <motion.div
-                    layoutId="activeNavIndicator"
-                    className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
-                    style={{
-                      background:
-                        "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)))",
-                    }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                  />
-                )}
-              </Link>
-            ))}
-          </nav>
+            <nav className="hidden md:flex items-center gap-8" role="navigation">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.id}
+                  href={item.href}
+                  className={`relative text-sm font-medium tracking-wide transition-colors duration-300 ${
+                    isActive(item.href)
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {item.label}
+                  {isActive(item.href) && (
+                    <motion.div
+                      layoutId="activeNavIndicator"
+                      className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
+                      style={{
+                        background:
+                          "linear-gradient(90deg, hsl(var(--primary)), hsl(var(--secondary)))",
+                      }}
+                      transition={{ duration: 0.3, ease: "easeOut" }}
+                    />
+                  )}
+                </Link>
+              ))}
+            </nav>
         </div>
       </motion.header>
     </>

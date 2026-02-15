@@ -79,7 +79,7 @@ const ArtistCard = ({
               style={{ y: imageY }}
             >
               <img
-                src={artist.imageUrl}
+                src={typeof artist.imageUrl === "string" ? artist.imageUrl : artist.imageUrl.src}
                 alt={artist.name}
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 loading="lazy"

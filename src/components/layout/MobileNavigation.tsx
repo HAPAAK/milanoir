@@ -3,7 +3,8 @@
  * Fixed at bottom with iOS-inspired design and active state indicators
  */
 
-import { Link, useLocation } from "react-router-dom";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import { motion } from "framer-motion";
 import { Home, Users, Mail, Ticket } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,9 +24,9 @@ const navItems: NavItem[] = [
 ];
 
 const MobileNavigation = () => {
-  const location = useLocation();
+  const { pathname } = useRouter();
 
-  const isActive = (href: string) => location.pathname === href;
+  const isActive = (href: string) => pathname === href;
 
   return (
     <motion.nav
@@ -52,12 +53,10 @@ const MobileNavigation = () => {
             return (
               <Link
                 key={item.id}
-                to={item.href}
+                href={item.href}
                 className={cn(
                   "relative flex flex-col items-center justify-center w-16 h-14 rounded-2xl transition-all duration-300",
-                  active 
-                    ? "text-primary" 
-                    : "text-muted-foreground hover:text-foreground"
+                  active ? "text-primary" : "text-muted-foreground hover:text-foreground",
                 )}
                 aria-current={active ? "page" : undefined}
               >

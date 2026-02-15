@@ -1,3 +1,5 @@
+import type { StaticImageData } from "next/image";
+
 /**
  * Event and Artist type definitions
  * Extensible structure for managing multiple events and artists
@@ -9,7 +11,7 @@ export interface Artist {
   genre: string;
   description: string;
   origin?: string;
-  imageUrl?: string;
+  imageUrl?: string | StaticImageData;
   spotifyTrackId?: string;
   soundcloudUrl?: string;
   isMystery: boolean;

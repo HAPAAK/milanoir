@@ -102,7 +102,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
               }}
             >
               <img
-                src={artist.imageUrl}
+                src={typeof artist.imageUrl === "string" ? artist.imageUrl : artist.imageUrl?.src}
                 alt="Mystery Artist"
                 className="w-full h-full object-cover object-top filter brightness-0 invert opacity-80"
                 loading="lazy"

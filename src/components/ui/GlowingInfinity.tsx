@@ -73,7 +73,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
       >
         {/* Outer glow layer for infinity shape */}
         <motion.img
-          src={glowingInfinityBg}
+          src={typeof glowingInfinityBg === "string" ? glowingInfinityBg : glowingInfinityBg.src}
           alt=""
           className="absolute w-[95%] md:w-[85%] lg:w-[75%] max-w-[1200px] h-auto object-contain"
           style={{
@@ -93,7 +93,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
 
         {/* Mid glow layer */}
         <motion.img
-          src={glowingInfinityBg}
+          src={typeof glowingInfinityBg === "string" ? glowingInfinityBg : glowingInfinityBg.src}
           alt=""
           className="absolute w-[90%] md:w-[80%] lg:w-[70%] max-w-[1100px] h-auto object-contain"
           style={{
@@ -114,7 +114,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
 
         {/* Main infinity image - very dark */}
         <motion.img
-          src={glowingInfinityBg}
+          src={typeof glowingInfinityBg === "string" ? glowingInfinityBg : glowingInfinityBg.src}
           alt=""
           className="absolute w-[85%] md:w-[75%] lg:w-[65%] max-w-[1000px] h-auto object-contain"
           style={{

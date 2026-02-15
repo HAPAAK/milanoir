@@ -83,6 +83,7 @@ const ThemeMusicPlayer = () => {
     await waitForSeeked(audio);
   };
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Create audio element
     const audio = new Audio(THEME_SONG_URL);

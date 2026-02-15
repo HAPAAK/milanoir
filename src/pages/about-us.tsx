@@ -1,8 +1,3 @@
-/**
- * About - About Us page (previously Index)
- * Contains: Story, Mission, Difference, Vision, Values, Commitment sections
- */
-
 import PageWrapper from "@/components/layout/PageWrapper";
 import HeroSection from "@/components/about/HeroSection";
 import StorySection from "@/components/about/StorySection";
@@ -13,7 +8,7 @@ import ValuesSection from "@/components/about/ValuesSection";
 import CommitmentSection from "@/components/about/CommitmentSection";
 import FooterSection from "@/components/about/FooterSection";
 
-const About = () => {
+const AboutPage = () => {
   return (
     <PageWrapper>
       <HeroSection />
@@ -28,4 +23,4 @@ const About = () => {
   );
 };
 
-export default About;
+export default AboutPage;

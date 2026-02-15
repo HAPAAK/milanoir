@@ -4,7 +4,7 @@
  */
 
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Facebook, Instagram, Youtube, Globe, ChevronDown } from "lucide-react";
 import logo from "@/assets/milanoir-logo-infinity.png";
@@ -75,7 +75,7 @@ const FooterSection = () => {
             className="flex flex-col items-center text-center mb-6"
           >
             <motion.img 
-              src={logo} 
+              src={typeof logo === "string" ? logo : logo.src} 
               alt="Milanoir Events" 
               className="w-44 md:w-52 mb-4"
               whileHover={{ scale: 1.05 }}
@@ -152,11 +152,11 @@ const FooterSection = () => {
             {/* Links */}
             <nav className="flex items-center gap-4">
               {companyLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
-                >
+              <Link
+                key={link.href}
+                href={link.href}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors duration-300"
+              >
                   {link.label}
                 </Link>
               ))}

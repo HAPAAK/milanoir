@@ -3,7 +3,7 @@
  * Layout: Logo + presents → Subtitle → Title → Tagline → Badges → Countdown → CTA
  */
 
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MapPin, Calendar } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
@@ -26,7 +26,7 @@ const EventHero = () => {
           className="flex flex-col items-center mb-4"
         >
           <img 
-            src={logo} 
+            src={typeof logo === "string" ? logo : logo.src} 
             alt="Milanoir Events" 
             className="w-16 md:w-20 opacity-80 mb-2"
           />
@@ -98,7 +98,7 @@ const EventHero = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.6, duration: 0.8 }}
         >
-          <Link to="/waitlist">
+          <Link href="/waitlist">
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}

@@ -6,6 +6,11 @@ interface ShootingStarsProps {
 }
 
 const ShootingStars = ({ count = 3, interval = 5 }: ShootingStarsProps) => {
+  const seeded = (seed: number) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
+
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
       {[...Array(count)].map((_, i) => (
@@ -23,9 +28,9 @@ const ShootingStars = ({ count = 3, interval = 5 }: ShootingStarsProps) => {
           }}
           transition={{
             duration: 1.5,
-            delay: i * interval + Math.random() * 2,
+            delay: i * interval + seeded(i + 11) * 2,
             repeat: Infinity,
-            repeatDelay: interval * count - 1.5 + Math.random() * 3,
+            repeatDelay: interval * count - 1.5 + seeded(i + 29) * 3,
             ease: "linear",
           }}
         >

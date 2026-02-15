@@ -17,15 +17,20 @@ interface StarFieldProps {
 }
 
 const StarField = ({ count = 100, className = "" }: StarFieldProps) => {
+  const seeded = (seed: number) => {
+    const x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+  };
+
   const stars = useMemo<Star[]>(() => {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
-      x: Math.random() * 100,
-      y: Math.random() * 100,
-      size: Math.random() * 2 + 0.5,
-      duration: Math.random() * 3 + 2,
-      delay: Math.random() * 2,
-      opacity: Math.random() * 0.7 + 0.3,
+      x: seeded(i + 1) * 100,
+      y: seeded(i + 101) * 100,
+      size: seeded(i + 201) * 2 + 0.5,
+      duration: seeded(i + 301) * 3 + 2,
+      delay: seeded(i + 401) * 2,
+      opacity: seeded(i + 501) * 0.7 + 0.3,
     }));
   }, [count]);
 

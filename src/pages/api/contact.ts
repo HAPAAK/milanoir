@@ -1,72 +1,45 @@
+import type { NextApiRequest, NextApiResponse } from "next";
+
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-type RequestBody = Record<string, unknown>;
 type JsonRecord = Record<string, unknown>;
-
-const parseBody = (body: unknown): RequestBody => {
-  if (!body) return {};
-  if (typeof body === "string") {
-    try {
-      return JSON.parse(body) as RequestBody;
-    } catch {
-      return {};
-    }
-  }
-  return typeof body === "object" ? (body as RequestBody) : {};
-};
 
 const extractErrorMessage = (data: unknown, fallback: string): string => {
   if (typeof data === "object" && data !== null) {
     const record = data as JsonRecord;
-    if (typeof record.error === "string" && record.error.trim()) {
-      return record.error;
-    }
-    if (typeof record.message === "string" && record.message.trim()) {
-      return record.message;
-    }
+    if (typeof record.error === "string" && record.error.trim()) return record.error;
+    if (typeof record.message === "string" && record.message.trim()) return record.message;
   }
   return fallback;
 };
 
-export default async function handler(
-  req: { method?: string; body?: unknown },
-  res: {
-    status: (statusCode: number) => {
-      json: (payload: unknown) => void;
-    };
-  },
-) {
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
   try {
-    const body = parseBody(req.body);
-    const name = typeof body.name === "string" ? body.name.trim() : "";
-    const email = typeof body.email === "string" ? body.email.trim() : "";
-    const message = typeof body.message === "string" ? body.message.trim() : "";
+    const { name = "", email = "", message = "" } = req.body ?? {};
+    const cleanName = typeof name === "string" ? name.trim() : "";
+    const cleanEmail = typeof email === "string" ? email.trim() : "";
+    const cleanMessage = typeof message === "string" ? message.trim() : "";
 
-    if (!name || !email) {
+    if (!cleanName || !cleanEmail) {
       return res.status(400).json({ error: "Name and email are required" });
     }
 
-    if (!EMAIL_REGEX.test(email)) {
+    if (!EMAIL_REGEX.test(cleanEmail)) {
       return res.status(400).json({ error: "Invalid email address" });
     }
 
     const htmlContent = `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #333; margin-bottom: 20px;">New Contact Form Submission</h2>
-        
         <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px;">
-          <p style="margin: 10px 0;"><strong>Name:</strong> ${name}</p>
-          <p style="margin: 10px 0;"><strong>Email:</strong> ${email}</p>
-          ${message ? `<p style="margin: 10px 0;"><strong>Message:</strong></p><p style="white-space: pre-wrap; margin: 10px 0;">${message}</p>` : ""}
+          <p style="margin: 10px 0;"><strong>Name:</strong> ${cleanName}</p>
+          <p style="margin: 10px 0;"><strong>Email:</strong> ${cleanEmail}</p>
+          ${cleanMessage ? `<p style="margin: 10px 0;"><strong>Message:</strong></p><p style="white-space: pre-wrap; margin: 10px 0;">${cleanMessage}</p>` : ""}
         </div>
-        
-        <p style="color: #666; font-size: 14px; margin-top: 20px;">
-          ${name} has reached out via the contact form on Milanoir Events Website.
-        </p>
       </div>
     `;
 
@@ -89,14 +62,13 @@ export default async function handler(
       body: JSON.stringify({
         from: fromEmail,
         to: recipientEmail,
-        reply_to: email,
-        subject: `New Contact Form Submission from ${name}`,
+        reply_to: cleanEmail,
+        subject: `New Contact Form Submission from ${cleanName}`,
         html: htmlContent,
       }),
     });
 
     const responseData = await emailResponse.json().catch(() => ({}));
-
     if (!emailResponse.ok) {
       const providerError = extractErrorMessage(
         responseData,
@@ -106,14 +78,15 @@ export default async function handler(
         status: emailResponse.status,
         responseData,
       });
-      return res.status(400).json({
-        error: providerError,
-      });
+      return res.status(400).json({ error: providerError });
     }
 
-    const emailId = typeof (responseData as JsonRecord).id === "string"
-      ? ((responseData as JsonRecord).id as string)
-      : undefined;
+    const emailId =
+      typeof responseData === "object" &&
+      responseData !== null &&
+      typeof (responseData as JsonRecord).id === "string"
+        ? ((responseData as JsonRecord).id as string)
+        : undefined;
 
     return res.status(200).json({
       success: true,
