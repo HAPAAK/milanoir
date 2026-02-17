@@ -6,9 +6,10 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Play } from "lucide-react";
 import { useRef } from "react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { uiText } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { Artist } from "@/types/event";
 
 interface ArtistCardProps {
@@ -22,6 +23,7 @@ const ArtistCard = ({
   index,
   onPlayPreview,
 }: ArtistCardProps) => {
+  const { t } = useLanguage();
   const cardRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: cardRef,
@@ -78,11 +80,12 @@ const ArtistCard = ({
               className="relative overflow-hidden rounded-xl mb-4 h-52 md:h-56 flex-shrink-0"
               style={{ y: imageY }}
             >
-              <img
-                src={typeof artist.imageUrl === "string" ? artist.imageUrl : artist.imageUrl.src}
+              <Image
+                src={artist.imageUrl}
                 alt={artist.name}
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
-                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
               />
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-background/20 to-transparent" />
@@ -129,7 +132,7 @@ const ArtistCard = ({
                 }}
                 variant="ghost"
                 className="group/btn flex items-center gap-2 px-4 py-2 h-auto text-sm md:text-base text-primary hover:text-primary hover:bg-primary/10 transition-all duration-300"
-                aria-label={`${uiText.artists.playPreview} - ${artist.name}`}
+                aria-label={`${t.artists.playPreview} - ${artist.name}`}
               >
                 <motion.div
                   className="w-8 h-8 md:w-10 md:h-10 rounded-full bg-primary/20 flex items-center justify-center group-hover/btn:bg-primary/30 transition-colors"
@@ -139,7 +142,7 @@ const ArtistCard = ({
                   <Play className="w-4 h-4 md:w-5 md:h-5 fill-current ml-0.5" />
                 </motion.div>
                 <span className="hidden sm:inline">
-                  {uiText.artists.playPreview}
+                  {t.artists.playPreview}
                 </span>
               </Button>
             </motion.div>

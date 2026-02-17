@@ -1,8 +1,10 @@
+import dynamic from "next/dynamic";
 import PageWrapper from "@/components/layout/PageWrapper";
 import EventHero from "@/components/home/EventHero";
 import ArtistBentoGrid from "@/components/home/ArtistBentoGrid";
-import FooterSection from "@/components/about/FooterSection";
-import ThemeMusicPlayer from "@/components/home/ThemeMusicPlayer";
+import Footer from "@/components/layout/Footer";
+
+const ThemeMusicPlayer = dynamic(() => import("@/components/home/ThemeMusicPlayer"), { ssr: false });
 
 const HomePage = () => {
   return (
@@ -10,7 +12,7 @@ const HomePage = () => {
       <ThemeMusicPlayer />
       <EventHero />
       <ArtistBentoGrid />
-      <FooterSection />
+      <Footer />
     </PageWrapper>
   );
 };

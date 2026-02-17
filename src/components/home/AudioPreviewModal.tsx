@@ -1,5 +1,5 @@
 /**
- * AudioPreviewModal - Elegant Spotify/SoundCloud player modal
+ * AudioPreviewModal - Spotify/SoundCloud player modal
  * Uses Radix Dialog for accessibility with glassmorphism styling
  * Pauses theme music when open, resumes when closed
  */
@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-import { uiText } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { Artist } from "@/types/event";
 import { PAUSE_THEME_MUSIC, RESUME_THEME_MUSIC } from "@/lib/audioEvents";
 
@@ -28,6 +28,8 @@ const AudioPreviewModal = ({
   isOpen,
   onClose,
 }: AudioPreviewModalProps) => {
+  const { t } = useLanguage();
+
   // Pause/resume theme music based on modal state
   useEffect(() => {
     if (isOpen) {
@@ -78,7 +80,7 @@ const AudioPreviewModal = ({
                       ease: "easeInOut",
                     }}
                   />
-                  {uiText.audioModal.nowPlaying}
+                  {t.audioModal.nowPlaying}
                 </div>
                 <DialogTitle className="text-2xl font-heading font-bold gradient-text">
                   {artist.name}
@@ -89,7 +91,7 @@ const AudioPreviewModal = ({
                 <p className="text-sm text-muted-foreground">{artist.genre}</p>
               </DialogHeader>
 
-              {/* Audio player embed - autoplay enabled */}
+              {/* Audio player embed */}
               <div className="px-6 pb-6">
                 {embedUrl ? (
                   <div className="rounded-xl overflow-hidden bg-background/50">
@@ -107,7 +109,7 @@ const AudioPreviewModal = ({
                 ) : (
                   <div className="glass-card rounded-xl p-8 text-center">
                     <p className="text-muted-foreground">
-                      Audio preview coming soon...
+                      {t.audioModal.comingSoon}
                     </p>
                   </div>
                 )}

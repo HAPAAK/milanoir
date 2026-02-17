@@ -4,15 +4,19 @@
  */
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import ArtistCard from "./ArtistCard";
 import MysteryArtistCard from "./MysteryArtistCard";
-import AudioPreviewModal from "./AudioPreviewModal";
 import { useHoverAudio } from "@/hooks/useHoverAudio";
-import { artists, uiText } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { artists } from "@/data/content";
 import type { Artist } from "@/types/event";
 
+const AudioPreviewModal = dynamic(() => import("./AudioPreviewModal"), { ssr: false });
+
 const ArtistBentoGrid = () => {
+  const { t } = useLanguage();
   const [selectedArtist, setSelectedArtist] = useState<Artist | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { playOnHover, stopOnLeave } = useHoverAudio();
@@ -43,7 +47,7 @@ const ArtistBentoGrid = () => {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold gradient-text">
-            {uiText.artists.sectionTitle}
+            {t.artists.sectionTitle}
           </h2>
         </motion.div>
 

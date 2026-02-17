@@ -4,6 +4,7 @@
  */
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { MapPin, Calendar } from "lucide-react";
 import CountdownTimer from "./CountdownTimer";
@@ -25,10 +26,13 @@ const EventHero = () => {
           transition={{ duration: 0.6 }}
           className="flex flex-col items-center mb-4"
         >
-          <img 
-            src={typeof logo === "string" ? logo : logo.src} 
+          <Image 
+            src={logo} 
             alt="Milanoir Events" 
             className="w-16 md:w-20 opacity-80 mb-2"
+            width={80}
+            height={80}
+            priority
           />
           <span className="text-xs md:text-sm tracking-[0.3em] uppercase text-muted-foreground font-light">
             {t.hero.presents}
@@ -36,14 +40,14 @@ const EventHero = () => {
         </motion.div>
 
         {/* Event subtitle badge */}
-        <motion.span
+        {/* <motion.span
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6, delay: 0.1 }}
           className="inline-block px-4 py-2 glass-card text-xs md:text-sm tracking-widest text-primary uppercase mb-3 md:mb-4"
         >
           {mainEvent.subtitle}
-        </motion.span>
+        </motion.span> */}
 
         {/* Main title */}
         <motion.h1

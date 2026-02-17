@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Nosotros",
+    "contact": "Contacto",
+    "waitlist": "Lista de Espera"
+  },
+  "hero": {
+    "presents": "presenta",
+    "tagline": "Experimenta la celebración de tu vida",
+    "location": "Londres, Reino Unido",
+    "dateLabel": "13 de Abril, 2026",
+    "scrollCta": "Descubre el lineup",
+    "joinWaitlist": "Únete a la Lista"
+  },
+  "countdown": {
+    "title": "Cuenta regresiva para la celebración",
+    "days": "Días",
+    "hours": "Horas",
+    "minutes": "Minutos",
+    "seconds": "Segundos",
+    "eventPassed": "¡El evento ha comenzado!"
+  },
+  "artists": {
+    "sectionTitle": "Artistas Destacados",
+    "sectionSubtitle": "Artistas de clase mundial trayendo la energía",
+    "playPreview": "Reproducir Vista Previa",
+    "comingSoon": "Próximamente",
+    "upcomingArtistLabel": "Próximo Artista"
+  },
+  "audioModal": {
+    "nowPlaying": "Reproduciendo",
+    "close": "Cerrar",
+    "comingSoon": "Vista previa de audio próximamente..."
+  },
+  "eventInfo": {
+    "venueTitle": "Lugar",
+    "venueTba": "Por Anunciar",
+    "getNotified": "Recibir Notificación",
+    "learnMore": "Saber Más"
+  },
+  "contact": {
+    "getInTouch": "Contáctanos",
+    "title": "Creemos Algo",
+    "subtitle": "Extraordinario",
+    "description": "¿Tienes una visión? Hagámosla realidad juntos. Contáctanos para discutir tu próximo gran evento.",
+    "sendMessage": "Envíanos un Mensaje",
+    "formDescription": "Completa el formulario y te responderemos en 24 horas.",
+    "fullName": "Nombre Completo",
+    "email": "Correo Electrónico",
+    "message": "Mensaje (¿De qué se trata?)",
+    "submit": "Enviar Mensaje",
+    "joinJourney": "Únete a Nuestro Viaje",
+    "joinJourneyText": "Ya seas un artista buscando actuar en escenarios internacionales, un patrocinador buscando conectar con audiencias de la diáspora, un socio de venue queriendo organizar eventos culturalmente significativos, o simplemente alguien que cree en el poder del entretenimiento con propósito—te invitamos a ser parte del Comienzo del Infinito."
+  },
+  "footer": {
+    "tagline": "El Comienzo del Infinito — Representando a la Diáspora Nepalí Globalmente",
+    "followUs": "Síguenos",
+    "privacyPolicy": "Política de Privacidad",
+    "terms": "Términos y Condiciones",
+    "registered": "Registrado en Inglaterra y Gales • Número de Empresa: 16820191",
+    "copyright": "© 2026 Milanoir Events Limited. Todos los derechos reservados."
+  },
+  "waitlist": {
+    "title": "Únete a la Lista de Espera",
+    "subtitle": "Sé el primero en saber cuando los boletos estén disponibles",
+    "infinityBeginsIn": "El infinito comienza en...",
+    "firstName": "Nombre",
+    "lastName": "Apellido",
+    "email": "Correo Electrónico",
+    "phone": "Teléfono (Opcional)",
+    "termsAgree": "Acepto los",
+    "termsLink": "Términos y Condiciones",
+    "andThe": "y la",
+    "privacyLink": "Política de Privacidad",
+    "submit": "Unirse a la Lista",
+    "successTitle": "¡Estás en la lista!",
+    "successMessage": "Te notificaremos cuando los boletos estén disponibles."
+  },
+  "legal": {
+    "backLabel": "Volver al Inicio"
+  }
+}

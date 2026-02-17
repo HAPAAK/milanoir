@@ -8,9 +8,9 @@ import type { ReactNode } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import TopNavigation from "./TopNavigation";
 import MobileNavigation from "./MobileNavigation";
-import GlowingInfinity from "@/components/ui/GlowingInfinity";
-import StarField from "@/components/ui/StarField";
-import ShootingStars from "@/components/ui/ShootingStars";
+import GlowingInfinity from "@/components/shared/GlowingInfinity";
+import StarField from "@/components/shared/StarField";
+import ShootingStars from "@/components/shared/ShootingStars";
 
 interface PageWrapperProps {
   children: ReactNode;

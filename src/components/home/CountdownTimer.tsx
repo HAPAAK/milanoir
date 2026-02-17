@@ -6,7 +6,8 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import type { CountdownTime } from "@/types/event";
-import { uiText, mainEvent } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { mainEvent } from "@/data/content";
 
 const calculateTimeLeft = (targetDate: Date): CountdownTime => {
   const now = new Date().getTime();
@@ -26,6 +27,7 @@ const calculateTimeLeft = (targetDate: Date): CountdownTime => {
 };
 
 const CountdownTimer = () => {
+  const { t } = useLanguage();
   // Use deterministic initial markup for SSR; populate real time on mount.
   const [timeLeft, setTimeLeft] = useState<CountdownTime>({
     days: 0,
@@ -68,10 +70,10 @@ const CountdownTimer = () => {
   }, []);
 
   const timeUnits = [
-    { value: timeLeft.days, label: uiText.countdown.days },
-    { value: timeLeft.hours, label: uiText.countdown.hours },
-    { value: timeLeft.minutes, label: uiText.countdown.minutes },
-    { value: timeLeft.seconds, label: uiText.countdown.seconds },
+    { value: timeLeft.days, label: t.countdown.days },
+    { value: timeLeft.hours, label: t.countdown.hours },
+    { value: timeLeft.minutes, label: t.countdown.minutes },
+    { value: timeLeft.seconds, label: t.countdown.seconds },
   ];
 
   if (isEventPassed) {
@@ -82,7 +84,7 @@ const CountdownTimer = () => {
         className="glass-card rounded-2xl p-6 md:p-8 text-center"
       >
         <span className="text-2xl md:text-3xl font-heading font-bold gradient-text">
-          {uiText.countdown.eventPassed}
+          {t.countdown.eventPassed}
         </span>
       </motion.div>
     );

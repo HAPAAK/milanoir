@@ -1,13 +1,14 @@
 import { motion } from "framer-motion";
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import logo from "@/assets/milanoir-logo-infinity.png";
-import FooterSection from "@/components/about/FooterSection";
+import Footer from "@/components/layout/Footer";
 import PageWrapper from "@/components/layout/PageWrapper";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { getApiUrl } from "@/lib/api";
@@ -113,10 +114,13 @@ const ContactPage = () => {
               transition={{ duration: 0.6 }}
               className="flex flex-col items-center mb-6"
             >
-              <img
-                src={typeof logo === "string" ? logo : logo.src}
+              <Image
+                src={logo}
                 alt="Milanoir Events"
                 className="w-16 md:w-20 opacity-80"
+                width={80}
+                height={80}
+                priority
               />
             </motion.div>
 
@@ -341,7 +345,7 @@ const ContactPage = () => {
         </div>
       </section>
 
-      <FooterSection />
+      <Footer />
     </PageWrapper>
   );
 };

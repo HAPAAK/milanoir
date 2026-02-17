@@ -1,23 +1,23 @@
 /**
- * Centralized content for internationalization and easy updates
- * All text strings used throughout the application
+ * Centralized non-translatable content: artists, events, and navigation structure.
+ * All user-facing UI text lives in src/locales/*.json via the i18n system.
  */
 
 import type { Artist, Event, NavigationItem } from "@/types/event";
-
-// Navigation items
-export const navigationItems: NavigationItem[] = [
-  { id: "home", label: "Home", href: "/" },
-  { id: "about", label: "About Us", href: "/about-us" },
-  { id: "contact", label: "Contact", href: "/contact" },
-];
 
 // Artist images
 import mrDImage from "@/assets/artists/mr-d.jpeg";
 import sacarImage from "@/assets/artists/sacar.jpeg";
 import mysteryArtistImage from "@/assets/artists/mystery-artist.jpeg";
 
-// Featured artists for Nepalese New Year 2082
+// Navigation items (labels resolved via t.nav[id] at render time)
+export const navigationItems: NavigationItem[] = [
+  { id: "home", href: "/" },
+  { id: "about", href: "/about-us" },
+  { id: "contact", href: "/contact" },
+];
+
+// Featured artists for Nepalese New Year 2083
 export const artists: Artist[] = [
   {
     id: "mr-d",
@@ -55,78 +55,13 @@ export const artists: Artist[] = [
 
 // Main event data
 export const mainEvent: Event = {
-  id: "nepalese-new-year-2082",
-  title: "Nepalese New Year 2082",
+  id: "nepalese-new-year-2083",
+  title: "Nepalese New Year 2083",
   subtitle: "The Beginning of Infinity",
-  date: new Date("2026-04-13T00:00:00+01:00"), // April 13, 2026, UK time
-  venue: null, // TBA
-  artists: artists,
+  date: new Date("2026-04-13T00:00:00+01:00"),
+  venue: null,
+  artists,
   isActive: true,
   ticketUrl: undefined,
   notifyUrl: undefined,
-};
-
-// UI Text strings
-export const uiText = {
-  // Hero section
-  hero: {
-    tagline: "Experience the celebration of a lifetime",
-    location: "London, United Kingdom",
-    dateLabel: "April 13, 2026",
-    scrollCta: "Discover the lineup",
-  },
-  
-  // Countdown
-  countdown: {
-    title: "Countdown to the celebration",
-    days: "Days",
-    hours: "Hours",
-    minutes: "Minutes",
-    seconds: "Seconds",
-    eventPassed: "The event has begun!",
-  },
-  
-  // Artists section
-  artists: {
-    sectionTitle: "Featured Artists",
-    sectionSubtitle: "World-class performers bringing the energy",
-    playPreview: "Play Preview",
-    comingSoon: "Coming Soon",
-    upcomingArtistLabel: "Upcoming Artist",
-  },
-  
-  // Event info
-  eventInfo: {
-    venueTitle: "Venue",
-    venueTba: "To Be Announced",
-    getNotified: "Get Notified",
-    learnMore: "Learn More",
-  },
-  
-  // Navigation
-  nav: {
-    home: "Home",
-    about: "About Us",
-    contact: "Contact",
-    menuOpen: "Open menu",
-    menuClose: "Close menu",
-  },
-  
-  // Audio modal
-  audioModal: {
-    nowPlaying: "Now Playing",
-    close: "Close",
-  },
-  
-  // Footer
-  footer: {
-    copyright: "© 2026 Milanoir Events. All rights reserved.",
-  },
-};
-
-// Social links
-export const socialLinks = {
-  instagram: "https://instagram.com/milanoir",
-  facebook: "https://facebook.com/milanoir",
-  twitter: "https://twitter.com/milanoir",
 };

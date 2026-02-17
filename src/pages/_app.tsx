@@ -1,25 +1,37 @@
 import "@/index.css";
 import type { AppProps } from "next/app";
-import { useState } from "react";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
+
+const routeTitles: Record<string, string> = {
+  "/": "Milanoir Events",
+  "/about-us": "About Us | Milanoir Events",
+  "/contact": "Contact | Milanoir Events",
+  "/waitlist": "Waitlist | Milanoir Events",
+  "/privacy-policy": "Privacy Policy | Milanoir Events",
+  "/terms": "Terms & Conditions | Milanoir Events",
+  "/404": "Page Not Found | Milanoir Events",
+};
 
 const App = ({ Component, pageProps }: AppProps) => {
-  const [queryClient] = useState(() => new QueryClient());
+  const { pathname } = useRouter();
+  const title = routeTitles[pathname] ?? "Milanoir Events";
 
   return (
-    <QueryClientProvider client={queryClient}>
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
       <LanguageProvider>
         <TooltipProvider>
           <Toaster />
-          <Sonner />
           <Component {...pageProps} />
         </TooltipProvider>
       </LanguageProvider>
-    </QueryClientProvider>
+    </>
   );
 };
 

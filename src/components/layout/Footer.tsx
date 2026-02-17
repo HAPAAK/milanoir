@@ -7,6 +7,7 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Facebook, Instagram, Youtube, Globe, ChevronDown } from "lucide-react";
+import Image from "next/image";
 import logo from "@/assets/milanoir-logo-infinity.png";
 import { useLanguage, languages, type LanguageCode } from "@/contexts/LanguageContext";
 
@@ -25,7 +26,7 @@ const TikTokIcon = () => (
   </svg>
 );
 
-const FooterSection = () => {
+const Footer = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isLangOpen, setIsLangOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -74,13 +75,19 @@ const FooterSection = () => {
             transition={{ duration: 0.6 }}
             className="flex flex-col items-center text-center mb-6"
           >
-            <motion.img 
-              src={typeof logo === "string" ? logo : logo.src} 
-              alt="Milanoir Events" 
-              className="w-44 md:w-52 mb-4"
+            <motion.div
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
-            />
+              className="w-44 md:w-52 mb-4"
+            >
+              <Image
+                src={logo}
+                alt="Milanoir Events"
+                width={208}
+                height={208}
+                className="w-full h-auto"
+              />
+            </motion.div>
             
             {/* Glowing Tagline - Larger */}
             <motion.p 
@@ -225,4 +232,4 @@ const FooterSection = () => {
   );
 };
 
-export default FooterSection;
+export default Footer;

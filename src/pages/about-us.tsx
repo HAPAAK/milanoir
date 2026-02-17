@@ -6,7 +6,7 @@ import DifferenceSection from "@/components/about/DifferenceSection";
 import VisionSection from "@/components/about/VisionSection";
 import ValuesSection from "@/components/about/ValuesSection";
 import CommitmentSection from "@/components/about/CommitmentSection";
-import FooterSection from "@/components/about/FooterSection";
+import Footer from "@/components/layout/Footer";
 
 const AboutPage = () => {
   return (
@@ -18,7 +18,7 @@ const AboutPage = () => {
       <VisionSection />
       <ValuesSection />
       <CommitmentSection />
-      <FooterSection />
+      <Footer />
     </PageWrapper>
   );
 };

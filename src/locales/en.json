@@ -1,0 +1,83 @@
+{
+  "nav": {
+    "home": "Home",
+    "about": "About Us",
+    "contact": "Contact",
+    "waitlist": "Waitlist"
+  },
+  "hero": {
+    "presents": "presents",
+    "tagline": "Experience the celebration of a lifetime",
+    "location": "London, United Kingdom",
+    "dateLabel": "April 13, 2026",
+    "scrollCta": "Discover the lineup",
+    "joinWaitlist": "Join the Waitlist"
+  },
+  "countdown": {
+    "title": "Countdown to the celebration",
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds",
+    "eventPassed": "The event has begun!"
+  },
+  "artists": {
+    "sectionTitle": "Featured Artists",
+    "sectionSubtitle": "World-class performers bringing the energy",
+    "playPreview": "Play Preview",
+    "comingSoon": "Coming Soon",
+    "upcomingArtistLabel": "Upcoming Artist"
+  },
+  "audioModal": {
+    "nowPlaying": "Now Playing",
+    "close": "Close",
+    "comingSoon": "Audio preview coming soon..."
+  },
+  "eventInfo": {
+    "venueTitle": "Venue",
+    "venueTba": "To Be Announced",
+    "getNotified": "Get Notified",
+    "learnMore": "Learn More"
+  },
+  "contact": {
+    "getInTouch": "Get In Touch",
+    "title": "Let's Create Something",
+    "subtitle": "Extraordinary",
+    "description": "Have a vision? Let's bring it to life together. Reach out to discuss your next big event.",
+    "sendMessage": "Send Us a Message",
+    "formDescription": "Fill out the form below and we'll get back to you within 24 hours.",
+    "fullName": "Full Name",
+    "email": "Email Address",
+    "message": "Message (What's this about?)",
+    "submit": "Send Message",
+    "joinJourney": "Join Our Journey",
+    "joinJourneyText": "Whether you're an artist seeking to perform on international stages, a sponsor looking to connect with engaged diaspora audiences, a venue partner wanting to host culturally significant events, or simply someone who believes in the power of purposeful entertainment—we invite you to be part of The Beginning of Infinity."
+  },
+  "footer": {
+    "tagline": "The Beginning of Infinity — Representing the Nepalese Diaspora Globally",
+    "followUs": "Follow Us",
+    "privacyPolicy": "Privacy Policy",
+    "terms": "Terms & Conditions",
+    "registered": "Registered in England & Wales • Company Number: 16820191",
+    "copyright": "© 2026 Milanoir Events Limited. All rights reserved."
+  },
+  "waitlist": {
+    "title": "Join the Waitlist",
+    "subtitle": "Be the first to know when tickets go live",
+    "infinityBeginsIn": "Infinity begins in...",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email Address",
+    "phone": "Phone Number (Optional)",
+    "termsAgree": "I agree to the",
+    "termsLink": "Terms & Conditions",
+    "andThe": "and the",
+    "privacyLink": "Privacy Policy",
+    "submit": "Join the Waitlist",
+    "successTitle": "You're on the list!",
+    "successMessage": "We'll notify you when tickets are available."
+  },
+  "legal": {
+    "backLabel": "Back to Home"
+  }
+}

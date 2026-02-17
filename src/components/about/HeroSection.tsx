@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import Image from "next/image";
 import logo from "@/assets/milanoir-logo-infinity.png";
 
 const HeroSection = () => {
@@ -44,10 +45,7 @@ const HeroSection = () => {
           transition={{ duration: 1, ease: "easeOut" }}
           className="flex flex-col items-center text-center"
         >
-          <motion.img
-            src={typeof logo === "string" ? logo : logo.src}
-            alt="Milanoir Events"
-            className="w-64 md:w-80 lg:w-96 mb-8 animate-glow-pulse"
+          <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 1.2, ease: "easeOut" }}
@@ -55,7 +53,17 @@ const HeroSection = () => {
               scale: 1.05,
               filter: "drop-shadow(0 0 30px hsl(330 85% 60% / 0.6))",
             }}
-          />
+            className="w-64 md:w-80 lg:w-96 mb-8 animate-glow-pulse"
+          >
+            <Image
+              src={logo}
+              alt="Milanoir Events"
+              width={384}
+              height={384}
+              priority
+              className="w-full h-auto"
+            />
+          </motion.div>
 
           <motion.p
             className="text-lg md:text-xl text-muted-foreground tracking-[0.3em] uppercase mb-6"

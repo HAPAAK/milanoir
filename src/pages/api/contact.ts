@@ -1,17 +1,5 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-type JsonRecord = Record<string, unknown>;
-
-const extractErrorMessage = (data: unknown, fallback: string): string => {
-  if (typeof data === "object" && data !== null) {
-    const record = data as JsonRecord;
-    if (typeof record.error === "string" && record.error.trim()) return record.error;
-    if (typeof record.message === "string" && record.message.trim()) return record.message;
-  }
-  return fallback;
-};
+import { EMAIL_REGEX, extractErrorMessage, type JsonRecord } from "@/lib/api-utils";
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== "POST") {

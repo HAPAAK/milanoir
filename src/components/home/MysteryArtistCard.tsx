@@ -5,8 +5,9 @@
 
 import { motion } from "framer-motion";
 import { Sparkles } from "lucide-react";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { uiText } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
 import type { Artist } from "@/types/event";
 
 interface MysteryArtistCardProps {
@@ -15,6 +16,7 @@ interface MysteryArtistCardProps {
 }
 
 const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
+  const { t } = useLanguage();
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -101,11 +103,12 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
                 ease: "easeInOut",
               }}
             >
-              <img
-                src={typeof artist.imageUrl === "string" ? artist.imageUrl : artist.imageUrl?.src}
+              <Image
+                src={artist.imageUrl!}
                 alt="Mystery Artist"
-                className="w-full h-full object-cover object-top filter brightness-0 invert opacity-80"
-                loading="lazy"
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                className="object-cover object-top filter brightness-0 invert opacity-80"
               />
               {/* Cosmic overlay */}
               <div 
@@ -130,13 +133,13 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
               className="border-primary/30 text-primary animate-pulse text-xs md:text-sm"
             >
               <Sparkles className="w-3 h-3 mr-1" />
-              {uiText.artists.comingSoon}
+              {t.artists.comingSoon}
             </Badge>
           </div>
 
           {/* Artist name */}
           <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-bold mb-2 flex-shrink-0">
-            <span className="gradient-text">{uiText.artists.upcomingArtistLabel}</span>
+            <span className="gradient-text">{t.artists.upcomingArtistLabel}</span>
           </h3>
 
           {/* Description - Full text without clipping */}

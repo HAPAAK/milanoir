@@ -5,15 +5,18 @@ import { ArrowLeft, MapPin, Clock } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import dynamic from "next/dynamic";
 import PageWrapper from "@/components/layout/PageWrapper";
 import CountdownTimer from "@/components/home/CountdownTimer";
-import CountryCodeSelect from "@/components/ui/CountryCodeSelect";
 import { Button } from "@/components/ui/button";
+
+const CountryCodeSelect = dynamic(() => import("@/components/shared/CountryCodeSelect"), { ssr: false });
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { mainEvent, uiText } from "@/data/content";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { mainEvent } from "@/data/content";
 import { defaultCountryCode } from "@/data/countryCodes";
 import { getApiUrl } from "@/lib/api";
 
@@ -31,6 +34,7 @@ const waitlistSchema = z.object({
 type WaitlistFormData = z.infer<typeof waitlistSchema>;
 
 const WaitlistPage = () => {
+  const { t } = useLanguage();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [countryCode, setCountryCode] = useState(defaultCountryCode);
@@ -140,7 +144,7 @@ const WaitlistPage = () => {
                 <span className="gradient-text">{mainEvent.title}</span>
               </h1>
 
-              <p className="text-muted-foreground text-lg mb-8">{uiText.eventInfo.venueTba}</p>
+              <p className="text-muted-foreground text-lg mb-8">{t.eventInfo.venueTba}</p>
 
               <div className="mb-8 overflow-visible">
                 <p className="text-sm text-muted-foreground uppercase tracking-widest mb-4 flex items-center gap-2">
