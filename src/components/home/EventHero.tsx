@@ -11,7 +11,7 @@ import CountdownTimer from "./CountdownTimer";
 import { Button } from "@/components/ui/button";
 import { mainEvent } from "@/data/content";
 import { useLanguage } from "@/contexts/LanguageContext";
-import eventBanner from "@/assets/event-banner.png";
+import eventBanner from "@/assets/event-banner-landscape.png";
 import eventBannerMobile from "@/assets/event-banner-mobile.png";
 
 const TicketsCTA = ({ label, sublabel }: { label: string; sublabel: string }) => (
@@ -74,7 +74,7 @@ const EventHero = () => {
             src={eventBannerMobile}
             alt="Milanoir Events — Nepalese New Year 2083"
             priority
-            quality={90}
+            quality={100}
             placeholder="blur"
             sizes="100vw"
             className="w-full h-auto"
@@ -99,22 +99,30 @@ const EventHero = () => {
       </section>
 
       {/* ─── DESKTOP ─── */}
-      <section className="hidden md:flex flex-col items-center overflow-hidden">
-        {/* Full banner -- contain so nothing is cropped, centered */}
-        <div className="relative w-full max-w-4xl mx-auto mt-20">
+      <section className="relative h-screen hidden md:flex flex-col overflow-hidden">
+        {/* Banner stretched edge-to-edge, top 90% visible, bottom fades out */}
+        <div className="absolute inset-0 z-0">
           <Image
             src={eventBanner}
             alt="Milanoir Events — Nepalese New Year 2083"
-            priority
-            quality={90}
+            quality={100}
             placeholder="blur"
-            sizes="(min-width: 768px) 896px, 100vw"
-            className="w-full h-auto"
+            // sizes="100vw"
+            preload={true}
+            className="object-center"
+          />
+          <div
+            className="absolute inset-0"
+            style={{
+              background: "linear-gradient(to bottom, transparent 60%, hsl(var(--background) / 0.6) 80%, hsl(var(--background)) 95%)",
+            }}
           />
         </div>
 
-        {/* Countdown + CTA below the image */}
-        <div className="container max-w-5xl mx-auto text-center px-4 -mt-4 pb-14">
+        <div className="flex-1" />
+
+        {/* Countdown + CTA at bottom */}
+        <div className="relative z-10 container max-w-5xl mx-auto text-center px-3 pb-4">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
