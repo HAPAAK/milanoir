@@ -62,16 +62,11 @@ const TopNavigation = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className={`fixed top-0 left-0 right-0 z-50 h-16 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-3 md:py-0 md:h-16 ${
         isScrolled
-          ? "backdrop-blur-2xl bg-background/80 border-b border-border/40"
-          : "backdrop-blur-xl bg-background/60 border-b border-border/20"
+          ? "md:backdrop-blur-2xl md:bg-background/80 md:border-b md:border-border/40 md:shadow-[0_4px_30px_rgba(0,0,0,0.15)]"
+          : "md:backdrop-blur-xl md:bg-background/60 md:border-b md:border-border/20 md:shadow-[0_4px_20px_rgba(0,0,0,0.05)]"
       }`}
-      style={{
-        boxShadow: isScrolled
-          ? "0 4px 30px rgba(0, 0, 0, 0.15)"
-          : "0 4px 20px rgba(0, 0, 0, 0.05)",
-      }}
     >
       <div className="container max-w-7xl mx-auto h-full px-4 flex items-center justify-between">
         {/* Logo */}

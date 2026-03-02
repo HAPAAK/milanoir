@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { motion } from "framer-motion";
-import { Home, Users, Mail, Ticket, Music } from "lucide-react";
+import { Home, Users, Mail, Music } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useLanguage, type Translations } from "@/contexts/LanguageContext";
 import { TOGGLE_THEME_MUSIC } from "@/lib/audioEvents";
@@ -22,7 +22,6 @@ interface NavItem {
 const navItems: NavItem[] = [
   { id: "home", labelKey: "home", href: "/", icon: Home },
   { id: "about", labelKey: "about", href: "/about-us", icon: Users },
-  { id: "waitlist", labelKey: "waitlist", href: "/waitlist", icon: Ticket },
   { id: "contact", labelKey: "contact", href: "/contact", icon: Mail },
 ];
 

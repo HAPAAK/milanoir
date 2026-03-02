@@ -1,4 +1,11 @@
 import type { NextApiRequest, NextApiResponse } from "next";
+
+// Waitlist API is temporarily disabled. All routes redirect to home.
+export default function handler(_req: NextApiRequest, res: NextApiResponse) {
+  return res.status(410).json({ error: "Waitlist is currently closed." });
+}
+
+/*
 import { EMAIL_REGEX, extractErrorMessage, type JsonRecord } from "@/lib/api-utils";
 
 const isPhoneFieldUnsupportedError = (message: string): boolean =>
@@ -96,3 +103,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
   }
 }
+*/
