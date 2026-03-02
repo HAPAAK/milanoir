@@ -11,7 +11,11 @@
     "location": "London, United Kingdom",
     "dateLabel": "April 13, 2026",
     "scrollCta": "Discover the lineup",
-    "joinWaitlist": "Join the Waitlist"
+    "joinWaitlist": "Join the Waitlist",
+    "getTickets": "GET TICKETS",
+    "ticketsExternal": "Powered by TicketTailor",
+    "vibeOn": "VIBING ♪",
+    "vibeOff": "TURN IT UP OR MISS THE VIBE"
   },
   "countdown": {
     "title": "Countdown to the celebration",
@@ -27,6 +31,9 @@
     "playPreview": "Play Preview",
     "comingSoon": "Coming Soon",
     "upcomingArtistLabel": "Upcoming Artist"
+  },
+  "host": {
+    "sectionTitle": "Your Host"
   },
   "audioModal": {
     "nowPlaying": "Now Playing",

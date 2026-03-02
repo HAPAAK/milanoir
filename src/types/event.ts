@@ -17,6 +17,15 @@ export interface Artist {
   isMystery: boolean;
 }
 
+export interface Host {
+  id: string;
+  name: string;
+  role: string;
+  description: string;
+  origin?: string;
+  imageUrl?: string | StaticImageData;
+}
+
 export interface Venue {
   name: string;
   address: string;

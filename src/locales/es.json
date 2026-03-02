@@ -11,7 +11,11 @@
     "location": "Londres, Reino Unido",
     "dateLabel": "13 de Abril, 2026",
     "scrollCta": "Descubre el lineup",
-    "joinWaitlist": "Únete a la Lista"
+    "joinWaitlist": "Únete a la Lista",
+    "getTickets": "OBTENER ENTRADAS",
+    "ticketsExternal": "Powered by TicketTailor",
+    "vibeOn": "VIBING ♪",
+    "vibeOff": "SUBE EL VOLUMEN O TE LO PIERDES"
   },
   "countdown": {
     "title": "Cuenta regresiva para la celebración",
@@ -27,6 +31,9 @@
     "playPreview": "Reproducir Vista Previa",
     "comingSoon": "Próximamente",
     "upcomingArtistLabel": "Próximo Artista"
+  },
+  "host": {
+    "sectionTitle": "Tu Presentadora"
   },
   "audioModal": {
     "nowPlaying": "Reproduciendo",

@@ -11,7 +11,11 @@
     "location": "लन्डन, बेलायत",
     "dateLabel": "अप्रिल १३, २०२६",
     "scrollCta": "कलाकारहरू हेर्नुहोस्",
-    "joinWaitlist": "प्रतीक्षा सूचीमा सामेल हुनुहोस्"
+    "joinWaitlist": "प्रतीक्षा सूचीमा सामेल हुनुहोस्",
+    "getTickets": "टिकट लिनुहोस्",
+    "ticketsExternal": "TicketTailor द्वारा संचालित",
+    "vibeOn": "VIBING ♪",
+    "vibeOff": "बजाउनुस् नत्र मिस हुन्छ"
   },
   "countdown": {
     "title": "उत्सवको उल्टो गणना",
@@ -27,6 +31,9 @@
     "playPreview": "प्रिभ्यु सुन्नुहोस्",
     "comingSoon": "छिट्टै आउँदै",
     "upcomingArtistLabel": "आगामी कलाकार"
+  },
+  "host": {
+    "sectionTitle": "तपाईंको होस्ट"
   },
   "audioModal": {
     "nowPlaying": "बजिरहेको छ",

@@ -3,12 +3,15 @@
  * All user-facing UI text lives in src/locales/*.json via the i18n system.
  */
 
-import type { Artist, Event, NavigationItem } from "@/types/event";
+import type { Artist, Event, Host, NavigationItem } from "@/types/event";
 
 // Artist images
 import mrDImage from "@/assets/artists/mr-d.jpeg";
 import sacarImage from "@/assets/artists/sacar.jpeg";
-import mysteryArtistImage from "@/assets/artists/mystery-artist.jpeg";
+import vtenImage from "@/assets/artists/vten.png";
+
+// Host images
+import sydneyImage from "@/assets/host/sydney-gurung.png";
 
 // Navigation items (labels resolved via t.nav[id] at render time)
 export const navigationItems: NavigationItem[] = [
@@ -20,14 +23,14 @@ export const navigationItems: NavigationItem[] = [
 // Featured artists for Nepalese New Year 2083
 export const artists: Artist[] = [
   {
-    id: "mr-d",
-    name: "Mr. D",
-    genre: "Rap / Hip-Hop",
+    id: "vten",
+    name: "VTEN (Samir Ghising)",
+    genre: "Hip-Hop / Rap",
     description:
-      "From the streets of Hetauda to stages across Nepal and beyond, Mr. D is a lyrical force who blends raw emotion with razor-sharp storytelling. His tracks like 'Gobar Lyath' and 'Bandai Cha Nepal' speak truth to power, making him a voice for the unheard and a rebel with rhythm.",
-    origin: "Hetauda, Nepal",
-    imageUrl: mrDImage,
-    spotifyTrackId: "4BCEDbMGVmwuKX6E9LpMJy",
+      "VTEN is one of Nepal\u2019s most influential hip\u2011hop voices \u2014 a cultural disruptor whose raw honesty, street\u2011level storytelling, and fearless attitude reshaped the nation\u2019s rap landscape. Rising from the outskirts of Kathmandu, he built a movement with tracks like \u2018Hami Yestai Ta Honi Bro,\u2019 \u2018Yatra,\u2019 and \u2018Superstar,\u2019 blending gritty realism with melodic hooks that resonate across generations. His journey from controversy and arrest to international tours turned him into a symbol of artistic freedom and youth expression. VTEN\u2019s music bridges Nepal\u2019s underground grit with global hip\u2011hop energy, making him a defining figure of modern Nephop.",
+    origin: "Kathmandu, Nepal",
+    imageUrl: vtenImage,
+    spotifyTrackId: "3L9JCjxy0VeTIDHXwtD50G",
     isMystery: false,
   },
   {
@@ -42,16 +45,28 @@ export const artists: Artist[] = [
     isMystery: false,
   },
   {
-    id: "mystery-artist",
-    name: "???",
-    genre: "Experimental / Soulful Rap",
+    id: "mr-d",
+    name: "Mr. D",
+    genre: "Rap / Hip-Hop",
     description:
-      "There's a presence that doesn't shout—it resonates. A voice that feels like dusk and dawn colliding. When he steps in, the energy shifts. You won't find him chasing the spotlight, but when the beat drops, it finds him. Cryptic. Cosmic. Calm. And yet, unforgettable.",
-    origin: "TBA",
-    imageUrl: mysteryArtistImage,
-    isMystery: true,
-  },
+      "From the streets of Hetauda to stages across Nepal and beyond, Mr. D is a lyrical force who blends raw emotion with razor-sharp storytelling. His tracks like 'Gobar Lyath' and 'Bandai Cha Nepal' speak truth to power, making him a voice for the unheard and a rebel with rhythm.",
+    origin: "Hetauda, Nepal",
+    imageUrl: mrDImage,
+    spotifyTrackId: "4BCEDbMGVmwuKX6E9LpMJy",
+    isMystery: false,
+  }
 ];
+
+// Event host
+export const host: Host = {
+  id: "sydney-gurung",
+  name: "Sydney Gurung",
+  role: "Host",
+  description:
+    "Sydney Gurung is a dynamic Nepali presenter and content creator based in London, known for her confident on\u2011camera presence and her ability to connect effortlessly with diverse audiences. With a background in event planning, public speaking, and social media strategy, she brings a polished, modern, and globally aware energy to every stage she steps on. Her work spans lifestyle content, beauty collaborations, and creative digital storytelling \u2014 showcasing her natural charisma and ease in front of the camera. Multilingual and culturally versatile, Sydney represents the new generation of Nepali diaspora talent shaping international creative spaces.",
+  origin: "London, UK",
+  imageUrl: sydneyImage,
+};
 
 // Main event data
 export const mainEvent: Event = {
@@ -62,6 +77,6 @@ export const mainEvent: Event = {
   venue: null,
   artists,
   isActive: true,
-  ticketUrl: undefined,
+  ticketUrl: "https://buytickets.at/milanoireventszlimited/2096833",
   notifyUrl: undefined,
 };
