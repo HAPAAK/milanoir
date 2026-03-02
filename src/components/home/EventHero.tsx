@@ -68,30 +68,33 @@ const EventHero = () => {
     <>
       {/* ─── MOBILE ─── */}
       <section className="md:hidden flex flex-col">
-        {/* Full banner image -- no crop */}
-        <Image
-          src={eventBannerMobile}
-          alt="Milanoir Events — Nepalese New Year 2083"
-          priority
-          quality={90}
-          placeholder="blur"
-          sizes="100vw"
-          className="w-full h-auto"
-        />
+        {/* Banner with GET TICKETS overlaid in the gap area */}
+        <div className="relative">
+          <Image
+            src={eventBannerMobile}
+            alt="Milanoir Events — Nepalese New Year 2083"
+            priority
+            quality={90}
+            placeholder="blur"
+            sizes="100vw"
+            className="w-full h-auto"
+          />
+          {/* GET TICKETS button overlaid on the image gap -- adjust bottom-[15%] to move up/down */}
+          <div className="absolute bottom-[5%] left-0 right-0 z-10 flex justify-center px-4">
+            <TicketsCTA label={t.hero.getTickets} sublabel={t.hero.ticketsExternal} />
+          </div>
+        </div>
 
-        {/* Countdown + CTA below the image */}
-        <div className="px-4 -mt-2 pb-8">
+        {/* Countdown below the image */}
+        <div className="px-4 pt-4 pb-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="w-full max-w-sm mx-auto mb-5"
+            className="w-full max-w-sm mx-auto"
           >
             <CountdownTimer />
           </motion.div>
-          <div className="flex justify-center">
-            <TicketsCTA label={t.hero.getTickets} sublabel={t.hero.ticketsExternal} />
-          </div>
         </div>
       </section>
 
