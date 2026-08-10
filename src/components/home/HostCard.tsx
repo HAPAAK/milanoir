@@ -38,7 +38,7 @@ const HostCard = ({ host }: HostCardProps) => {
         className="absolute -inset-[1px] rounded-2xl md:rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
         style={{
           background:
-            "linear-gradient(135deg, hsl(330 85% 60%), hsl(280 80% 55%), hsl(200 85% 55%), hsl(185 85% 50%))",
+            "linear-gradient(135deg, hsl(348 85% 55%), hsl(0 78% 48%), hsl(30 90% 55%), hsl(43 95% 55%))",
           backgroundSize: "300% 300%",
         }}
         animate={{
@@ -58,7 +58,7 @@ const HostCard = ({ host }: HostCardProps) => {
           className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
           style={{
             background:
-              "radial-gradient(circle at 30% 30%, hsl(330 85% 60% / 0.1), transparent 50%), radial-gradient(circle at 70% 70%, hsl(200 85% 55% / 0.1), transparent 50%)",
+              "radial-gradient(circle at 30% 30%, hsl(348 85% 55% / 0.1), transparent 50%), radial-gradient(circle at 70% 70%, hsl(30 90% 55% / 0.1), transparent 50%)",
           }}
         />
 

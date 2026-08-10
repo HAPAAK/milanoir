@@ -9,96 +9,96 @@
 @layer base {
   :root {
     /* Dark cosmic background */
-    --background: 240 20% 4%;
+    --background: 350 28% 5%;
     --foreground: 0 0% 98%;
 
     /* Cards with glassmorphism */
-    --card: 240 15% 8%;
+    --card: 350 24% 9%;
     --card-foreground: 0 0% 98%;
 
-    --popover: 240 15% 8%;
+    --popover: 350 24% 9%;
     --popover-foreground: 0 0% 98%;
 
     /* Primary - Cosmic Pink */
-    --primary: 330 85% 60%;
+    --primary: 348 85% 55%;
     --primary-foreground: 0 0% 100%;
 
     /* Secondary - Cosmic Cyan */
-    --secondary: 185 85% 50%;
+    --secondary: 43 95% 55%;
     --secondary-foreground: 0 0% 100%;
 
     /* Muted */
-    --muted: 240 10% 15%;
-    --muted-foreground: 240 5% 65%;
+    --muted: 350 16% 16%;
+    --muted-foreground: 350 10% 68%;
 
     /* Accent - Cosmic Blue */
-    --accent: 220 80% 60%;
+    --accent: 22 85% 55%;
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 240 10% 20%;
-    --input: 240 10% 15%;
-    --ring: 330 85% 60%;
+    --border: 350 16% 22%;
+    --input: 350 16% 16%;
+    --ring: 348 85% 55%;
 
     --radius: 0.75rem;
 
     /* Custom Milanoir gradients */
-    --gradient-cosmic: linear-gradient(135deg, hsl(330 85% 60%), hsl(280 80% 55%), hsl(200 85% 55%), hsl(185 85% 50%));
-    --gradient-cosmic-text: linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(200 85% 60%));
-    --gradient-glow: linear-gradient(180deg, hsl(330 85% 60% / 0.3), hsl(200 85% 55% / 0.1), transparent);
-    --gradient-card: linear-gradient(145deg, hsl(240 15% 12% / 0.8), hsl(240 15% 6% / 0.9));
+    --gradient-cosmic: linear-gradient(135deg, hsl(348 85% 55%), hsl(0 78% 48%), hsl(30 90% 55%), hsl(43 95% 55%));
+    --gradient-cosmic-text: linear-gradient(90deg, hsl(348 88% 62%), hsl(5 80% 55%), hsl(32 92% 60%));
+    --gradient-glow: linear-gradient(180deg, hsl(348 85% 55% / 0.3), hsl(30 90% 55% / 0.1), transparent);
+    --gradient-card: linear-gradient(145deg, hsl(350 22% 13% / 0.8), hsl(350 24% 7% / 0.9));
 
     /* Shadows & Glows */
-    --shadow-cosmic: 0 0 60px hsl(330 85% 60% / 0.15), 0 0 100px hsl(200 85% 55% / 0.1);
+    --shadow-cosmic: 0 0 60px hsl(348 85% 55% / 0.15), 0 0 100px hsl(30 90% 55% / 0.1);
     --shadow-card: 0 8px 32px hsl(0 0% 0% / 0.4), inset 0 1px 0 hsl(0 0% 100% / 0.05);
-    --glow-pink: 0 0 20px hsl(330 85% 60% / 0.5);
-    --glow-cyan: 0 0 20px hsl(185 85% 50% / 0.5);
+    --glow-pink: 0 0 20px hsl(348 85% 55% / 0.5);
+    --glow-cyan: 0 0 20px hsl(43 95% 55% / 0.5);
 
     /* Typography */
     --font-heading: 'Cinzel', serif;
     --font-body: 'Inter', sans-serif;
 
     /* Sidebar defaults */
-    --sidebar-background: 240 15% 8%;
+    --sidebar-background: 350 24% 9%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 330 85% 60%;
+    --sidebar-primary: 348 85% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 10% 15%;
+    --sidebar-accent: 350 16% 16%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 240 10% 20%;
-    --sidebar-ring: 330 85% 60%;
+    --sidebar-border: 350 16% 22%;
+    --sidebar-ring: 348 85% 55%;
   }
 
   .dark {
-    --background: 240 20% 4%;
+    --background: 350 28% 5%;
     --foreground: 0 0% 98%;
-    --card: 240 15% 8%;
+    --card: 350 24% 9%;
     --card-foreground: 0 0% 98%;
-    --popover: 240 15% 8%;
+    --popover: 350 24% 9%;
     --popover-foreground: 0 0% 98%;
-    --primary: 330 85% 60%;
+    --primary: 348 85% 55%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 185 85% 50%;
+    --secondary: 43 95% 55%;
     --secondary-foreground: 0 0% 100%;
-    --muted: 240 10% 15%;
-    --muted-foreground: 240 5% 65%;
-    --accent: 220 80% 60%;
+    --muted: 350 16% 16%;
+    --muted-foreground: 350 10% 68%;
+    --accent: 22 85% 55%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 240 10% 20%;
-    --input: 240 10% 15%;
-    --ring: 330 85% 60%;
-    --sidebar-background: 240 15% 8%;
+    --border: 350 16% 22%;
+    --input: 350 16% 16%;
+    --ring: 348 85% 55%;
+    --sidebar-background: 350 24% 9%;
     --sidebar-foreground: 0 0% 98%;
-    --sidebar-primary: 330 85% 60%;
+    --sidebar-primary: 348 85% 55%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 10% 15%;
+    --sidebar-accent: 350 16% 16%;
     --sidebar-accent-foreground: 0 0% 98%;
-    --sidebar-border: 240 10% 20%;
-    --sidebar-ring: 330 85% 60%;
+    --sidebar-border: 350 16% 22%;
+    --sidebar-ring: 348 85% 55%;
   }
 }
 
@@ -155,9 +155,9 @@
 
   .cosmic-bg {
     background: 
-      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(330 85% 60% / 0.15), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 50%, hsl(200 85% 55% / 0.1), transparent),
-      radial-gradient(ellipse 50% 30% at 20% 80%, hsl(280 80% 55% / 0.08), transparent),
+      radial-gradient(ellipse 80% 50% at 50% -20%, hsl(348 85% 55% / 0.15), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 50%, hsl(30 90% 55% / 0.1), transparent),
+      radial-gradient(ellipse 50% 30% at 20% 80%, hsl(0 78% 48% / 0.08), transparent),
       hsl(var(--background));
   }
 
@@ -207,10 +207,10 @@
 
 @keyframes glowPulse {
   0%, 100% {
-    filter: drop-shadow(0 0 20px hsl(330 85% 60% / 0.4));
+    filter: drop-shadow(0 0 20px hsl(348 85% 55% / 0.4));
   }
   50% {
-    filter: drop-shadow(0 0 40px hsl(200 85% 55% / 0.6));
+    filter: drop-shadow(0 0 40px hsl(30 90% 55% / 0.6));
   }
 }
 

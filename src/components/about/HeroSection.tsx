@@ -51,7 +51,7 @@ const HeroSection = () => {
             transition={{ duration: 1.2, ease: "easeOut" }}
             whileHover={{ 
               scale: 1.05,
-              filter: "drop-shadow(0 0 30px hsl(330 85% 60% / 0.6))",
+              filter: "drop-shadow(0 0 30px hsl(348 85% 55% / 0.6))",
             }}
             className="w-64 md:w-80 lg:w-96 mb-8 animate-glow-pulse"
           >
@@ -84,7 +84,7 @@ const HeroSection = () => {
             <motion.span 
               className="gradient-text"
               whileHover={{
-                textShadow: "0 0 30px hsl(330 85% 60% / 0.5)",
+                textShadow: "0 0 30px hsl(348 85% 55% / 0.5)",
               }}
             >
               concerts, experiential entertainment
@@ -98,7 +98,7 @@ const HeroSection = () => {
             transition={{ delay: 1, duration: 0.8 }}
             whileHover={{ 
               scale: 1.05,
-              boxShadow: "0 0 30px hsl(330 85% 60% / 0.3)",
+              boxShadow: "0 0 30px hsl(348 85% 55% / 0.3)",
             }}
           >
             <motion.span 

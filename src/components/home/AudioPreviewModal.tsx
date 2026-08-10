@@ -120,7 +120,7 @@ const AudioPreviewModal = ({
                 className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
                 style={{
                   background:
-                    "linear-gradient(to top, hsl(330 85% 60% / 0.05), transparent)",
+                    "linear-gradient(to top, hsl(348 85% 55% / 0.05), transparent)",
                 }}
               />
             </motion.div>

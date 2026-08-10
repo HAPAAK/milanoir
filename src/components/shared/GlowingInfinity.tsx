@@ -15,7 +15,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
       <motion.div
         className="absolute w-[900px] md:w-[1200px] lg:w-[1600px] h-[600px] md:h-[800px] lg:h-[1000px] rounded-full"
         style={{
-          background: "radial-gradient(ellipse at center, hsl(260 70% 12% / 0.5), hsl(280 60% 8% / 0.3), transparent 70%)",
+          background: "radial-gradient(ellipse at center, hsl(352 65% 12% / 0.5), hsl(350 55% 8% / 0.3), transparent 70%)",
         }}
         animate={{
           scale: [1, 1.05, 1],
@@ -32,7 +32,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
       <motion.div
         className="absolute w-[700px] md:w-[1000px] lg:w-[1300px] h-[350px] md:h-[500px] lg:h-[650px]"
         style={{
-          background: "conic-gradient(from 0deg at 50% 50%, hsl(280 80% 30% / 0.1), hsl(200 90% 35% / 0.12), hsl(330 85% 35% / 0.1), hsl(185 90% 30% / 0.12), hsl(280 80% 30% / 0.1))",
+          background: "conic-gradient(from 0deg at 50% 50%, hsl(0 68% 25% / 0.1), hsl(32 88% 38% / 0.12), hsl(348 85% 32% / 0.1), hsl(43 92% 34% / 0.12), hsl(0 68% 25% / 0.1))",
           borderRadius: "50%",
           filter: "blur(100px)",
         }}
@@ -50,7 +50,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
       <motion.div
         className="absolute w-[600px] md:w-[900px] lg:w-[1200px] h-[300px] md:h-[450px] lg:h-[600px]"
         style={{
-          background: "conic-gradient(from 180deg at 50% 50%, hsl(200 90% 35% / 0.08), hsl(260 80% 35% / 0.1), hsl(185 90% 30% / 0.08), hsl(330 80% 35% / 0.1), hsl(200 90% 35% / 0.08))",
+          background: "conic-gradient(from 180deg at 50% 50%, hsl(32 88% 38% / 0.08), hsl(355 78% 34% / 0.1), hsl(43 92% 34% / 0.08), hsl(348 80% 32% / 0.1), hsl(32 88% 38% / 0.08))",
           borderRadius: "50%",
           filter: "blur(80px)",
         }}
@@ -124,9 +124,9 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
           animate={{
             opacity: [0.12, 0.2, 0.12],
             filter: [
-              "brightness(0.15) saturate(1.1) drop-shadow(0 0 15px hsl(280 80% 40% / 0.2))",
-              "brightness(0.2) saturate(1.2) drop-shadow(0 0 25px hsl(200 90% 45% / 0.3))",
-              "brightness(0.15) saturate(1.1) drop-shadow(0 0 15px hsl(280 80% 40% / 0.2))",
+              "brightness(0.15) saturate(1.1) drop-shadow(0 0 15px hsl(0 72% 33% / 0.2))",
+              "brightness(0.2) saturate(1.2) drop-shadow(0 0 25px hsl(32 90% 46% / 0.3))",
+              "brightness(0.15) saturate(1.1) drop-shadow(0 0 15px hsl(0 72% 33% / 0.2))",
             ],
           }}
           transition={{
@@ -141,7 +141,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
       <motion.div
         className="absolute w-[300px] md:w-[450px] lg:w-[600px] h-[150px] md:h-[225px] lg:h-[300px] rounded-full"
         style={{
-          background: "radial-gradient(ellipse at center, hsl(220 90% 45% / 0.05), hsl(280 80% 40% / 0.03), transparent 70%)",
+          background: "radial-gradient(ellipse at center, hsl(25 88% 46% / 0.05), hsl(0 72% 33% / 0.03), transparent 70%)",
         }}
         animate={{
           scale: [1, 1.2, 1],
@@ -158,7 +158,7 @@ const GlowingInfinity = ({ isFixed = true }: GlowingInfinityProps) => {
       <div 
         className="absolute inset-0"
         style={{
-          background: "radial-gradient(ellipse at center, transparent 20%, hsl(240 20% 3% / 0.6) 100%)",
+          background: "radial-gradient(ellipse at center, transparent 20%, hsl(350 28% 4% / 0.6) 100%)",
         }}
       />
     </div>

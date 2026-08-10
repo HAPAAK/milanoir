@@ -113,7 +113,7 @@ const CountdownTimer = () => {
               className="absolute inset-0 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
               style={{
                 background:
-                  "radial-gradient(circle at center, hsl(330 85% 60% / 0.2), transparent 70%)",
+                  "radial-gradient(circle at center, hsl(348 85% 55% / 0.2), transparent 70%)",
                 filter: "blur(20px)",
               }}
               animate={{
@@ -134,9 +134,9 @@ const CountdownTimer = () => {
                 className="block text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-heading font-bold gradient-text"
                 animate={{
                   textShadow: [
-                    "0 0 20px hsl(330 85% 60% / 0.3)",
-                    "0 0 40px hsl(200 85% 55% / 0.5)",
-                    "0 0 20px hsl(330 85% 60% / 0.3)",
+                    "0 0 20px hsl(348 85% 55% / 0.3)",
+                    "0 0 40px hsl(30 90% 55% / 0.5)",
+                    "0 0 20px hsl(348 85% 55% / 0.3)",
                   ],
                 }}
                 transition={{

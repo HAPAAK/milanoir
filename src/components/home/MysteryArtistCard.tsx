@@ -31,7 +31,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
         className="absolute -inset-[1px] rounded-2xl md:rounded-3xl"
         style={{
           background:
-            "linear-gradient(135deg, hsl(280 80% 40% / 0.5), hsl(200 85% 45% / 0.3), hsl(280 80% 40% / 0.5))",
+            "linear-gradient(135deg, hsl(0 72% 33% / 0.5), hsl(30 88% 45% / 0.3), hsl(0 72% 33% / 0.5))",
           backgroundSize: "200% 200%",
         }}
         animate={{
@@ -52,7 +52,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
           className="absolute inset-0 pointer-events-none"
           style={{
             background:
-              "radial-gradient(ellipse at 50% 50%, hsl(280 80% 50% / 0.15), transparent 70%)",
+              "radial-gradient(ellipse at 50% 50%, hsl(0 75% 42% / 0.15), transparent 70%)",
           }}
           animate={{
             scale: [1, 1.2, 1],
@@ -114,7 +114,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
               <div 
                 className="absolute inset-0"
                 style={{
-                  background: "radial-gradient(ellipse at 50% 50%, hsl(280 80% 50% / 0.3), transparent 70%)",
+                  background: "radial-gradient(ellipse at 50% 50%, hsl(0 75% 42% / 0.3), transparent 70%)",
                 }}
               />
             </motion.div>
@@ -155,7 +155,7 @@ const MysteryArtistCard = ({ artist, index }: MysteryArtistCardProps) => {
               className="w-full h-[2px] rounded-full"
               style={{
                 background:
-                  "linear-gradient(90deg, transparent, hsl(280 80% 60% / 0.5), hsl(200 85% 55% / 0.5), transparent)",
+                  "linear-gradient(90deg, transparent, hsl(5 80% 55% / 0.5), hsl(30 90% 55% / 0.5), transparent)",
               }}
               animate={{
                 opacity: [0.3, 0.7, 0.3],

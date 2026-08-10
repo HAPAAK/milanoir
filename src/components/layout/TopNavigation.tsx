@@ -97,7 +97,7 @@ const TopNavigation = () => {
               <motion.div
                 className="absolute -inset-[1px] rounded-full"
                 style={{
-                  background: "linear-gradient(135deg, hsl(330 85% 60%), hsl(280 80% 55%), hsl(200 85% 55%), hsl(185 85% 50%))",
+                  background: "linear-gradient(135deg, hsl(348 85% 55%), hsl(0 78% 48%), hsl(30 90% 55%), hsl(43 95% 55%))",
                   backgroundSize: "300% 300%",
                 }}
                 animate={{

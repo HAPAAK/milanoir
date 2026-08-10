@@ -79,17 +79,17 @@ const Footer = () => {
             <motion.p 
               className="text-base md:text-xl lg:text-2xl max-w-xl font-medium italic"
               style={{
-                background: "linear-gradient(90deg, hsl(330 85% 65%), hsl(280 80% 60%), hsl(185 85% 55%))",
+                background: "linear-gradient(90deg, hsl(348 88% 62%), hsl(5 80% 55%), hsl(43 95% 60%))",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
-                filter: "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                filter: "drop-shadow(0 0 10px hsl(348 85% 55% / 0.4))",
               }}
               animate={{
                 filter: [
-                  "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
-                  "drop-shadow(0 0 20px hsl(185 85% 55% / 0.5))",
-                  "drop-shadow(0 0 10px hsl(330 85% 60% / 0.4))",
+                  "drop-shadow(0 0 10px hsl(348 85% 55% / 0.4))",
+                  "drop-shadow(0 0 20px hsl(43 95% 60% / 0.5))",
+                  "drop-shadow(0 0 10px hsl(348 85% 55% / 0.4))",
                 ],
               }}
               transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
