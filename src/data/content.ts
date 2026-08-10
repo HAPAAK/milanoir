@@ -6,12 +6,12 @@
 import type { Artist, Event, Host, NavigationItem } from "@/types/event";
 
 // Artist images
-import mrDImage from "@/assets/artists/mr-d.jpeg";
-import sacarImage from "@/assets/artists/sacar.jpeg";
-import vtenImage from "@/assets/artists/vten.png";
+import samikshyaImage from "@/assets/artists/samikshya-adhikari.jpeg";
+import durgeshImage from "@/assets/artists/durgesh-thapa.webp";
+import badriImage from "@/assets/artists/badri-pangeni.jpg";
 
-// Host images
-import sydneyImage from "@/assets/host/sydney-gurung.png";
+// TODO(Teej): still waiting on a photo of Lalana Chimariya (the host).
+import artistPlaceholder from "@/assets/artist-placeholder.jpg";
 
 // Navigation items (labels resolved via t.nav[id] at render time)
 export const navigationItems: NavigationItem[] = [
@@ -20,63 +20,71 @@ export const navigationItems: NavigationItem[] = [
   { id: "contact", href: "/contact" },
 ];
 
-// Featured artists for Nepalese New Year 2083
+// Featured artists for Teej Dhamaka 2083
 export const artists: Artist[] = [
   {
-    id: "vten",
-    name: "VTEN (Samir Ghising)",
-    genre: "Hip-Hop / Rap",
+    id: "samikshya-adhikari",
+    name: "Samikshya Adhikari",
+    genre: "Lok Pop / Teej Geet",
     description:
-      "VTEN is one of Nepal\u2019s most influential hip\u2011hop voices \u2014 a cultural disruptor whose raw honesty, street\u2011level storytelling, and fearless attitude reshaped the nation\u2019s rap landscape. Rising from the outskirts of Kathmandu, he built a movement with tracks like \u2018Hami Yestai Ta Honi Bro,\u2019 \u2018Yatra,\u2019 and \u2018Superstar,\u2019 blending gritty realism with melodic hooks that resonate across generations. His journey from controversy and arrest to international tours turned him into a symbol of artistic freedom and youth expression. VTEN\u2019s music bridges Nepal\u2019s underground grit with global hip\u2011hop energy, making him a defining figure of modern Nephop.",
+      "Samikshya Adhikari is the voice of modern Teej. Breaking through as a teenager with ‘Balapan Ko Umer’ from Nai Nabhannu La 4, she has become the singer whose Teej releases define the season — ‘Aamaile Diyeko Maya’, ‘Bhet Huna Aaisyo Hai Raja’, ‘Yo Teej Aayo’ — songs that fill courtyards and living rooms from Kathmandu to Kentish Town every Bhadra. Her voice carries the old lok feeling with a young edge, which is exactly why a generation of Nepali women hear their own Teej in it. On stage she is pure energy, and this is her Teej.",
     origin: "Kathmandu, Nepal",
-    imageUrl: vtenImage,
-    spotifyTrackId: "3L9JCjxy0VeTIDHXwtD50G",
+    imageUrl: samikshyaImage,
+    // TODO(Teej): add Spotify track id for the Play Preview.
     isMystery: false,
   },
   {
-    id: "sacar-lil-buddha",
-    name: "Sacar aka Lil Buddha",
-    genre: "Hip-Hop / Rap",
+    id: "durgesh-thapa",
+    name: "Durgesh Thapa",
+    genre: "Lok Pop / Dohori",
     description:
-      "Kathmandu-born and Sydney-based, Lil Buddha is a bilingual rap phenom known for his fiery freestyles and authentic storytelling. His music bridges cultures and continents, delivering powerful narratives that resonate with audiences worldwide.",
-    origin: "Kathmandu / Sydney",
-    imageUrl: sacarImage,
-    spotifyTrackId: "7q35Cd6mgVfZfeTfzki0ij",
+      "Durgesh Thapa is the man who dragged Nepali folk onto the dancefloor. Born in Sikkim and raised in Baglung, he built the modern lok‑pop sound — folk rhythm, pop production, lyrics that sound like something your uncle would actually say. ‘Bicha Bichama’, ‘Dushman Hereko Herai’, ‘Don Aayo Don’ and the Teej hit ‘Kacho Katar’ are the songs that reliably empty the seats and fill the floor. Few performers in Nepal command a live crowd the way he does — expect noise.",
+    origin: "Kathmandu, Nepal",
+    imageUrl: durgeshImage,
+    // TODO(Teej): add Spotify track id for the Play Preview.
     isMystery: false,
   },
   {
-    id: "mr-d",
-    name: "Mr. D",
-    genre: "Rap / Hip-Hop",
+    id: "badri-pangeni",
+    name: "Badri Pangeni",
+    genre: "Lok Dohori",
     description:
-      "From the streets of Hetauda to stages across Nepal and beyond, Mr. D is a lyrical force who blends raw emotion with razor-sharp storytelling. His tracks like 'Gobar Lyath' and 'Bandai Cha Nepal' speak truth to power, making him a voice for the unheard and a rebel with rhythm.",
-    origin: "Hetauda, Nepal",
-    imageUrl: mrDImage,
-    spotifyTrackId: "4BCEDbMGVmwuKX6E9LpMJy",
+      "Badri Pangeni is lok dohori royalty. From Nawalparasi to Palpa to six years singing in Kathmandu’s dohori sanjh, he built a career on the real thing — call‑and‑response, sharp wit, and a voice that has carried ‘Tansen Kasauli’, ‘Beauty Number One’, ‘Photo Firta Leu’ and ‘Lau Cheli Rato Lau’ into the Nepali songbook. A former president of the National Folk & Duet Song Academy, he has also used Teej songs to say something, from ‘Motiram ra Jamuna’ onwards. When he trades verses live, the room answers back.",
+    origin: "Palpa / Kathmandu, Nepal",
+    imageUrl: badriImage,
+    // TODO(Teej): add Spotify track id for the Play Preview.
     isMystery: false,
   }
 ];
 
 // Event host
 export const host: Host = {
-  id: "sydney-gurung",
-  name: "Sydney Gurung",
+  id: "lalana-chimariya",
+  name: "Lalana Chimariya",
   role: "Host",
-  description:
-    "Sydney Gurung is a dynamic Nepali presenter and content creator based in London, known for her confident on\u2011camera presence and her ability to connect effortlessly with diverse audiences. With a background in event planning, public speaking, and social media strategy, she brings a polished, modern, and globally aware energy to every stage she steps on. Her work spans lifestyle content, beauty collaborations, and creative digital storytelling \u2014 showcasing her natural charisma and ease in front of the camera. Multilingual and culturally versatile, Sydney represents the new generation of Nepali diaspora talent shaping international creative spaces.",
+  // TODO(Teej): bio not supplied yet. Same shape as the artist bios:
+  // who she is -> what she does -> why she fits this room.
+  description: "",
   origin: "London, UK",
-  imageUrl: sydneyImage,
+  // TODO(Teej): replace with lalana-chimariya photo when supplied.
+  imageUrl: artistPlaceholder,
 };
 
 // Main event data
 export const mainEvent: Event = {
-  id: "nepalese-new-year-2083",
-  title: "Nepalese New Year 2083",
+  id: "teej-dhamaka-2083",
+  title: "Teej Dhamaka 2083",
   subtitle: "The Beginning of Infinity",
-  date: new Date("2026-04-13T00:00:00+01:00"),
-  venue: null,
+  // TODO(Teej): 18:00 is a placeholder — confirm the real doors time and update.
+  date: new Date("2026-09-11T18:00:00+01:00"),
+  venue: {
+    name: "The Royal Regency",
+    address: "Manor Park",
+    city: "London",
+    country: "United Kingdom",
+  },
   artists,
   isActive: true,
-  ticketUrl: "https://buytickets.at/milanoireventszlimited/2096833",
+  ticketUrl: "https://sahisearch.com/events/teej-dhamaka-2083-1784675101-71",
   notifyUrl: undefined,
 };
