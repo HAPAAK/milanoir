@@ -166,7 +166,7 @@ const MobileNavigation = () => {
                 isMusicPlaying && "font-semibold",
               )}
             >
-              {isMusicPlaying ? "♪" : "Vibe"}
+              {isMusicPlaying ? "♪" : "Teej"}
             </span>
           </button>}
         </div>
