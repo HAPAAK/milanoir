@@ -4,6 +4,7 @@ import PageWrapper from "@/components/layout/PageWrapper";
 import EventHero from "@/components/home/EventHero";
 import ArtistBentoGrid from "@/components/home/ArtistBentoGrid";
 import HostCard from "@/components/home/HostCard";
+import DanceCompetition from "@/components/home/DanceCompetition";
 import Footer from "@/components/layout/Footer";
 import { host } from "@/data/content";
 import { useLanguage } from "@/contexts/LanguageContext";
@@ -36,6 +37,8 @@ const HomePage = () => {
           <HostCard host={host} />
         </div>
       </section>
+
+      <DanceCompetition />
 
       <Footer />
     </PageWrapper>
