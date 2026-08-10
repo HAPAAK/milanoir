@@ -6,7 +6,7 @@ import ArtistBentoGrid from "@/components/home/ArtistBentoGrid";
 import HostCard from "@/components/home/HostCard";
 import DanceCompetition from "@/components/home/DanceCompetition";
 import Footer from "@/components/layout/Footer";
-import { host } from "@/data/content";
+import { hosts } from "@/data/content";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const ThemeMusicPlayer = dynamic(() => import("@/components/home/ThemeMusicPlayer"), { ssr: false });
@@ -34,7 +34,11 @@ const HomePage = () => {
               {t.host.sectionTitle}
             </h2>
           </motion.div>
-          <HostCard host={host} />
+          <div className="flex flex-col gap-6">
+            {hosts.map((h) => (
+              <HostCard key={h.id} host={h} />
+            ))}
+          </div>
         </div>
       </section>
 

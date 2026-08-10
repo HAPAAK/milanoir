@@ -10,8 +10,9 @@ import samikshyaImage from "@/assets/artists/samikshya-adhikari.jpeg";
 import durgeshImage from "@/assets/artists/durgesh-thapa.webp";
 import badriImage from "@/assets/artists/badri-pangeni.jpg";
 
-// TODO(Teej): still waiting on a photo of Lalana Chimariya (the host).
-import artistPlaceholder from "@/assets/artist-placeholder.jpg";
+// Host images
+import lalanaImage from "@/assets/host/lalana-chimariya.png";
+import sydneyImage from "@/assets/host/sydney-gurung.png";
 
 // Navigation items (labels resolved via t.nav[id] at render time)
 export const navigationItems: NavigationItem[] = [
@@ -57,18 +58,31 @@ export const artists: Artist[] = [
   }
 ];
 
-// Event host
-export const host: Host = {
-  id: "lalana-chimariya",
-  name: "Lalana Chimariya",
-  role: "Host",
-  // TODO(Teej): bio not supplied yet. Same shape as the artist bios:
-  // who she is -> what she does -> why she fits this room.
-  description: "",
-  origin: "London, UK",
-  // TODO(Teej): replace with lalana-chimariya photo when supplied.
-  imageUrl: artistPlaceholder,
-};
+// Event hosts
+export const hosts: Host[] = [
+  {
+    id: "lalana-chimariya",
+    name: "Lalana Chimariya",
+    role: "Host",
+    // TODO(Teej): bio not supplied yet. Same shape as the artist bios:
+    // who she is -> what she does -> why she fits this room.
+    description: "",
+    origin: "London, UK",
+    imageUrl: lalanaImage,
+  },
+  {
+    id: "sydney-gurung",
+    name: "Sydney Gurung",
+    role: "Host",
+    description:
+      "Sydney Gurung is a dynamic Nepali presenter and content creator based in London, known for her confident on‑camera presence and her ability to connect effortlessly with diverse audiences. With a background in event planning, public speaking, and social media strategy, she brings a polished, modern, and globally aware energy to every stage she steps on. Her work spans lifestyle content, beauty collaborations, and creative digital storytelling — showcasing her natural charisma and ease in front of the camera. Multilingual and culturally versatile, Sydney represents the new generation of Nepali diaspora talent shaping international creative spaces.",
+    origin: "London, UK",
+    imageUrl: sydneyImage,
+  },
+];
+
+/** Back-compat single-host export (first host). */
+export const host: Host = hosts[0];
 
 // Main event data
 export const mainEvent: Event = {
