@@ -9,13 +9,13 @@
     "presents": "presenta",
     "tagline": "Experimenta la celebración de tu vida",
     "location": "Londres, Reino Unido",
-    "dateLabel": "13 de Abril, 2026",
+    "dateLabel": "11 de Septiembre, 2026",
     "scrollCta": "Descubre el lineup",
     "joinWaitlist": "Únete a la Lista",
     "getTickets": "OBTENER ENTRADAS",
-    "ticketsExternal": "Powered by TicketTailor",
+    "ticketsExternal": "Powered by Sahi Search",
     "vibeOn": "VIBING ♪",
-    "vibeOff": "SUBE EL VOLUMEN O TE LO PIERDES"
+    "vibeOff": "SARIS ROJOS. DOHORI FUERTE. UNA NOCHE."
   },
   "countdown": {
     "title": "Cuenta regresiva para la celebración",
@@ -34,6 +34,12 @@
   },
   "host": {
     "sectionTitle": "Tu Presentadora"
+  },
+  "danceComp": {
+    "sectionTitle": "Baila Con Ellos",
+    "body": "Solo Reino Unido. Graba 45 segundos bailando cualquier tema de Samikshya Adhikari, Durgesh Thapa o Badri Pangeni y envíalo a info@milanoir-events.com. Los propios artistas eligen al ganador. Los ganadores reciben una cesta de regalo, 100 £ en efectivo y un encuentro con los artistas esa noche. Publicaremos las participaciones en nuestras redes.",
+    "cta": "Participa en el concurso",
+    "deadlineLabel": "Fecha límite"
   },
   "audioModal": {
     "nowPlaying": "Reproduciendo",

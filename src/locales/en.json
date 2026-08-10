@@ -9,13 +9,13 @@
     "presents": "presents",
     "tagline": "Experience the celebration of a lifetime",
     "location": "London, United Kingdom",
-    "dateLabel": "April 13, 2026",
+    "dateLabel": "September 11, 2026",
     "scrollCta": "Discover the lineup",
     "joinWaitlist": "Join the Waitlist",
     "getTickets": "GET TICKETS",
-    "ticketsExternal": "Powered by TicketTailor",
+    "ticketsExternal": "Powered by Sahi Search",
     "vibeOn": "VIBING ♪",
-    "vibeOff": "TURN IT UP OR MISS THE VIBE"
+    "vibeOff": "RED SAREES. LOUD DOHORI. ONE NIGHT."
   },
   "countdown": {
     "title": "Countdown to the celebration",
@@ -34,6 +34,12 @@
   },
   "host": {
     "sectionTitle": "Your Host"
+  },
+  "danceComp": {
+    "sectionTitle": "Dance With Them",
+    "body": "UK only. Record 45 seconds dancing to any Samikshya Adhikari, Durgesh Thapa or Badri Pangeni track and email it to info@milanoir-events.com. The artists judge it themselves. Winners take a gift hamper, £100 cash, and a meet-up with the lineup on the night. We'll post the entries on our pages.",
+    "cta": "Enter the competition",
+    "deadlineLabel": "Deadline"
   },
   "audioModal": {
     "nowPlaying": "Now Playing",
