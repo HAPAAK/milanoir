@@ -11,8 +11,8 @@ import CountdownTimer from "./CountdownTimer";
 import { Button } from "@/components/ui/button";
 import { mainEvent } from "@/data/content";
 import { useLanguage } from "@/contexts/LanguageContext";
-import eventBanner from "@/assets/event-banner-landscape.png";
-import eventBannerMobile from "@/assets/event-banner-mobile.png";
+import eventBanner from "@/assets/teej-banner-landscape.jpg";
+import eventBannerMobile from "@/assets/teej-banner-mobile.jpg";
 
 const TicketsCTA = ({ label, sublabel }: { label: string; sublabel: string }) => (
   <motion.div
@@ -72,7 +72,7 @@ const EventHero = () => {
         <div className="relative">
           <Image
             src={eventBannerMobile}
-            alt="Milanoir Events — Nepalese New Year 2083"
+            alt="Milanoir Events — Teej Dhamaka 2083"
             priority
             quality={100}
             placeholder="blur"
@@ -104,7 +104,7 @@ const EventHero = () => {
         <div className="absolute inset-0 z-0">
           <Image
             src={eventBanner}
-            alt="Milanoir Events — Nepalese New Year 2083"
+            alt="Milanoir Events — Teej Dhamaka 2083"
             quality={100}
             placeholder="blur"
             // sizes="100vw"
